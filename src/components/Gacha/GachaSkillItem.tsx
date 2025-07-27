@@ -46,7 +46,7 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
             ))}
           </HStack>
           <Card.Title color={getColorRarity(skill.rarity)}>{skill.name}</Card.Title>
-          <Card.Description>{skill.description}</Card.Description>
+          <Card.Description color={"gray.400"}>{skill.description}</Card.Description>
           {isSelected && (
             <Box mt={2}>
               {skill.tags?.map((item, i) => (
@@ -56,7 +56,9 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
                       {item.label} {item.Icon}
                     </Tag.Label>
                   </Tag.Root>
-                  <Text fontSize="sm">{item.description}</Text>
+                  <Text fontSize="sm" color={"gray.400"}>
+                    {item.description}
+                  </Text>
                 </Box>
               ))}
             </Box>

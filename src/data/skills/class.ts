@@ -15,7 +15,7 @@ export class SkillEngine implements ISkillEngine {
   element: IElement[];
   rarity: Rarity;
   id: number;
-  tags?: IEffect[] | IAction[];
+  tags?: Array<IEffect | IAction>;
 
   constructor(args: SkillBaseArgs, rarity: Rarity) {
     this.name = args.name;

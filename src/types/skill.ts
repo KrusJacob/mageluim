@@ -16,7 +16,7 @@ export interface ISkillEngine {
   img?: string;
   // rarity: Rarity;
   element: IElement[];
-  tags?: IEffect[] | IAction[];
+  tags?: Array<IEffect | IAction>;
 }
 export interface ISkill extends ISkillEngine {
   id: number;
