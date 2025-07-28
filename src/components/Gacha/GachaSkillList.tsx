@@ -11,7 +11,7 @@ interface Props {
 const GachaSkillList = ({ skills, selectedSkill, select }: Props) => {
   return (
     <Box>
-      <HStack gap={12}>
+      <HStack gap={12} alignItems={"self-start"} minH={"450px"}>
         {skills?.map((skill, i) => (
           <GachaSkillItem
             key={skill.name}

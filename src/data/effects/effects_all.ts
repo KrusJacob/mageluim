@@ -1,4 +1,4 @@
-import { EffectEngine } from "@/types/effect";
+import { EffectEngine } from "./class";
 
 export const FREEZE = new EffectEngine("freeze");
 export const BURN = new EffectEngine("burn");

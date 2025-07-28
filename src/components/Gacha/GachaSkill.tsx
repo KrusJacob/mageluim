@@ -27,7 +27,6 @@ function getThreeRandomSkills(skills: ISkill[] = ALL_SKILL_LIST) {
   const selected: ISkill[] = [];
   while (selected.length < 3) {
     const skill = pickSkill();
-    console.log(selected);
     if (!selected.some((s) => s.id === skill.id)) {
       selected.push(skill);
     }

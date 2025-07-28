@@ -2,7 +2,7 @@ import { Box, Card, HStack, Image, Stack, Tag, Text } from "@chakra-ui/react";
 import React from "react";
 import type { ISkill } from "@/types/skill";
 import { getColorRarity } from "@/utils/getColorRarity";
-import { getIconElement } from "@/utils/getIconElement";
+import { getDataElement } from "@/utils/getDataElement";
 
 interface Props {
   skill: ISkill;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
+  console.log(skill.tags);
   return (
     <Box
       onClick={() => select(skill)}
@@ -26,7 +27,7 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
       transition={"all 200ms ease-in-out"}
       border={`2px solid ${getColorRarity(skill.rarity)}`}
       borderRadius={8}
-      _hover={{ scale: 1.05 }}
+      _hover={{ scale: 1.025 }}
     >
       <Card.Root
         animation={skill.rarity === "legendary" ? "glow 2s ease-in-out infinite" : "none"}
@@ -34,16 +35,32 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
         overflow="hidden"
       >
         <Image src={skill.url} alt={skill.name} />
-        <Card.Body gap="1" bg={"gray.700"}>
+        <Card.Body gap="1" bg={"gray.700"} p={4}>
           <HStack>
             {skill.element.map((item, i) => (
               <Tag.Root size="lg" key={i}>
-                <Tag.Label title={item}>{getIconElement(item).Icon}</Tag.Label>
+                <Tag.Label color={item.color} title={item.label}>
+                  {item.Icon}
+                </Tag.Label>
               </Tag.Root>
             ))}
           </HStack>
           <Card.Title color={getColorRarity(skill.rarity)}>{skill.name}</Card.Title>
           <Card.Description>{skill.description}</Card.Description>
+          {isSelected && (
+            <Box mt={2}>
+              {skill.tags?.map((item, i) => (
+                <Box key={i}>
+                  <Tag.Root size="lg" key={i}>
+                    <Tag.Label display="flex" alignItems="center" gap={1} color={item.color} title={item.label}>
+                      {item.label} {item.Icon}
+                    </Tag.Label>
+                  </Tag.Root>
+                  <Text fontSize="sm">{item.description}</Text>
+                </Box>
+              ))}
+            </Box>
+          )}
         </Card.Body>
       </Card.Root>
     </Box>

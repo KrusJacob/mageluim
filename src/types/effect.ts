@@ -1,52 +1,25 @@
-import type { IElement } from "./skill";
+import type { ReactNode } from "react";
+import type { IElementName } from "./skill";
 
-export type IEffectName = "breach" | "freeze" | "wet" | "burn" | "poison" | "stun" | "blind";
+export type IEffectName = "freeze" | "wet" | "burn" | "poison" | "stun" | "fear" | "blind";
 export type IEffect = {
   name: IEffectName;
+  color: string;
   label: string;
+  Icon: ReactNode;
+  description?: string;
 };
 
 // export type IDebuff = "water" | "wet" | "burn" | "poison" | "stun";
-type Action = "buff" | "debuff";
-type level = 1 | 2;
-
-class BuffEngine {
-  element: IElement;
-  action: Action;
-  level: level;
-  constructor(element: IElement, action: Action, level: level) {
-    this.element = element;
-    this.action = action;
-    this.level = level;
-  }
-  getLabel() {
-    return `${this.element}_${this.level}`;
-  }
-}
-
-export class EffectEngine {
-  name: IEffectName;
+export type ITypeAction = "buff" | "debuff";
+export interface IAction {
+  element: IElementName;
+  color: string;
   label: string;
-  getLabel() {
-    switch (this.name) {
-      case "breach":
-        return "Разлом";
-      case "freeze":
-        return "Заморозка";
-      case "wet":
-        return "Влажность";
-      case "burn":
-        return "Ожог";
-      case "poison":
-        return "Яд";
-      case "blind":
-        return "Ослепление";
-      case "stun":
-        return "Оглушение";
-    }
-  }
-  constructor(name: IEffectName) {
-    this.name = name;
-    this.label = this.getLabel();
-  }
+  labelElement: string;
+  Icon: ReactNode;
+  level: LevelAction;
+  typeAction: ITypeAction;
+  description?: string;
 }
+export type LevelAction = 1 | 2;
