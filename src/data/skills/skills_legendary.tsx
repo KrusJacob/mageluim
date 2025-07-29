@@ -1,7 +1,7 @@
 import { SkillEngine } from "./class";
 import { DARK, FIRE, FOREST, LIGHT, WATER, WIND } from "../elements/elements_all";
 import { useDmgToElement, useEffectTo } from "./helpers";
-import { DARKNESS, WET } from "../effects/effects_all";
+import { BURN, DARKNESS, WET } from "../effects/effects_all";
 
 export const SKILLS_LEGENDARY = [
   new SkillEngine(
@@ -12,8 +12,7 @@ export const SKILLS_LEGENDARY = [
           Наносит {useDmgToElement(475, DARK)} урона всем и {useEffectTo(DARKNESS, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Черная_дыра.png",
       element: [DARK],
       tags: [DARKNESS],
     },
@@ -23,8 +22,7 @@ export const SKILLS_LEGENDARY = [
     {
       name: "Божественная кара",
       description: <>Наносит {useDmgToElement(1000, LIGHT)} урона одному врагу</>,
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Божественная_кара.png",
       element: [LIGHT],
     },
     "legendary"
@@ -37,10 +35,23 @@ export const SKILLS_LEGENDARY = [
           Наносит {useDmgToElement(250, WIND)} и {useDmgToElement(250, WATER)} урона всем и {useEffectTo(WET, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Цунами.png",
       element: [WIND, WATER],
       tags: [WET],
+    },
+    "legendary"
+  ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Армагедон",
+      description: (
+        <>
+          Наносит {useDmgToElement(450, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
+        </>
+      ),
+      img: "/img/skills/Армагедон.png",
+      element: [FIRE],
+      tags: [BURN],
     },
     "legendary"
   ).getSkill(),

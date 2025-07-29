@@ -14,8 +14,7 @@ export const SKILLS_EPIC = [
           Наносит {useDmgToElement(250, PHYSICAL)} и {useDmgToElement(200, FOREST)} урона всем врагам
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Гнев_земли.png",
       element: [PHYSICAL, FOREST],
     },
     "epic"
@@ -28,9 +27,9 @@ export const SKILLS_EPIC = [
           Наносит {useDmgToElement(700, PHYSICAL)} урона одному врагу и {useActionTo(DEBUFF_PHYSICAL_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Сокрушительный_удар.png",
       element: [PHYSICAL, FOREST],
+      tags: [DEBUFF_PHYSICAL_1],
     },
     "epic"
   ).getSkill(),
@@ -43,8 +42,7 @@ export const SKILLS_EPIC = [
           {useEffectTo(FREEZE, 1)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Замораживающее_дыхание.png",
       element: [WATER, WIND],
       tags: [FREEZE],
     },
@@ -52,25 +50,23 @@ export const SKILLS_EPIC = [
   ).getSkill(),
   new SkillEngine(
     {
-      name: "Листья Сакуры",
+      name: "Цветок жизни",
       description: <>Исцеляет герою 20% здоровья</>,
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Цветок_жизни.png",
       element: [FOREST],
     },
     "epic"
   ).getSkill(),
   new SkillEngine(
     {
-      name: "Ядовитый облако",
+      name: "Ядовитое облако",
       description: (
         <>
           Наносит {useDmgToElement(150, FOREST)} урона всем и {useEffectTo(POISON, 2, 2)}, также{" "}
           {useActionTo(DEBUFF_FOREST_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Ядовитое_облако.png",
       element: [FOREST],
       tags: [POISON, DEBUFF_FOREST_1],
     },
@@ -78,15 +74,14 @@ export const SKILLS_EPIC = [
   ).getSkill(),
   new SkillEngine(
     {
-      name: "Густой туман",
+      name: "Туман ужаса",
       description: (
         <>
-          Наносит {useDmgToElement(150, WIND)} и {useDmgToElement(150, DARK)} урона всем врагам.
+          Наносит {useDmgToElement(125, WIND)} и {useDmgToElement(200, DARK)} урона всем врагам.{" "}
           {useActionTo(DEBUFF_DARK_2, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Туман_ужаса.png",
       element: [WIND, DARK],
       tags: [DEBUFF_DARK_2],
     },

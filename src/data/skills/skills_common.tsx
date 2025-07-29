@@ -15,8 +15,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(225, FIRE)} урона всем врагам и {useActionTo(BUFF_BURN_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Огненные_угли.png",
       element: [FIRE],
       tags: [BUFF_BURN_1],
     },
@@ -30,8 +29,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(200, WATER)} урона всем врагам и {useEffectTo(WET, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Водная_волна.png",
       element: [WATER],
       tags: [WET],
     },
@@ -45,8 +43,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(225, WIND)} урона всем врагам и {useActionTo(DEBUFF_WIND_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Искры_молнии.png",
       element: [WIND],
       tags: [DEBUFF_WIND_1],
     },
@@ -56,8 +53,7 @@ export const SKILLS_COMMON = [
     {
       name: "Языки пламени",
       description: <>Наносит {useDmgToElement(275, FIRE)} урона всем врагам</>,
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Языки_пламени.png",
       element: [FIRE],
     },
     "common"
@@ -70,8 +66,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(100, FOREST)} урона всем врагам и {useEffectTo(POISON, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Брызги_яда.png",
       element: [FOREST],
       tags: [POISON],
     },
@@ -85,8 +80,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(250, WATER)} урона одному врагу и {useEffectTo(FREEZE, 1)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Ледяное_прикосновение.png",
       element: [WATER],
       tags: [FREEZE],
     },
@@ -100,8 +94,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(550, PHYSICAL)} урона одному врагу и {useActionTo(DEBUFF_PHYSICAL_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Удар_булыжником.png",
       element: [PHYSICAL],
       tags: [DEBUFF_PHYSICAL_1],
     },
@@ -115,8 +108,7 @@ export const SKILLS_COMMON = [
           Наносит {useDmgToElement(150, FIRE)} урона всем врагам и {useEffectTo(BURN, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Поджигание.png",
       element: [FIRE],
       tags: [BURN],
     },

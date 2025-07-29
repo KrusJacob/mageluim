@@ -6,11 +6,13 @@ import GachaHistory from "./GachaHistory";
 import { toaster } from "../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
 import { getThreeRandomSkills } from "@/utils/getRandomSkills";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import GachaInfo from "./GachaInfo";
 
 const GachaSkill = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
   const [totalShards, setTotalShards] = useState(10);
-  const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(getThreeRandomSkills());
+  const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<ISkill | null>(null);
 
   const useShard = () => {
@@ -41,11 +43,12 @@ const GachaSkill = () => {
 
   return (
     <Center flexDir={"column"} maxW={{ base: "8xl" }} w={"100%"}>
-      <HStack mb={8} justify={"space-between"} w={"100%"} px={4}>
+      <HStack mb={8} w={"100%"} gap={4} px={4}>
         <GachaHistory skills={gachaHistory} />
-        <HStack>
+        <GachaInfo />
+        <HStack ml={"auto"}>
           {totalShards}
-          <SiCrystal />
+          <SiCrystal color="violet" title="Кристалл призыва" size={20} />
         </HStack>
       </HStack>
       <HStack minH={"380px"}>
@@ -56,16 +59,16 @@ const GachaSkill = () => {
         />
         {!randomedSkills && (
           <Center w={"100%"} flexDir={"column"} gap={2}>
-            <Text>You have {totalShards} shards</Text>
+            <Text>У вас имеются {totalShards} кристаллов</Text>
             <Button disabled={totalShards === 0} onClick={handleRoll}>
-              Roll
+              Использовать
             </Button>
           </Center>
         )}
       </HStack>
       <ButtonGroup mt={4}>
         <Button disabled={!selectedSkill} onClick={handleSelect}>
-          Select
+          Выбрать
         </Button>
       </ButtonGroup>
     </Center>

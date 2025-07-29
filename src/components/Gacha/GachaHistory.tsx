@@ -7,14 +7,14 @@ import { getColorRarity } from "@/utils/getColorRarity";
 const GachaHistory = ({ skills }: { skills: ISkillHistory[] }) => {
   return (
     <DialogWrapper
-      title="History wish"
+      title="История получения навыков"
       body={
         <Box maxH="500px" overflowY="auto">
           <Table.Root size="sm">
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeader>Name</Table.ColumnHeader>
-                <Table.ColumnHeader textAlign="end">Date</Table.ColumnHeader>
+                <Table.ColumnHeader>Имя</Table.ColumnHeader>
+                <Table.ColumnHeader textAlign="end">Дата</Table.ColumnHeader>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -28,7 +28,7 @@ const GachaHistory = ({ skills }: { skills: ISkillHistory[] }) => {
           </Table.Root>
         </Box>
       }
-      trigger={<IoList size={20} cursor={"pointer"} />}
+      trigger={<IoList size={24} cursor={"pointer"} />}
     />
   );
 };

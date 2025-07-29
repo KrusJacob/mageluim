@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { IAction, IEffect } from "./effect";
 
+export type GachaChanses = Record<Rarity, number>;
 export type Rarity = "common" | "rare" | "epic" | "legendary";
 export type IElementName = "physical" | "def" | "fire" | "water" | "wind" | "forest" | "light" | "dark";
 export interface IElement {
@@ -12,8 +13,8 @@ export interface IElement {
 export interface ISkillEngine {
   name: string;
   description: string | React.ReactNode;
-  url: string;
-  img?: string;
+  // url: string;
+  img: string;
   // rarity: Rarity;
   element: IElement[];
   tags?: Array<IEffect | IAction>;

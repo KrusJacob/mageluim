@@ -3,13 +3,13 @@ import type { Rarity } from "@/types/skill";
 export const getColorRarity = (rarity: Rarity) => {
   switch (rarity) {
     case "common":
-      return "green";
+      return "var(--color-common)";
     case "rare":
-      return "blue";
+      return "var(--color-rare)";
     case "epic":
-      return "blueviolet";
+      return "var(--color-epic)";
     case "legendary":
-      return "gold";
+      return "var(--color-legendary)";
     default:
       return "gray";
   }
