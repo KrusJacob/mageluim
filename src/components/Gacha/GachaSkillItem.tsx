@@ -34,8 +34,14 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
         maxW="sm"
         overflow="hidden"
       >
-        <Image src={skill.url} alt={skill.name} />
-        <Card.Body gap="1" bg={"gray.700"} p={4}>
+        <Image src={skill.img} alt={skill.name} />
+        <Card.Title mt={-9} px={3} py={1} color={"gray.100"}>
+          {skill.name}
+        </Card.Title>
+        <Card.Body borderTop={`2px solid ${getColorRarity(skill.rarity)}`} gap="1" bg={"gray.950"} p={3}>
+          {/* <Card.Title mt={-10} color={"gray.200"} bg={getColorRarity(skill.rarity)}>
+            {skill.name}
+          </Card.Title> */}
           <HStack>
             {skill.element.map((item, i) => (
               <Tag.Root size="lg" key={i}>
@@ -45,7 +51,6 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
               </Tag.Root>
             ))}
           </HStack>
-          <Card.Title color={getColorRarity(skill.rarity)}>{skill.name}</Card.Title>
           <Card.Description color={"gray.400"}>{skill.description}</Card.Description>
           {isSelected && (
             <Box mt={2}>

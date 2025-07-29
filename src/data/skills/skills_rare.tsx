@@ -13,8 +13,7 @@ export const SKILLS_RARE = [
           Наносит {useDmgToElement(350, WIND)} урона всем врагам и {useActionTo(BUFF_WIND_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Лютый_вихрь.png",
       element: [WIND],
       tags: [BUFF_WIND_1],
     },
@@ -25,11 +24,10 @@ export const SKILLS_RARE = [
       name: "Утренний дождик",
       description: (
         <>
-          {useEffectTo(HEAL, 2)} на героя. {useEffectTo(WET, 2)} на врагов
+          {useEffectTo(HEAL, 2)} на героя. {useEffectTo(WET, 2)} на всех врагов
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Утренний_дождик.png",
       element: [WATER],
       tags: [HEAL, WET],
     },
@@ -44,8 +42,7 @@ export const SKILLS_RARE = [
           Наносит {useDmgToElement(400, FIRE)} и {useDmgToElement(400, PHYSICAL)} урона одному врагу
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Удар_метеорита.png",
       element: [FIRE, PHYSICAL],
     },
     "rare"
@@ -58,8 +55,7 @@ export const SKILLS_RARE = [
           Наносит {useDmgToElement(600, LIGHT)} урона одному врагу и {useEffectTo(BLIND, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Луч_света.png",
       element: [LIGHT],
       tags: [BLIND],
     },
@@ -73,8 +69,7 @@ export const SKILLS_RARE = [
           Наносит {useDmgToElement(650, WIND)} урона одному врагу и {useEffectTo(STUN, 1)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Удар_молнии.png",
       element: [WIND],
       tags: [STUN],
     },
@@ -88,8 +83,7 @@ export const SKILLS_RARE = [
           {useActionTo(BUFF_PHYSICAL_1, 2)} и {useActionTo(BUFF_DEF_1, 2)}
         </>
       ),
-      url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
-      img: "",
+      img: "/img/skills/Каменная_кожа.png",
       element: [WIND],
       tags: [BUFF_PHYSICAL_1, BUFF_DEF_1],
     },

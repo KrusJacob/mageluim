@@ -8,6 +8,7 @@ import { PiSunDimLight } from "react-icons/pi";
 import { FaRegCircle } from "react-icons/fa";
 import { FaHandFist } from "react-icons/fa6";
 import { FaShieldAlt } from "react-icons/fa";
+import { FaSun } from "react-icons/fa";
 import type { ITypeAction } from "@/types/effect";
 
 export const getDataAction = (elementName: IElementName, typeAction: ITypeAction) => {
@@ -18,49 +19,49 @@ export const getDataAction = (elementName: IElementName, typeAction: ITypeAction
   switch (elementName) {
     case "physical":
       Icon = <FaHandFist />;
-      color = "slategrey";
+      color = "var(--color-physical)";
       label = typeAction === "buff" ? "Мощь" : "Бессилие";
       labelElement = "Физический";
       break;
     case "def":
       Icon = <FaShieldAlt />;
-      color = "slategrey";
+      color = "var(--color-physical)";
       label = typeAction === "buff" ? "Укрепление" : "Разлом";
       labelElement = "Физический";
       break;
     case "fire":
       Icon = <FaFire />;
-      color = "red";
+      color = "var(--color-fire)";
       label = typeAction === "buff" ? "Жар" : "Ожог";
       labelElement = "Огонь";
       break;
     case "water":
       Icon = <IoIosWater />;
-      color = "blue";
+      color = "var(--color-water)";
       label = typeAction === "buff" ? "Напор" : "Намокание";
       labelElement = "Вода";
       break;
     case "wind":
       Icon = <FaWind />;
-      color = "turquoise";
+      color = "var(--color-wind)";
       label = typeAction === "buff" ? "Ветренность" : "Неустойчивость";
       labelElement = "Ветер";
       break;
     case "forest":
       Icon = <LuFlower />;
-      color = "green";
+      color = "var(--color-forest)";
       label = typeAction === "buff" ? "Источник" : "Болезнь";
       labelElement = "Природа";
       break;
     case "dark":
       Icon = <MdDarkMode />;
-      color = "slateblue";
+      color = "var(--color-dark)";
       label = typeAction === "buff" ? "Затмение" : "Страх";
       labelElement = "Тьма";
       break;
     case "light":
-      Icon = <PiSunDimLight />;
-      color = "gold";
+      Icon = <FaSun />;
+      color = "var(--color-light)";
       label = typeAction === "buff" ? "Сияние" : "Излучение";
       labelElement = "Свет";
       break;

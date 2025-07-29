@@ -1,16 +1,17 @@
 :root {
-  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --color-common: rgb(101, 235, 101);
+  --color-rare: #5757fd;
+  --color-epic: blueviolet;
+  --color-legendary: gold;
+  --color-default: gray;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  --color-fire: rgb(255, 79, 79);
+  --color-water: rgb(65, 92, 216);
+  --color-wind: rgb(48, 214, 214);
+  --color-forest: rgb(0, 128, 0);
+  --color-dark: rgb(108, 43, 182);
+  --color-light: rgb(199, 189, 45);
+  --color-physical: rgb(126, 126, 126);
 }
 
 html.dark {

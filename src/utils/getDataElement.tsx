@@ -4,7 +4,7 @@ import { IoIosWater } from "react-icons/io";
 import { FaWind } from "react-icons/fa6";
 import { LuFlower } from "react-icons/lu";
 import { MdDarkMode } from "react-icons/md";
-import { PiSunDimLight } from "react-icons/pi";
+import { FaSun } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa";
 import { FaHandFist } from "react-icons/fa6";
 
@@ -16,37 +16,37 @@ export const getDataElement = (elementName: IElementName) => {
   switch (elementName) {
     case "physical":
       Icon = <FaHandFist />;
-      color = "slategrey";
+      color = "var(--color-physical)";
       label = "Физический";
       break;
     case "fire":
       Icon = <FaFire />;
-      color = "red";
+      color = "var(--color-fire)";
       label = "Огонь";
       break;
     case "water":
       Icon = <IoIosWater />;
-      color = "blue";
+      color = "var(--color-water)";
       label = "Вода";
       break;
     case "wind":
       Icon = <FaWind />;
-      color = "turquoise";
+      color = "var(--color-wind)";
       label = "Ветер";
       break;
     case "forest":
       Icon = <LuFlower />;
-      color = "green";
+      color = "var(--color-forest)";
       label = "Природа";
       break;
     case "dark":
       Icon = <MdDarkMode />;
-      color = "slateblue";
+      color = "var(--color-dark)";
       label = "Тьма";
       break;
     case "light":
-      Icon = <PiSunDimLight />;
-      color = "gold";
+      Icon = <FaSun />;
+      color = "var(--color-light)";
       label = "Свет";
       break;
     default:

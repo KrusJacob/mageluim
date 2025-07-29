@@ -30,46 +30,46 @@ export const getDataEffect = (effectName: IEffect["name"]) => {
     case "burn":
       Icon = <FaBurn />;
       label = "Поджог"; // DoT урон
-      color = "red";
+      color = "var(--color-fire)";
       maxLayer = BURN_MAX_LAYERS;
-      description = `В начале хода наносит урон от [Огонь] в размере ${BURN_DOT_DMG}% от максимального здоровья. Максимум ${BURN_MAX_LAYERS} слоев.`;
+      description = `В начале хода получает урон от [Огонь] в размере ${BURN_DOT_DMG}% от максимального здоровья. Максимум ${BURN_MAX_LAYERS} слоев.`;
       break;
     case "poison":
       Icon = <GiPoisonBottle />;
       label = "Яд"; // DoT урон
-      color = "green";
+      color = "var(--color-forest)";
       maxLayer = POSION_DOT_DMG;
-      description = `В начале хода наносит урон от [Яд] в размере ${POSION_DOT_DMG} ед. Максимум ${POSION_MAX_LAYERS} слоев.`;
+      description = `В начале хода получает урон от [Яд] в размере ${POSION_DOT_DMG} ед. Максимум ${POSION_MAX_LAYERS} слоев.`;
       break;
     case "freeze":
       Icon = <FaRegSnowflake />;
       label = "Заморозка"; // контроль
       color = "cyan";
-      description = "Обездвиживает и заставляет пропустить ход";
+      description = "Обездвиживание. Заставляет пропустить ход";
       break;
     case "stun":
       Icon = <PiSpiralLight />;
       label = "Оглушение"; // контроль
-      color = "gold";
-      description = "Обездвиживает и заставляет пропустить ход";
+      color = "orange";
+      description = "Обездвиживание. Заставляет пропустить ход";
       break;
     case "wet":
       Icon = <IoIosWater />;
       label = "Влажность"; // повышает шанс заморозки
-      color = "blue";
-      description = `При наличии увеличивает шанс быть замороженным на ${WET_CHANCE_FREEZE}%`;
+      color = "var(--color-water)";
+      description = `Эффект увеличивает шанс быть замороженным на ${WET_CHANCE_FREEZE}%`;
       break;
     case "darkness":
       Icon = <IoSkull />;
       label = "Мрак"; // DoT урон
-      color = "blue";
+      color = "var(--color-dark)";
       maxLayer = DARKNESS_MAX_LAYERS;
-      description = `В начале хода наносит урон от [Тьма] в размере ${DARKNESS_DOT_DMG} ед. Максимум ${DARKNESS_MAX_LAYERS} слоев.`;
+      description = `В начале хода получает урон от [Тьма] в размере ${DARKNESS_DOT_DMG} ед. Максимум ${DARKNESS_MAX_LAYERS} слоев.`;
       break;
     case "blind":
       Icon = <BsEyeSlashFill />;
       label = "Слепота"; // 50% промахи
-      color = "orange";
+      color = "var(--color-light)";
       description = `При атаке есть ${BLIND_CHANCE_MISS}% шанс промахнуться`;
       break;
     case "heal":

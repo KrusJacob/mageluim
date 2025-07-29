@@ -1,11 +1,13 @@
-export const GACHA_CHANCE_SKILL = {
+import type { GachaChanses } from "@/types/skill";
+
+export const GACHA_CHANCE_SKILL: GachaChanses = {
   common: 60,
   rare: 30,
   epic: 8,
   legendary: 2,
 };
 
-export const BURN_DOT_DMG = 2; // %
+export const BURN_DOT_DMG = 3; // %
 export const BURN_MAX_LAYERS = 5;
 
 export const POSION_DOT_DMG = 100;
