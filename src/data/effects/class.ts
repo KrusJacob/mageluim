@@ -7,14 +7,18 @@ export class EffectEngine implements IEffect {
   label: string;
   Icon: ReactNode;
   color: string;
+  description?: string;
+  maxLayer: number;
   getData() {
     return getDataEffect(this.name);
   }
   constructor(name: IEffectName) {
     this.name = name;
-    const { Icon, color, label } = this.getData();
+    const { Icon, color, label, maxLayer, description } = this.getData();
     this.Icon = Icon;
     this.color = color;
     this.label = label;
+    this.maxLayer = maxLayer;
+    this.description = description;
   }
 }

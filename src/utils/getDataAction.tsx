@@ -55,7 +55,7 @@ export const getDataAction = (elementName: IElementName, typeAction: ITypeAction
     case "dark":
       Icon = <MdDarkMode />;
       color = "slateblue";
-      label = typeAction === "buff" ? "Затмение" : "Мрак";
+      label = typeAction === "buff" ? "Затмение" : "Страх";
       labelElement = "Тьма";
       break;
     case "light":

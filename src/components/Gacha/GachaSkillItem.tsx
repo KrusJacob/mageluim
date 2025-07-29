@@ -50,7 +50,7 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
           {isSelected && (
             <Box mt={2}>
               {skill.tags?.map((item, i) => (
-                <Box key={i}>
+                <Box key={i} my={2}>
                   <Tag.Root size="lg" key={i}>
                     <Tag.Label display="flex" alignItems="center" gap={1} color={item.color} title={item.label}>
                       {item.label} {item.Icon}

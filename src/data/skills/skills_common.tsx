@@ -55,7 +55,7 @@ export const SKILLS_COMMON = [
   new SkillEngine(
     {
       name: "Языки пламени",
-      description: <>Наносит {useDmgToElement(300, FIRE)} урона всем врагам</>,
+      description: <>Наносит {useDmgToElement(275, FIRE)} урона всем врагам</>,
       url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",
       img: "",
       element: [FIRE],
@@ -97,7 +97,7 @@ export const SKILLS_COMMON = [
       name: "Удар булыжником",
       description: (
         <>
-          Наносит {useDmgToElement(600, PHYSICAL)} урона одному врагу и {useActionTo(DEBUFF_PHYSICAL_1, 2)}
+          Наносит {useDmgToElement(550, PHYSICAL)} урона одному врагу и {useActionTo(DEBUFF_PHYSICAL_1, 2)}
         </>
       ),
       url: "https://storage01.sb.by/iblock/f3a/f3a892c7581a0c48efaf62f0abb9a8b6/f04ef9e7572b12d75af4b5090727f691.jpg",

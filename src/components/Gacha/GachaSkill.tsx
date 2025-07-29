@@ -1,39 +1,11 @@
-import { Box, Button, ButtonGroup, Center, HStack, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Center, HStack, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import GachaSkillList from "./GachaSkillList";
-import { CHANCE_TABLE } from "./data";
 import { SiCrystal } from "react-icons/si";
 import GachaHistory from "./GachaHistory";
 import { toaster } from "../ui/toaster";
-import type { ISkill, ISkillHistory, Rarity } from "@/types/skill";
-import { ALL_SKILL_LIST } from "@/data/skills/skills_all";
-
-function getThreeRandomSkills(skills: ISkill[] = ALL_SKILL_LIST) {
-  function pickSkill() {
-    const roll = Math.random() * 100;
-    let cumulative = 0;
-
-    for (const rarity of Object.keys(CHANCE_TABLE) as Rarity[]) {
-      cumulative += CHANCE_TABLE[rarity];
-      if (roll < cumulative) {
-        const pool = skills.filter((s) => s.rarity === rarity);
-        return pool[Math.floor(Math.random() * pool.length)];
-      }
-    }
-
-    return skills[0]; // fallback
-  }
-
-  const selected: ISkill[] = [];
-  while (selected.length < 3) {
-    const skill = pickSkill();
-    if (!selected.some((s) => s.id === skill.id)) {
-      selected.push(skill);
-    }
-  }
-
-  return selected;
-}
+import type { ISkill, ISkillHistory } from "@/types/skill";
+import { getThreeRandomSkills } from "@/utils/getRandomSkills";
 
 const GachaSkill = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);

@@ -13,13 +13,13 @@ export const useDmgToElement = (value: number, element: IElement) => {
   );
 };
 
-export const useEffectTo = (effect: IEffect, duration: number) => {
+export const useEffectTo = (effect: IEffect, duration: number, layer?: number) => {
   const { Icon, color, label } = effect;
   const plural = usePluralizationEffect(duration);
 
   return (
     <span style={{ fontWeight: "bold" }}>
-      Накладывает{" "}
+      Накладывает {layer ? `${layer} слой ` : " "}
       <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px" }}>
         {label} {Icon}
       </span>{" "}

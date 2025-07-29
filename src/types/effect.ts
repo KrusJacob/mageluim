@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import type { IElementName } from "./skill";
 
-export type IEffectName = "freeze" | "wet" | "burn" | "poison" | "stun" | "fear" | "blind";
+export type IEffectName = "freeze" | "wet" | "burn" | "poison" | "stun" | "darkness" | "blind" | "heal";
 export type IEffect = {
   name: IEffectName;
   color: string;
   label: string;
   Icon: ReactNode;
+  maxLayer: number;
   description?: string;
 };
 
