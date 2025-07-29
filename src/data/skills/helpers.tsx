@@ -1,15 +1,10 @@
 import usePluralizationEffect from "@/hooks/usePluralizationEffect";
-import type { IEffect } from "@/types/effect";
-import type { IElement, Rarity } from "@/types/skill";
-import { getColorElement } from "@/utils/getColorElement";
-import { getIconEffect } from "@/utils/getIconEffect";
-import { getIconElement } from "@/utils/getIconElement";
-import { Text } from "@chakra-ui/react";
-import { MdBolt } from "react-icons/md";
+import type { IAction, IEffect } from "@/types/effect";
+import type { IElement, IElementName, Rarity } from "@/types/skill";
+import { getDataElement } from "@/utils/getDataElement";
 
 export const useDmgToElement = (value: number, element: IElement) => {
-  const { Icon, color } = getIconElement(element);
-  //   const color = getColorElement(element);
+  const { Icon, color } = element;
 
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", color, fontWeight: "bold" }}>
@@ -18,17 +13,36 @@ export const useDmgToElement = (value: number, element: IElement) => {
   );
 };
 
-export const useEffectTo = (effect: IEffect, duration: number) => {
-  const { Icon, color } = getIconEffect(effect.name);
+export const useEffectTo = (effect: IEffect, duration: number, layer?: number) => {
+  const { Icon, color, label } = effect;
   const plural = usePluralizationEffect(duration);
 
   return (
     <span style={{ fontWeight: "bold" }}>
-      накладывает{" "}
+      Накладывает {layer ? `${layer} слой ` : " "}
       <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px" }}>
-        {effect.label} {Icon}
+        {label} {Icon}
       </span>{" "}
       на {duration} {plural}
     </span>
   );
+};
+
+export const useActionTo = (action: IAction, duration: number) => {
+  const { Icon, color, level, typeAction, label } = action;
+  const target = typeAction === "buff" ? "Дает герою" : "Накладывает";
+  const plural = usePluralizationEffect(duration);
+
+  return (
+    <span title={label} style={{ fontWeight: "bold" }}>
+      {target} <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px" }}>{label}</span> на{" "}
+      {duration} {plural}
+    </span>
+  );
+
+  // return (
+  //   <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", color, fontWeight: "bold" }}>
+  //     {target} {label} {Icon}
+  //   </span>
+  // );
 };
