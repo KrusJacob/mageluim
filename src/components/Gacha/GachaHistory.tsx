@@ -28,7 +28,7 @@ const GachaHistory = ({ skills }: { skills: ISkillHistory[] }) => {
           </Table.Root>
         </Box>
       }
-      trigger={<IoList size={24} cursor={"pointer"} />}
+      trigger={<IoList size={28} cursor={"pointer"} />}
     />
   );
 };

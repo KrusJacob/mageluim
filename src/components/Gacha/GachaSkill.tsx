@@ -6,7 +6,7 @@ import GachaHistory from "./GachaHistory";
 import { toaster } from "../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
 import { getThreeRandomSkills } from "@/utils/getRandomSkills";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 import GachaInfo from "./GachaInfo";
 
 const GachaSkill = () => {
@@ -43,12 +43,13 @@ const GachaSkill = () => {
 
   return (
     <Center flexDir={"column"} maxW={{ base: "8xl" }} w={"100%"}>
-      <HStack mb={8} w={"100%"} gap={4} px={4}>
+      <HStack mb={8} w={"100%"} gap={4}>
+        {/* <BsArrowLeftSquareFill size={28} cursor={"pointer"} onClick={back} /> */}
         <GachaHistory skills={gachaHistory} />
         <GachaInfo />
         <HStack ml={"auto"}>
           {totalShards}
-          <SiCrystal color="violet" title="Кристалл призыва" size={20} />
+          <SiCrystal color="violet" title="Кристалл призыва" size={24} />
         </HStack>
       </HStack>
       <HStack minH={"380px"}>
@@ -66,11 +67,12 @@ const GachaSkill = () => {
           </Center>
         )}
       </HStack>
-      <ButtonGroup mt={4}>
-        <Button disabled={!selectedSkill} onClick={handleSelect}>
+
+      {randomedSkills && (
+        <Button mt={4} disabled={!selectedSkill} onClick={handleSelect}>
           Выбрать
         </Button>
-      </ButtonGroup>
+      )}
     </Center>
   );
 };

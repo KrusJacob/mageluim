@@ -14,7 +14,7 @@ export type IEffect = {
 // export type IDebuff = "water" | "wet" | "burn" | "poison" | "stun";
 export type ITypeAction = "buff" | "debuff";
 export interface IAction {
-  element: IElementName;
+  elementName: IElementName;
   color: string;
   label: string;
   labelElement: string;

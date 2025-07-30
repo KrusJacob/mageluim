@@ -10,8 +10,7 @@ let id_skill_legendary = 300;
 export class SkillEngine implements ISkillEngine {
   name: string;
   description: string | React.ReactNode;
-  url: string;
-  img?: string;
+  img: string;
   element: IElement[];
   rarity: Rarity;
   id: number;
@@ -20,7 +19,6 @@ export class SkillEngine implements ISkillEngine {
   constructor(args: SkillBaseArgs, rarity: Rarity) {
     this.name = args.name;
     this.description = args.description;
-    this.url = args.url;
     this.img = args.img;
     this.element = args.element;
     this.rarity = rarity;
@@ -46,7 +44,6 @@ export class SkillEngine implements ISkillEngine {
       id: this.id,
       name: this.name,
       description: this.description,
-      url: this.url,
       img: this.img,
       tags: this.tags,
       element: this.element,

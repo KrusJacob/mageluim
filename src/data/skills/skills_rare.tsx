@@ -77,14 +77,14 @@ export const SKILLS_RARE = [
   ).getSkill(),
   new SkillEngine(
     {
-      name: "Каменная кожа",
+      name: "Каменная кожа", // пофиксить бафф защиты
       description: (
         <>
           {useActionTo(BUFF_PHYSICAL_1, 2)} и {useActionTo(BUFF_DEF_1, 2)}
         </>
       ),
       img: "/img/skills/Каменная_кожа.png",
-      element: [WIND],
+      element: [PHYSICAL],
       tags: [BUFF_PHYSICAL_1, BUFF_DEF_1],
     },
     "rare"

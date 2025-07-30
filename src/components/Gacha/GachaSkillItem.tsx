@@ -52,7 +52,7 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
             ))}
           </HStack>
           <Card.Description color={"gray.400"}>{skill.description}</Card.Description>
-          {isSelected && (
+          {isSelected && skill.tags && (
             <Box mt={2}>
               {skill.tags?.map((item, i) => (
                 <Box key={i} my={2}>

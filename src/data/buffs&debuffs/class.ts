@@ -4,7 +4,7 @@ import { getDataAction } from "@/utils/getDataAction";
 import type { ReactNode } from "react";
 
 export class ActionEngine implements IAction {
-  element: IElementName;
+  elementName: IElementName;
   Icon: ReactNode;
   color: string;
   label: string;
@@ -13,25 +13,20 @@ export class ActionEngine implements IAction {
   level: LevelAction;
   description?: string;
   getData() {
-    return getDataAction(this.element, this.typeAction);
+    return getDataAction(this);
   }
   getLabel(labelElement: string) {
     return `${labelElement} ${this.level === 1 ? "I" : "II"}`;
   }
-  getDescription() {
-    const type = this.typeAction === "buff" ? "Наносимый" : "Получаемый";
-    const value = this.level === 1 ? "20%" : "40%";
-    return `Увеличивает ${type} урон от [${this.labelElement}] на ${value}`;
-  }
   constructor(element: IElementName, action: ITypeAction, level: LevelAction) {
-    this.element = element;
+    this.elementName = element;
     this.typeAction = action;
     this.level = level;
-    const { Icon, color, label, labelElement } = this.getData();
+    const { Icon, color, label, labelElement, description } = this.getData();
     this.Icon = Icon;
     this.color = color;
     this.labelElement = labelElement;
     this.label = this.getLabel(label);
-    this.description = this.getDescription();
+    this.description = description;
   }
 }

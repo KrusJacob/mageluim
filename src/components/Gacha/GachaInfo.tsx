@@ -32,7 +32,7 @@ const GachaInfo = () => {
           </Table.Root>
         </Box>
       }
-      trigger={<IoIosInformationCircleOutline size={24} cursor={"pointer"} />}
+      trigger={<IoIosInformationCircleOutline size={28} cursor={"pointer"} />}
     />
   );
 };

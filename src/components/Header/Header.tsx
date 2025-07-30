@@ -1,13 +1,13 @@
 import { Box, Container } from "@chakra-ui/react";
 import { ColorModeButton } from "../ui/color-mode";
-import { ALL_SKILL_LIST } from "@/data/skills/skills_all";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 
-const Header = () => {
-  console.log(ALL_SKILL_LIST);
+const Header = ({ back }: { back: () => void }) => {
   return (
     <Box as="header" bg={"grayColor"} _dark={{ bg: "grayColorDark" }}>
-      <Container p={4} bg={"transparent"} maxW={{ base: "8xl" }}>
-        <ColorModeButton />
+      <Container p={2} bg={"transparent"} maxW={{ base: "8xl" }}>
+        {/* <ColorModeButton /> */}
+        <BsArrowLeftSquareFill size={40} cursor={"pointer"} onClick={back} />
       </Container>
     </Box>
   );

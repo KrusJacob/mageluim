@@ -13,7 +13,6 @@ export interface IElement {
 export interface ISkillEngine {
   name: string;
   description: string | React.ReactNode;
-  // url: string;
   img: string;
   // rarity: Rarity;
   element: IElement[];

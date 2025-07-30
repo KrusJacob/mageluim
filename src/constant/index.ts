@@ -22,3 +22,6 @@ export const DARKNESS_MAX_LAYERS = 3;
 
 export const HEAL_DOT_HEAL = 5;
 export const HEAL_DOT_LAYERS = 3;
+
+export const ACTION_VALUE_1 = 20; //  %
+export const ACTION_VALUE_2 = 40; //  %
