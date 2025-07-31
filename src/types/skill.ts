@@ -14,6 +14,7 @@ export interface ISkillEngine {
   name: string;
   description: string | React.ReactNode;
   img: string;
+  level: number;
   // rarity: Rarity;
   element: IElement[];
   tags?: Array<IEffect | IAction>;
@@ -21,6 +22,9 @@ export interface ISkillEngine {
 export interface ISkill extends ISkillEngine {
   id: number;
   rarity: Rarity;
+}
+export interface ISkillHero extends ISkill {
+  copies: number;
 }
 export type ISkillHistory = Pick<ISkill, "name" | "rarity"> & {
   dateOfRecipe: Date;

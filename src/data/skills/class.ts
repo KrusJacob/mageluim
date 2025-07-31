@@ -15,6 +15,7 @@ export class SkillEngine implements ISkillEngine {
   rarity: Rarity;
   id: number;
   tags?: Array<IEffect | IAction>;
+  level: number;
 
   constructor(args: SkillBaseArgs, rarity: Rarity) {
     this.name = args.name;
@@ -24,6 +25,7 @@ export class SkillEngine implements ISkillEngine {
     this.rarity = rarity;
     this.tags = args.tags;
     this.id = SkillEngine.generateId(rarity);
+    this.level = 1;
   }
 
   static generateId(rarity: Rarity) {
@@ -38,6 +40,9 @@ export class SkillEngine implements ISkillEngine {
         return id_skill_legendary++;
     }
   }
+  // upgradedSkill() {
+  //   this.level += 1;
+  // }
 
   getSkill(): ISkill {
     return {
@@ -48,6 +53,7 @@ export class SkillEngine implements ISkillEngine {
       tags: this.tags,
       element: this.element,
       rarity: this.rarity,
+      level: this.level,
     };
   }
 }

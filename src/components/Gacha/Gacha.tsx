@@ -6,12 +6,12 @@ import GachaHistory from "./GachaHistory";
 import { toaster } from "../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
 import { getThreeRandomSkills } from "@/utils/getRandomSkills";
-import { BsArrowLeftSquareFill } from "react-icons/bs";
 import GachaInfo from "./GachaInfo";
+import { HERO } from "@/data/hero/hero";
 
-const GachaSkill = () => {
+const Gacha = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
-  const [totalShards, setTotalShards] = useState(10);
+  const [totalShards, setTotalShards] = useState(HERO.shards);
   const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<ISkill | null>(null);
 
@@ -29,6 +29,7 @@ const GachaSkill = () => {
     if (selectedSkill) {
       addGachaHistory(selectedSkill);
       toaster.create({ title: "Congratulation", description: `You got skill: ${selectedSkill.name}` });
+      HERO.getNewSkill(selectedSkill);
     }
     setRandomedSkills(null);
     setSelectedSkill(null);
@@ -77,4 +78,4 @@ const GachaSkill = () => {
   );
 };
 
-export default GachaSkill;
+export default Gacha;

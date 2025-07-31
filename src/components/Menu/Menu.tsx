@@ -1,19 +1,22 @@
 import { Box, Center, Container, For, Grid, GridItem, Loader, Text } from "@chakra-ui/react";
 import React, { Suspense, lazy, useState } from "react";
-import GachaSkill from "../Gacha/GachaSkill";
+import Gacha from "../Gacha/Gacha";
 import Bag from "../Bag/Bag";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import Header from "../Header/Header";
 import Battle from "../Battle/Battle";
 import Shop from "../Shop/Shop";
 
-const LazyGacha = lazy(() => import("../Gacha/GachaSkill"));
+const LazyGacha = lazy(() => import("../Gacha/Gacha"));
+const LazyBag = lazy(() => import("../Bag/Bag"));
+const LazyBattle = lazy(() => import("../Battle/Battle"));
+const LazyShop = lazy(() => import("../Shop/Shop"));
 
 const Menu = () => {
   const [selectMode, setSelectMode] = useState<string | null>(null);
   return (
     <>
-      <Header back={() => setSelectMode(null)} />
+      <Header back={() => setSelectMode(null)} title={selectMode} />
       <Container px={2} py={4} maxW={{ base: "8xl" }} justifyContent="center">
         <Center>
           {!selectMode && (
@@ -21,7 +24,7 @@ const Menu = () => {
               <For
                 each={[
                   { name: "Призыв", img: "/img/bg_gacha.png" },
-                  { name: "Инвентарь", img: null },
+                  { name: "Инвентарь", img: "/img/bg_bag.png" },
                   { name: "Бой", img: null },
                   { name: "Магазин", img: null },
                 ]}
@@ -32,7 +35,7 @@ const Menu = () => {
                     bgSize="cover"
                     bgPos={"center"}
                     key={index}
-                    h="72"
+                    h="300px"
                     border={"1px solid gray"}
                     onClick={() => setSelectMode(item.name)}
                     borderRadius={8}
@@ -50,9 +53,9 @@ const Menu = () => {
           )}
           <Suspense fallback={<Loader mt={10} />}>
             {selectMode === "Призыв" && <LazyGacha />}
-            {selectMode === "Инвентарь" && <Bag />}
-            {selectMode === "Бой" && <Battle />}
-            {selectMode === "Магазин" && <Shop />}
+            {selectMode === "Инвентарь" && <LazyBag />}
+            {selectMode === "Бой" && <LazyBattle />}
+            {selectMode === "Магазин" && <LazyShop />}
           </Suspense>
         </Center>
       </Container>
