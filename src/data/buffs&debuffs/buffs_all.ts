@@ -9,6 +9,9 @@ export const BUFF_FOREST_2 = new ActionEngine("forest", "buff", 2);
 export const BUFF_PHYSICAL_1 = new ActionEngine("physical", "buff", 1);
 export const BUFF_PHYSICAL_2 = new ActionEngine("physical", "buff", 2);
 
+export const BUFF_ATTACK_1 = new ActionEngine("attack", "buff", 1);
+export const BUFF_ATTACK_2 = new ActionEngine("attack", "buff", 2);
+
 export const BUFF_DEF_1 = new ActionEngine("def", "buff", 1);
 export const BUFF_DEF_2 = new ActionEngine("def", "buff", 2);
 

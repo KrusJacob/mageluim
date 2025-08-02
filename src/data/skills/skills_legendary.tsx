@@ -1,7 +1,10 @@
 import { SkillEngine } from "./class";
 import { DARK, FIRE, FOREST, LIGHT, WATER, WIND } from "../elements/elements_all";
-import { useDmgToElement, useEffectTo } from "./helpers";
+import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
 import { BURN, DARKNESS, WET } from "../effects/effects_all";
+import { actionTarget } from "../dmg/dmg_all";
+import { BUFF_LIGHT_2 } from "../buffs&debuffs/buffs_all";
+import { DEBUFF_WATER_2 } from "../buffs&debuffs/debuffs_all";
 
 export const SKILLS_LEGENDARY = [
   new SkillEngine(
@@ -15,15 +18,49 @@ export const SKILLS_LEGENDARY = [
       img: "/img/skills/Черная_дыра.png",
       element: [DARK],
       tags: [DARKNESS],
+      awakenings: [
+        <>Урон увеличен на {useDmgToElement(150, DARK)}</>,
+        <>{useEffectTo(DARKNESS, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(150, DARK)}</>,
+      ],
+      data: {
+        manaCost: [7, 7, 7, 7],
+        useDmgToAOE: {
+          dark: [475, 625, 625, 775],
+        },
+        useActionToAOE: [
+          [actionTarget(DARKNESS, 2)],
+          [actionTarget(DARKNESS, 2)],
+          [actionTarget(DARKNESS, 2, 2)],
+          [actionTarget(DARKNESS, 4, 2)],
+        ],
+      },
     },
     "legendary"
   ).getSkill(),
   new SkillEngine(
     {
       name: "Божественная кара",
-      description: <>Наносит {useDmgToElement(1000, LIGHT)} урона одному врагу</>,
+      description: <>Наносит {useDmgToElement(1200, LIGHT)} урона одному врагу</>,
       img: "/img/skills/Божественная_кара.png",
       element: [LIGHT],
+      awakenings: [
+        <>{useActionTo(BUFF_LIGHT_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(300, LIGHT)}</>,
+        <>Урон увеличен на {useDmgToElement(300, LIGHT)}</>,
+      ],
+      data: {
+        manaCost: [8, 8, 8, 8],
+        useDmgToTarget: {
+          light: [1200, 1200, 1500, 1800],
+        },
+        useActionToSelf: [
+          [],
+          [actionTarget(BUFF_LIGHT_2, 2)],
+          [actionTarget(BUFF_LIGHT_2, 2)],
+          [actionTarget(BUFF_LIGHT_2, 2)],
+        ],
+      },
     },
     "legendary"
   ).getSkill(),
@@ -38,6 +75,24 @@ export const SKILLS_LEGENDARY = [
       img: "/img/skills/Цунами.png",
       element: [WIND, WATER],
       tags: [WET],
+      awakenings: [
+        <>{useActionTo(DEBUFF_WATER_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(150, WATER)}</>,
+        <>Урон увеличен на {useDmgToElement(150, WATER)}</>,
+      ],
+      data: {
+        manaCost: [6, 6, 6, 6],
+        useDmgToAOE: {
+          wind: [250, 250, 250, 250],
+          water: [250, 250, 400, 550],
+        },
+        useActionToAOE: [
+          [actionTarget(WET, 2)],
+          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2)],
+          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2)],
+          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2)],
+        ],
+      },
     },
     "legendary"
   ).getSkill(),
@@ -46,12 +101,29 @@ export const SKILLS_LEGENDARY = [
       name: "Армагедон",
       description: (
         <>
-          Наносит {useDmgToElement(450, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
+          Наносит {useDmgToElement(575, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
         </>
       ),
       img: "/img/skills/Армагедон.png",
       element: [FIRE],
       tags: [BURN],
+      awakenings: [
+        <>Урон увеличен на {useDmgToElement(175, FIRE)}</>,
+        <>{useEffectTo(BURN, 2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(175, WATER)}</>,
+      ],
+      data: {
+        manaCost: [9, 9, 9, 9],
+        useDmgToAOE: {
+          fire: [550, 750, 750, 875],
+        },
+        useActionToAOE: [
+          [actionTarget(BURN, 2, 2)],
+          [actionTarget(BURN, 2, 2)],
+          [actionTarget(BURN, 2, 4)],
+          [actionTarget(BURN, 2, 4)],
+        ],
+      },
     },
     "legendary"
   ).getSkill(),

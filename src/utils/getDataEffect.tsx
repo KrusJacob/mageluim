@@ -6,6 +6,8 @@ import { IoIosWater } from "react-icons/io";
 import { BsEyeSlashFill } from "react-icons/bs";
 import { IoSkull } from "react-icons/io5";
 import { LuCross } from "react-icons/lu";
+import { MdElectricBolt } from "react-icons/md";
+import { GiBellShield } from "react-icons/gi";
 
 import {
   BLIND_CHANCE_MISS,
@@ -78,6 +80,19 @@ export const getDataEffect = (effectName: IEffect["name"]) => {
       color = "aquamarine";
       maxLayer = HEAL_DOT_LAYERS;
       description = `Каждый ход исцеляет на ${HEAL_DOT_HEAL}% от максимального здоровья. Максимум ${HEAL_DOT_LAYERS} слоев.`;
+      break;
+    case "inspiration":
+      Icon = <MdElectricBolt />;
+      label = "Вдохновение"; // регенирирует ману
+      color = "turquoise";
+      description = `Каждый ход восстанавливает 1 ед. маны.`;
+      break;
+    case "invulnerability":
+      Icon = <GiBellShield />;
+      label = "Неуязвимость"; // Неуязвимость
+      color = "gold";
+      maxLayer = HEAL_DOT_LAYERS;
+      description = `Не получает урона.`;
       break;
     default:
       Icon = <FaBurn />;

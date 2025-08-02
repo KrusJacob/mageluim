@@ -43,8 +43,8 @@ const Gacha = () => {
   };
 
   return (
-    <Center flexDir={"column"} maxW={{ base: "8xl" }} w={"100%"}>
-      <HStack mb={8} w={"100%"} gap={4}>
+    <Center flexDir={"column"} maxW={{ base: "6xl" }} w={"100%"}>
+      <HStack mb={4} w={"100%"} gap={4}>
         {/* <BsArrowLeftSquareFill size={28} cursor={"pointer"} onClick={back} /> */}
         <GachaHistory skills={gachaHistory} />
         <GachaInfo />
@@ -53,7 +53,7 @@ const Gacha = () => {
           <SiCrystal color="violet" title="Кристалл призыва" size={24} />
         </HStack>
       </HStack>
-      <HStack minH={"380px"}>
+      <HStack minH={"400px"}>
         <GachaSkillList
           skills={randomedSkills}
           selectedSkill={selectedSkill}

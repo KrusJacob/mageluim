@@ -10,13 +10,17 @@ interface Props {
   upgradeSkill: () => void;
 }
 const DetailedBag = ({ skill, upgradeSkill }: Props) => {
+  if (skill?.getCurrentAwakeningData) {
+    console.log(skill?.getCurrentAwakeningData());
+  }
+  console.log(skill);
   return (
     <Box w={"380px"}>
       {skill && (
-        <Stack w={"380px"} gap={2} position={"relative"}>
+        <Stack w={"360px"} gap={2} position={"relative"}>
           <SkillLevel level={skill.level} />
           <SkillCard skill={skill} isSelected={true} />
-          <Text fontSize={40} fontWeight={"bold"} right={4} top={4} position={"absolute"}>
+          <Text lineHeight={1} fontSize={40} fontWeight={"bold"} right={4} top={4} position={"absolute"}>
             x{skill.copies}
           </Text>
           <Button onClick={upgradeSkill} disabled={skill.copies < 2} w={"100%"}>

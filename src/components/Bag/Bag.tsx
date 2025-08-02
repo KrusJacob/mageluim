@@ -21,9 +21,15 @@ const Bag = () => {
   return (
     <HStack w={"100%"} alignItems={"start"}>
       <Box flexDir={"column"} maxW={{ base: "8xl" }} w={"100%"}>
-        <Flex w={"100%"} justifyContent={"start"} alignItems={"start"} flexWrap={"wrap"} gap={2}>
+        <Flex w={"100%"} justifyContent={"start"} alignItems={"start"} flexWrap={"wrap"} gap={1}>
           {skills.map((skill, i) => (
-            <Box position={"relative"} onClick={() => setSelectedSkill(skill)} w={"250px"} h={"400px"}>
+            <Box
+              position={"relative"}
+              key={i + skill.name}
+              onClick={() => setSelectedSkill(skill)}
+              w={"260px"}
+              h={"400px"}
+            >
               <SkillLevel level={skill.level} />
               <SkillCard key={i + skill.name} skill={skill} isSelected={false} />
             </Box>

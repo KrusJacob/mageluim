@@ -9,6 +9,9 @@ export const DEBUFF_FOREST_2 = new ActionEngine("forest", "debuff", 2);
 export const DEBUFF_PHYSICAL_1 = new ActionEngine("physical", "debuff", 1);
 export const DEBUFF_PHYSICAL_2 = new ActionEngine("physical", "debuff", 2);
 
+export const DEBUFF_ATTACK_1 = new ActionEngine("attack", "debuff", 1);
+export const DEBUFF_ATTACK_2 = new ActionEngine("attack", "debuff", 2);
+
 export const DEBUFF_DEF_1 = new ActionEngine("def", "debuff", 1);
 export const DEBUFF_DEF_2 = new ActionEngine("def", "debuff", 2);
 

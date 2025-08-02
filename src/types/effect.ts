@@ -1,7 +1,17 @@
 import type { ReactNode } from "react";
 import type { IElementName } from "./skill";
 
-export type IEffectName = "freeze" | "wet" | "burn" | "poison" | "stun" | "darkness" | "blind" | "heal";
+export type IEffectName =
+  | "freeze"
+  | "wet"
+  | "burn"
+  | "poison"
+  | "stun"
+  | "darkness"
+  | "blind"
+  | "heal"
+  | "inspiration"
+  | "invulnerability";
 export type IEffect = {
   name: IEffectName;
   color: string;

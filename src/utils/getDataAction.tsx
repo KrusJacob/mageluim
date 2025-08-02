@@ -8,6 +8,7 @@ import { PiSunDimLight } from "react-icons/pi";
 import { FaRegCircle } from "react-icons/fa";
 import { FaHandFist } from "react-icons/fa6";
 import { FaShieldAlt } from "react-icons/fa";
+import { LuSword } from "react-icons/lu";
 import { FaSun } from "react-icons/fa";
 import type { IAction, ITypeAction } from "@/types/effect";
 import { ACTION_VALUE_1, ACTION_VALUE_2 } from "@/constant";
@@ -19,15 +20,21 @@ export const getDataAction = (action: IAction) => {
   let labelElement = "";
   let Icon = null;
   let description = "";
-  function getDescription(labelElement: IAction["labelElement"], reverse = false) {
+  function getDescription(labelElement: IAction["labelElement"]) {
     let type = typeAction === "buff" ? "Наносимый" : "Получаемый";
     let prefix = "Увеличивает";
-    if (reverse) {
-      type = typeAction === "buff" ? "Получаемый" : "Наносимый";
-      prefix = "Уменьшает";
-    }
+    // if (reverse) {
+    //   type = typeAction === "buff" ? "Получаемый" : "Наносимый";
+    //   prefix = "Уменьшает";
+    // }
     let value = level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2;
     return `${prefix} ${type} урон от [${labelElement}] на ${value}%`;
+  }
+  function getDescriptionStat(labelElement: IAction["labelElement"]) {
+    let prefix = typeAction === "buff" ? "Увеличивает" : "Уменьшает";
+
+    let value = level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2;
+    return `${prefix} ${labelElement} на ${value}%`;
   }
   switch (elementName) {
     case "physical":
@@ -37,12 +44,19 @@ export const getDataAction = (action: IAction) => {
       labelElement = "Физический";
       description = getDescription(labelElement);
       break;
+    case "attack":
+      Icon = <LuSword />;
+      color = "var(--color-physical)";
+      label = typeAction === "buff" ? "Сила" : "Слабость";
+      labelElement = "Атаку";
+      description = getDescriptionStat(labelElement);
+      break;
     case "def":
       Icon = <FaShieldAlt />;
       color = "var(--color-physical)";
       label = typeAction === "buff" ? "Укрепление" : "Разлом";
-      labelElement = "Физический";
-      description = getDescription(labelElement, true);
+      labelElement = "Защиту";
+      description = getDescriptionStat(labelElement);
       break;
     case "fire":
       Icon = <FaFire />;

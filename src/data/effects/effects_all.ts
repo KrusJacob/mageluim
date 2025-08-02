@@ -8,3 +8,5 @@ export const STUN = new EffectEngine("stun");
 export const BLIND = new EffectEngine("blind");
 export const DARKNESS = new EffectEngine("darkness");
 export const HEAL = new EffectEngine("heal");
+export const INSPIRATION = new EffectEngine("inspiration");
+export const INVULNERABILITY = new EffectEngine("invulnerability");

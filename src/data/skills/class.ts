@@ -1,6 +1,15 @@
 import type { IAction, IEffect } from "@/types/effect";
-import type { IElement, IElementName, ISkill, ISkillEngine, Rarity } from "@/types/skill";
-type SkillBaseArgs = Omit<ISkillEngine, "rarity">;
+import type {
+  IDataAwakenings,
+  IElement,
+  IElementName,
+  ILevelSkill,
+  ISkill,
+  ISkillEngine,
+  ITypeDMG,
+  Rarity,
+} from "@/types/skill";
+type SkillBaseArgs = Omit<ISkillEngine, "rarity" | "level">;
 
 let id_skill_common = 0;
 let id_skill_rare = 100;
@@ -15,7 +24,16 @@ export class SkillEngine implements ISkillEngine {
   rarity: Rarity;
   id: number;
   tags?: Array<IEffect | IAction>;
-  level: number;
+  level: ILevelSkill;
+  // manaCost: number;
+  awakenings?: React.ReactNode[];
+  data: IDataAwakenings;
+
+  getCurrentAwakeningData(): unknown {
+    if (this.data && this.level) {
+      return [this.data];
+    }
+  }
 
   constructor(args: SkillBaseArgs, rarity: Rarity) {
     this.name = args.name;
@@ -25,7 +43,10 @@ export class SkillEngine implements ISkillEngine {
     this.rarity = rarity;
     this.tags = args.tags;
     this.id = SkillEngine.generateId(rarity);
-    this.level = 1;
+    this.level = 0;
+    // this.manaCost = args.manaCost;
+    this.awakenings = args.awakenings;
+    this.data = args.data;
   }
 
   static generateId(rarity: Rarity) {
@@ -40,9 +61,6 @@ export class SkillEngine implements ISkillEngine {
         return id_skill_legendary++;
     }
   }
-  // upgradedSkill() {
-  //   this.level += 1;
-  // }
 
   getSkill(): ISkill {
     return {
@@ -54,6 +72,10 @@ export class SkillEngine implements ISkillEngine {
       element: this.element,
       rarity: this.rarity,
       level: this.level,
+      // manaCost: this.manaCost,
+      awakenings: this.awakenings,
+      data: this.data,
+      getCurrentAwakeningData: this.getCurrentAwakeningData,
     };
   }
 }

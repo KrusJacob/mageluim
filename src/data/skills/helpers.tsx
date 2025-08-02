@@ -18,9 +18,9 @@ export const useEffectTo = (effect: IEffect, duration: number, layer?: number) =
   const plural = usePluralizationEffect(duration);
 
   return (
-    <span style={{ fontWeight: "bold" }}>
+    <span>
       Накладывает {layer ? `${layer} слой ` : " "}
-      <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px" }}>
+      <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px", fontWeight: "bold" }}>
         {label} {Icon}
       </span>{" "}
       на {duration} {plural}
@@ -34,9 +34,12 @@ export const useActionTo = (action: IAction, duration: number) => {
   const plural = usePluralizationEffect(duration);
 
   return (
-    <span title={label} style={{ fontWeight: "bold" }}>
-      {target} <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px" }}>{label}</span> на{" "}
-      {duration} {plural}
+    <span title={label}>
+      {target}{" "}
+      <span style={{ color, display: "inline-flex", alignItems: "center", gap: "2px", fontWeight: "bold" }}>
+        {label}
+      </span>{" "}
+      на {duration} {plural}
     </span>
   );
 
