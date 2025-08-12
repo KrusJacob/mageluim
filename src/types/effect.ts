@@ -18,19 +18,21 @@ export type IEffect = {
   label: string;
   Icon: ReactNode;
   maxLayer: number;
+  type: "effect";
   description?: string;
 };
 
 // export type IDebuff = "water" | "wet" | "burn" | "poison" | "stun";
 export type ITypeAction = "buff" | "debuff";
+export type IActionElement = IElementName | "attack" | "def";
 export interface IAction {
-  elementName: IElementName;
+  elementName: IActionElement;
   color: string;
   label: string;
   labelElement: string;
   Icon: ReactNode;
   level: LevelAction;
-  typeAction: ITypeAction;
+  type: ITypeAction;
   description?: string;
 }
 export type LevelAction = 1 | 2;

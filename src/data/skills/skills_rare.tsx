@@ -32,7 +32,8 @@ export const SKILLS_RARE = [
       ],
       data: {
         manaCost: [7, 7, 6, 6],
-        useDmgToTarget: {
+        cooldown: [5, 5, 5, 5],
+        useDmgToAOE: {
           wind: [400, 400, 400, 525],
         },
         useActionToSelf: [
@@ -50,24 +51,25 @@ export const SKILLS_RARE = [
       name: "Утренний дождик",
       description: (
         <>
-          {useEffectTo(HEAL, 2)} на героя. {useEffectTo(WET, 2)} на всех врагов
+          {useEffectTo(HEAL, 3)} на героя. {useEffectTo(WET, 2)} на всех врагов
         </>
       ),
       img: "/img/skills/Утренний_дождик.png",
       element: [WATER],
       tags: [HEAL, WET],
       awakenings: [
-        <>{useEffectTo(HEAL, 2)}</>,
+        <>{useEffectTo(HEAL, 3)}</>,
         <>Расход маны уменьшен на 1</>,
         <>{useEffectTo(INSPIRATION, 3)}</>,
       ],
       data: {
         manaCost: [4, 4, 3, 3],
+        cooldown: [4, 4, 4, 4],
         useActionToSelf: [
-          [actionTarget(HEAL, 2)],
-          [actionTarget(HEAL, 2, 2)],
-          [actionTarget(HEAL, 2, 2)],
-          [actionTarget(HEAL, 2, 2), actionTarget(INSPIRATION, 3)],
+          [actionTarget(HEAL, 3)],
+          [actionTarget(HEAL, 3, 2)],
+          [actionTarget(HEAL, 3, 2)],
+          [actionTarget(HEAL, 3, 2), actionTarget(INSPIRATION, 3)],
         ],
         useActionToAOE: [
           [actionTarget(WET, 2)],
@@ -97,6 +99,7 @@ export const SKILLS_RARE = [
       ],
       data: {
         manaCost: [6, 6, 6, 6],
+        cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
           fire: [400, 550, 550, 550],
           physical: [400, 400, 550, 550],
@@ -124,9 +127,11 @@ export const SKILLS_RARE = [
       ],
       data: {
         manaCost: [5, 5, 5, 5],
+        cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
           wind: [600, 750, 750, 750],
         },
+        useHealSelf: [0, 0, 0, 10],
         useActionToTarget: [
           [actionTarget(BLIND, 1)],
           [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
@@ -140,30 +145,22 @@ export const SKILLS_RARE = [
   new SkillEngine(
     {
       name: "Удар молнии",
-      description: (
-        <>
-          Наносит {useDmgToElement(575, WIND)} урона одному врагу и {useEffectTo(STUN, 1)}
-        </>
-      ),
+      description: <>Наносит {useDmgToElement(575, WIND)} урона одному врагу</>,
       img: "/img/skills/Удар_молнии.png",
       element: [WIND],
       tags: [STUN],
       awakenings: [
+        <>{useEffectTo(STUN, 1)}</>,
         <>Урон увеличен на {useDmgToElement(125, WIND)}</>,
-        <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
         <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
+        cooldown: [5, 5, 5, 5],
         useDmgToTarget: {
-          wind: [575, 700, 850, 1000],
+          wind: [575, 575, 700, 850],
         },
-        useActionToTarget: [
-          [actionTarget(STUN, 1)],
-          [actionTarget(STUN, 1)],
-          [actionTarget(STUN, 1)],
-          [actionTarget(STUN, 1)],
-        ],
+        useActionToTarget: [[], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)]],
       },
     },
     "rare"
@@ -186,6 +183,7 @@ export const SKILLS_RARE = [
       ],
       data: {
         manaCost: [3, 3, 3, 3],
+        cooldown: [4, 4, 4, 4],
         useActionToSelf: [
           [actionTarget(BUFF_PHYSICAL_1, 2), actionTarget(BUFF_DEF_1, 2)],
           [actionTarget(BUFF_PHYSICAL_1, 2), actionTarget(BUFF_DEF_2, 2)],
@@ -210,10 +208,11 @@ export const SKILLS_RARE = [
       awakenings: [
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>{useEffectTo(BURN, 2)}</>,
-        <>Длительность {BURN.Icon} увеличен на 1 ход</>,
+        <>Перезарядка уменьшена на 1 ход</>,
       ],
       data: {
         manaCost: [3, 3, 3, 3],
+        cooldown: [4, 4, 4, 3],
         useDmgToAOE: {
           fire: [150, 250, 250, 250],
         },
@@ -221,7 +220,7 @@ export const SKILLS_RARE = [
           [actionTarget(BURN, 2)],
           [actionTarget(BURN, 2)],
           [actionTarget(BURN, 2, 2)],
-          [actionTarget(BURN, 3, 2)],
+          [actionTarget(BURN, 2, 2)],
         ],
       },
     },

@@ -11,7 +11,7 @@ const SkillManaCost = ({ value }: { value: number }) => {
       w={"30px"}
       h={"30px"}
       borderRadius={"100%"}
-      zIndex={1000}
+      zIndex={100}
       boxShadow="1px 1px 5px 1px skyblue"
       fontWeight={"bold"}
       fontSize={18}

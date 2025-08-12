@@ -14,7 +14,7 @@ import type { IAction, ITypeAction } from "@/types/effect";
 import { ACTION_VALUE_1, ACTION_VALUE_2 } from "@/constant";
 
 export const getDataAction = (action: IAction) => {
-  const { typeAction, elementName, level } = action;
+  const { type: typeAction, elementName, level } = action;
   let color = "slategrey";
   let label = "";
   let labelElement = "";
@@ -23,10 +23,6 @@ export const getDataAction = (action: IAction) => {
   function getDescription(labelElement: IAction["labelElement"]) {
     let type = typeAction === "buff" ? "Наносимый" : "Получаемый";
     let prefix = "Увеличивает";
-    // if (reverse) {
-    //   type = typeAction === "buff" ? "Получаемый" : "Наносимый";
-    //   prefix = "Уменьшает";
-    // }
     let value = level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2;
     return `${prefix} ${type} урон от [${labelElement}] на ${value}%`;
   }

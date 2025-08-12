@@ -19,7 +19,7 @@ import {
   HEAL_DOT_LAYERS,
   POSION_DOT_DMG,
   POSION_MAX_LAYERS,
-  WET_CHANCE_FREEZE,
+  WET_CHANCE_REDUCTION,
 } from "@/constant";
 
 export const getDataEffect = (effectName: IEffect["name"]) => {
@@ -31,65 +31,65 @@ export const getDataEffect = (effectName: IEffect["name"]) => {
   switch (effectName) {
     case "burn":
       Icon = <FaBurn />;
-      label = "Поджог"; // DoT урон
+      label = "Поджог"; // DoT урон +
       color = "var(--color-fire)";
       maxLayer = BURN_MAX_LAYERS;
-      description = `В начале хода получает урон от [Огонь] в размере ${BURN_DOT_DMG}% от максимального здоровья. Максимум ${BURN_MAX_LAYERS} слоев.`;
+      description = `В конце хода получает урон от [Огонь] в размере ${BURN_DOT_DMG}% от максимального здоровья. Максимум ${BURN_MAX_LAYERS} слоев.`;
       break;
     case "poison":
       Icon = <GiPoisonBottle />;
-      label = "Яд"; // DoT урон
+      label = "Яд"; // DoT урон +
       color = "var(--color-forest)";
       maxLayer = POSION_DOT_DMG;
-      description = `В начале хода получает урон от [Яд] в размере ${POSION_DOT_DMG} ед. Максимум ${POSION_MAX_LAYERS} слоев.`;
+      description = `В конце хода получает урон от [Яд] в размере ${POSION_DOT_DMG} ед. Максимум ${POSION_MAX_LAYERS} слоев.`;
       break;
     case "freeze":
       Icon = <FaRegSnowflake />;
-      label = "Заморозка"; // контроль
+      label = "Заморозка"; // контроль +
       color = "cyan";
-      description = "Обездвиживание. Заставляет пропустить ход";
+      description = "Контроль. Заставляет пропустить ход";
       break;
     case "stun":
       Icon = <PiSpiralLight />;
-      label = "Оглушение"; // контроль
+      label = "Оглушение"; // контроль +
       color = "orange";
-      description = "Обездвиживание. Заставляет пропустить ход";
+      description = "Контроль. Заставляет пропустить ход";
       break;
     case "wet":
       Icon = <IoIosWater />;
-      label = "Влажность"; // повышает шанс заморозки
+      label = "Влажность"; // повышает шанс дебафов
       color = "var(--color-water)";
-      description = `Эффект увеличивает шанс быть замороженным на ${WET_CHANCE_FREEZE}%`;
+      description = `Снижает сопротивление на ${WET_CHANCE_REDUCTION}%`;
       break;
     case "darkness":
       Icon = <IoSkull />;
-      label = "Мрак"; // DoT урон
+      label = "Мрак"; // DoT урон +
       color = "var(--color-dark)";
       maxLayer = DARKNESS_MAX_LAYERS;
-      description = `В начале хода получает урон от [Тьма] в размере ${DARKNESS_DOT_DMG} ед. Максимум ${DARKNESS_MAX_LAYERS} слоев.`;
+      description = `В конце хода получает урон от [Тьма] в размере ${DARKNESS_DOT_DMG}% от максимального здоровья. Максимум ${DARKNESS_MAX_LAYERS} слоев.`;
       break;
     case "blind":
       Icon = <BsEyeSlashFill />;
-      label = "Слепота"; // 50% промахи
+      label = "Слепота"; // 50% промахи +
       color = "var(--color-light)";
       description = `При атаке есть ${BLIND_CHANCE_MISS}% шанс промахнуться`;
       break;
     case "heal":
       Icon = <LuCross />;
-      label = "Лечение"; // лечение
+      label = "Лечение"; // лечение +
       color = "aquamarine";
       maxLayer = HEAL_DOT_LAYERS;
-      description = `Каждый ход исцеляет на ${HEAL_DOT_HEAL}% от максимального здоровья. Максимум ${HEAL_DOT_LAYERS} слоев.`;
+      description = `В конце хода исцеляет на ${HEAL_DOT_HEAL}% от максимального здоровья. Максимум ${HEAL_DOT_LAYERS} слоев.`;
       break;
     case "inspiration":
       Icon = <MdElectricBolt />;
-      label = "Вдохновение"; // регенирирует ману
+      label = "Вдохновение"; // регенирирует ману +
       color = "turquoise";
       description = `Каждый ход восстанавливает 1 ед. маны.`;
       break;
     case "invulnerability":
       Icon = <GiBellShield />;
-      label = "Неуязвимость"; // Неуязвимость
+      label = "Неуязвимость"; // Неуязвимость +
       color = "gold";
       maxLayer = HEAL_DOT_LAYERS;
       description = `Не получает урона.`;

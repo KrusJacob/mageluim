@@ -7,17 +7,16 @@ import { toaster } from "../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
 import { getThreeRandomSkills } from "@/utils/getRandomSkills";
 import GachaInfo from "./GachaInfo";
-import { HERO } from "@/data/hero/hero";
+import { useHeroSkillStore } from "@/store/heroSkillStore";
+import { IconShard } from "../ui/icons";
 
 const Gacha = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
-  const [totalShards, setTotalShards] = useState(HERO.shards);
+  const heroShards = useHeroSkillStore((state) => state.shards);
+  const useShard = useHeroSkillStore((state) => state.useShard);
+  const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
   const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<ISkill | null>(null);
-
-  const useShard = () => {
-    setTotalShards((prev) => prev - 1);
-  };
 
   const handleRoll = () => {
     useShard();
@@ -28,8 +27,8 @@ const Gacha = () => {
   const handleSelect = () => {
     if (selectedSkill) {
       addGachaHistory(selectedSkill);
-      toaster.create({ title: "Congratulation", description: `You got skill: ${selectedSkill.name}` });
-      HERO.getNewSkill(selectedSkill);
+      toaster.create({ title: "Поздравляем", description: `Вы получили карту заклинания: ${selectedSkill.name}` });
+      addNewSkill(selectedSkill);
     }
     setRandomedSkills(null);
     setSelectedSkill(null);
@@ -49,8 +48,8 @@ const Gacha = () => {
         <GachaHistory skills={gachaHistory} />
         <GachaInfo />
         <HStack ml={"auto"}>
-          {totalShards}
-          <SiCrystal color="violet" title="Кристалл призыва" size={24} />
+          {heroShards}
+          <IconShard />
         </HStack>
       </HStack>
       <HStack minH={"400px"}>
@@ -61,8 +60,8 @@ const Gacha = () => {
         />
         {!randomedSkills && (
           <Center w={"100%"} flexDir={"column"} gap={2}>
-            <Text>У вас имеются {totalShards} кристаллов</Text>
-            <Button disabled={totalShards === 0} onClick={handleRoll}>
+            <Text>У вас имеются {heroShards} кристаллов</Text>
+            <Button disabled={heroShards === 0} onClick={handleRoll}>
               Использовать
             </Button>
           </Center>

@@ -17,15 +17,15 @@ const Menu = () => {
   return (
     <>
       <Header back={() => setSelectMode(null)} title={selectMode} />
-      <Container px={2} py={4} maxW={{ base: "8xl" }} justifyContent="center">
-        <Center>
+      <Container px={2} py={4} maxW={{ base: "8xl" }} justifyContent="center" position={"static"}>
+        <Center w={"100%"}>
           {!selectMode && (
             <Grid templateColumns="repeat(2, 1fr)" maxW={{ base: "6xl" }} w={"100%"} gap={8}>
               <For
                 each={[
                   { name: "Призыв", img: "/img/bg_gacha.png" },
                   { name: "Инвентарь", img: "/img/bg_bag.png" },
-                  { name: "Бой", img: null },
+                  { name: "Бой", img: "/img/bg_battle.png" },
                   { name: "Магазин", img: null },
                 ]}
               >

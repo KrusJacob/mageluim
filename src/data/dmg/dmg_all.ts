@@ -29,6 +29,17 @@ export const dmgPhysical = (value: number): ITypeDMG => {
   return { value, element: "physical" };
 };
 
-export const actionTarget = (action: IEffect | IAction, duration: number, layer?: number): ITypeTargetAction => {
-  return { action, duration, layer };
+export const actionTarget = (action: IEffect | IAction, duration: number, layer = 1): ITypeTargetAction => {
+  if ("type" in action && action.type === "effect") {
+    return {
+      action: action as IEffect,
+      duration,
+      layer: layer ?? 1,
+    };
+  } else {
+    return {
+      action: action as IAction,
+      duration,
+    };
+  }
 };

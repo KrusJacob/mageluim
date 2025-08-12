@@ -28,7 +28,9 @@ const GachaSkillItem = ({ skill, index, select, isSelected }: Props) => {
       borderRadius={8}
       _hover={{ scale: 1.025 }}
     >
-      <SkillCard skill={skill} isSelected={isSelected} />
+      <Box animation={skill.rarity === "legendary" ? "glow 2s ease-in-out infinite" : "none"}>
+        <SkillCard skill={skill} isSelected={isSelected} />
+      </Box>
     </Box>
   );
 };

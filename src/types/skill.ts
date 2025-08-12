@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 import type { IAction, IEffect } from "./effect";
+import type { IEnemy } from "./enemy";
+import type { IHero } from "./hero";
 
 export type GachaChanses = Record<Rarity, number>;
 export type Rarity = "common" | "rare" | "epic" | "legendary";
-export type IElementName = "physical" | "attack" | "def" | "fire" | "water" | "wind" | "forest" | "light" | "dark";
+export type IElementName = "physical" | "fire" | "water" | "wind" | "forest" | "light" | "dark";
 export interface IElement {
   name: IElementName;
   color: string;
@@ -22,10 +24,13 @@ export interface ISkillEngine {
   awakenings?: React.ReactNode[];
   element: IElement[];
   tags?: Array<IEffect | IAction>;
+  currentCooldown: number;
 }
 // Record<ILevelSkill, IDataUse>
 export type IDataAwakenings = {
   manaCost: number[];
+  cooldown: number[];
+  useHealSelf?: number[];
   useDmgToTarget?: Partial<Record<IElementName, number[]>>;
   useDmgToAOE?: Partial<Record<IElementName, number[]>>;
   useActionToSelf?: ITypeTargetAction[][];
@@ -38,15 +43,28 @@ export interface ITypeDMG {
   element: IElementName;
 }
 
-export interface ITypeTargetAction {
-  action: IEffect | IAction;
+export type ITypeTargetAction = ITypeTargetBuff | ITypeTargetDebuff | ITypeTargetEffect;
+export interface ITypeTargetBuff {
+  action: IAction;
   duration: number;
-  layer?: number;
+}
+export interface ITypeTargetDebuff {
+  action: IAction;
+  duration: number;
+}
+export interface ITypeTargetEffect {
+  action: IEffect;
+  duration: number;
+  layer: number;
 }
 
 export interface ISkill extends ISkillEngine {
   id: number;
   rarity: Rarity;
+  setCooldown(): void;
+  resetCooldown(): void;
+  tickCooldown(): void;
+  useSkill(enemies: IEnemy[], index: number, hero: IHero): void;
 }
 export interface ISkillHero extends ISkill {
   copies: number;

@@ -9,6 +9,7 @@ export class EffectEngine implements IEffect {
   color: string;
   description?: string;
   maxLayer: number;
+  type: "effect" = "effect";
   getData() {
     return getDataEffect(this.name);
   }

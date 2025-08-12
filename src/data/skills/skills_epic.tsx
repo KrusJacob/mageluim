@@ -40,6 +40,7 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [7, 7, 7, 7],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           physical: [250, 250, 375, 375],
           forest: [250, 250, 250, 375],
@@ -72,6 +73,7 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [7, 7, 7, 7],
+        cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
           physical: [800, 800, 1000, 1200],
         },
@@ -104,6 +106,7 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [7, 6, 6, 6],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           water: [125, 125, 250, 250],
           wind: [125, 125, 125, 250],
@@ -121,7 +124,7 @@ export const SKILLS_EPIC = [
   new SkillEngine(
     {
       name: "Цветок жизни",
-      description: <>Исцеляет герою 15% здоровья</>,
+      description: <>Исцеляет герою 20% здоровья</>,
       img: "/img/skills/Цветок_жизни.png",
       element: [FOREST],
       awakenings: [
@@ -131,6 +134,8 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [4, 4, 4, 4],
+        cooldown: [4, 4, 4, 4],
+        useHealSelf: [20, 30, 30, 30],
         useActionToSelf: [
           [],
           [],
@@ -146,7 +151,7 @@ export const SKILLS_EPIC = [
       name: "Ядовитое облако",
       description: (
         <>
-          Наносит {useDmgToElement(150, FOREST)} урона всем врагам и {useEffectTo(POISON, 2, 2)}, также{" "}
+          Наносит {useDmgToElement(150, FOREST)} урона всем врагам и {useEffectTo(POISON, 3, 2)}, также{" "}
           {useActionTo(DEBUFF_FOREST_1, 2)}
         </>
       ),
@@ -155,19 +160,20 @@ export const SKILLS_EPIC = [
       tags: [POISON, DEBUFF_FOREST_1],
       awakenings: [
         <>{useActionTo(DEBUFF_FOREST_2, 2)}</>,
-        <>{useEffectTo(POISON, 2, 2)}</>,
-        <>Длительность {POISON.Icon} увеличен на 2 хода</>,
+        <>{useEffectTo(POISON, 3, 1)}</>,
+        <>Расход маны уменьшен на 1</>,
       ],
       data: {
-        manaCost: [6, 6, 6, 6],
+        manaCost: [6, 6, 6, 5],
+        cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
           forest: [150, 150, 150, 150],
         },
         useActionToAOE: [
-          [actionTarget(POISON, 2, 2), actionTarget(DEBUFF_FOREST_1, 2)],
-          [actionTarget(POISON, 2, 2), actionTarget(DEBUFF_FOREST_2, 2)],
-          [actionTarget(POISON, 2, 4), actionTarget(DEBUFF_FOREST_2, 2)],
-          [actionTarget(POISON, 4, 4), actionTarget(DEBUFF_FOREST_2, 2)],
+          [actionTarget(POISON, 3, 2), actionTarget(DEBUFF_FOREST_1, 2)],
+          [actionTarget(POISON, 3, 2), actionTarget(DEBUFF_FOREST_2, 2)],
+          [actionTarget(POISON, 3, 3), actionTarget(DEBUFF_FOREST_2, 2)],
+          [actionTarget(POISON, 3, 3), actionTarget(DEBUFF_FOREST_2, 2)],
         ],
       },
     },
@@ -192,6 +198,7 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [5, 5, 5, 5],
+        cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
           wind: [175, 175, 175, 175],
           dark: [175, 175, 175, 175],

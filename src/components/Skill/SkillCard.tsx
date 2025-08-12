@@ -4,6 +4,7 @@ import { Box, Card, HStack, Image, Tag, Text } from "@chakra-ui/react";
 import React from "react";
 import SkillManaCost from "./SkillManaCost";
 import { FaStar } from "react-icons/fa";
+import SkillCooldown from "./SkillCooldown";
 
 interface Props {
   skill: ISkill;
@@ -12,22 +13,18 @@ interface Props {
 
 const SkillCard = ({ skill, isSelected }: Props) => {
   return (
-    <Card.Root
-      animation={skill.rarity === "legendary" ? "glow 2s ease-in-out infinite" : "none"}
-      maxW="sm"
-      h={"100%"}
-      overflow="hidden"
-      cursor={"pointer"}
-    >
+    <Card.Root maxW="sm" h={"100%"} overflow="hidden" cursor={"pointer"}>
       <Image src={skill.img} alt={skill.name} />
       <Box position={"relative"} w={"100%"}>
         <Card.Title mt={-9} px={3} py={1} color={"gray.100"}>
           {skill.name}
         </Card.Title>
         <SkillManaCost value={skill.data.manaCost[skill.level]} />
+        <SkillCooldown cooldown={skill.data.cooldown[skill.level]} />
       </Box>
       <Card.Body
-        maxH={"300px"}
+        maxH={"280px"}
+        minH={"120px"}
         overflowY={"auto"}
         scrollbarWidth={"none"}
         borderTop={`2px solid ${getColorRarity(skill.rarity)}`}
@@ -46,7 +43,7 @@ const SkillCard = ({ skill, isSelected }: Props) => {
         </HStack>
         <Card.Description color={"gray.400"}>{skill.description}</Card.Description>
         {isSelected && (
-          <Box mt={2}>
+          <Box mt={2} data-state="open" _open={{ animationName: "fade-in", animationDuration: "300ms" }}>
             {skill.tags?.map((item, i) => (
               <Box key={i} my={2}>
                 <Tag.Root size="lg" key={i}>

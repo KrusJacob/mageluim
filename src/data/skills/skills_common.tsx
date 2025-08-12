@@ -32,6 +32,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [5, 5, 5, 5],
+        cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
           fire: [225, 300, 375, 375],
         },
@@ -55,7 +56,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Водная_волна.png",
       element: [WATER],
-      tags: [WET],
+      tags: [WET, DEBUFF_ATTACK_1],
 
       awakenings: [
         <>Урон увеличен на {useDmgToElement(75, WATER)}</>,
@@ -64,6 +65,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [4, 4, 4, 4],
+        cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
           wind: [200, 275, 275, 350],
         },
@@ -95,6 +97,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [6, 6, 6, 6],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           wind: [275, 350, 450, 450],
         },
@@ -114,6 +117,7 @@ export const SKILLS_COMMON = [
       description: <>Наносит {useDmgToElement(275, FIRE)} урона всем врагам</>,
       img: "/img/skills/Языки_пламени.png",
       element: [FIRE],
+      tags: [DEBUFF_BURN_1],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
         <>{useActionTo(DEBUFF_BURN_1, 2)}</>,
@@ -121,6 +125,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [5, 5, 5, 5],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           fire: [275, 350, 350, 425],
         },
@@ -148,6 +153,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [3, 3, 3, 3],
+        cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
           forest: [100, 175, 175, 250],
         },
@@ -171,7 +177,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Ледяное_прикосновение.png",
       element: [WATER],
-      tags: [FREEZE],
+      tags: [FREEZE, BUFF_WATER_1],
       awakenings: [
         <>{useActionTo(BUFF_WATER_1, 2)}</>,
         <>Урон увеличен на {useDmgToElement(125, WATER)}</>,
@@ -179,6 +185,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [4, 4, 4, 3],
+        cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
           water: [250, 250, 375, 375],
         },
@@ -216,6 +223,7 @@ export const SKILLS_COMMON = [
       ],
       data: {
         manaCost: [5, 5, 5, 4],
+        cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
           physical: [550, 700, 700, 700],
         },

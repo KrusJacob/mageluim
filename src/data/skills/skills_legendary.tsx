@@ -25,6 +25,7 @@ export const SKILLS_LEGENDARY = [
       ],
       data: {
         manaCost: [7, 7, 7, 7],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           dark: [475, 625, 625, 775],
         },
@@ -51,6 +52,7 @@ export const SKILLS_LEGENDARY = [
       ],
       data: {
         manaCost: [8, 8, 8, 8],
+        cooldown: [5, 5, 5, 5],
         useDmgToTarget: {
           light: [1200, 1200, 1500, 1800],
         },
@@ -82,6 +84,7 @@ export const SKILLS_LEGENDARY = [
       ],
       data: {
         manaCost: [6, 6, 6, 6],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           wind: [250, 250, 250, 250],
           water: [250, 250, 400, 550],
@@ -114,6 +117,7 @@ export const SKILLS_LEGENDARY = [
       ],
       data: {
         manaCost: [9, 9, 9, 9],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           fire: [550, 750, 750, 875],
         },

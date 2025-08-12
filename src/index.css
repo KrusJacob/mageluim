@@ -14,6 +14,11 @@
   --color-physical: rgb(126, 126, 126);
 }
 
+#root {
+  height: 100vh;
+  overflow: hidden;
+}
+
 html.dark {
   background-color: rgb(38, 29, 61);
 }
@@ -48,5 +53,33 @@ body {
   }
   100% {
     box-shadow: 0 0 5px gold;
+  }
+}
+@keyframes floatDamage {
+  0% {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+  10% {
+    opacity: 1;
+    scale: 2;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+    transform: translateY(-50px);
+  }
+}
+@keyframes enemy-attack {
+  0% {
+    scale: 1;
+  }
+  30% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
   }
 }

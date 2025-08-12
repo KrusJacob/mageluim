@@ -1,4 +1,4 @@
-import { CloseButton, Dialog, Portal } from "@chakra-ui/react";
+import { CloseButton, Dialog, Portal, type ConditionalValue } from "@chakra-ui/react";
 
 interface DialogWrapperProps {
   title: string;
@@ -6,10 +6,11 @@ interface DialogWrapperProps {
   actions?: React.ReactNode;
   trigger: React.ReactNode;
   onClose?: () => void;
+  size?: ConditionalValue<"sm" | "md" | "lg" | "xl" | "xs" | "full" | "cover" | undefined>;
 }
 
-export const DialogWrapper = ({ title, body, actions, trigger, onClose }: DialogWrapperProps) => (
-  <Dialog.Root>
+export const DialogWrapper = ({ title, body, actions, trigger, size }: DialogWrapperProps) => (
+  <Dialog.Root size={size}>
     <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
     <Portal>
       <Dialog.Backdrop />

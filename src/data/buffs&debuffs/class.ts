@@ -1,15 +1,15 @@
-import type { IAction, ITypeAction, LevelAction } from "@/types/effect";
+import type { IAction, IActionElement, ITypeAction, LevelAction } from "@/types/effect";
 import type { IElementName } from "@/types/skill";
 import { getDataAction } from "@/utils/getDataAction";
 import type { ReactNode } from "react";
 
 export class ActionEngine implements IAction {
-  elementName: IElementName;
+  elementName: IActionElement;
   Icon: ReactNode;
   color: string;
   label: string;
   labelElement: string;
-  typeAction: ITypeAction;
+  type: ITypeAction;
   level: LevelAction;
   description?: string;
   getData() {
@@ -18,9 +18,9 @@ export class ActionEngine implements IAction {
   getLabel(labelElement: string) {
     return `${labelElement} ${this.level === 1 ? "I" : "II"}`;
   }
-  constructor(element: IElementName, action: ITypeAction, level: LevelAction) {
+  constructor(element: IActionElement, action: ITypeAction, level: LevelAction) {
     this.elementName = element;
-    this.typeAction = action;
+    this.type = action;
     this.level = level;
     const { Icon, color, label, labelElement, description } = this.getData();
     this.Icon = Icon;

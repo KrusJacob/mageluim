@@ -1,4 +1,6 @@
 import type { IAction, IEffect } from "@/types/effect";
+import type { IEnemy } from "@/types/enemy";
+import type { IHero, IHeroEngine } from "@/types/hero";
 import type {
   IDataAwakenings,
   IElement,
@@ -9,7 +11,8 @@ import type {
   ITypeDMG,
   Rarity,
 } from "@/types/skill";
-type SkillBaseArgs = Omit<ISkillEngine, "rarity" | "level">;
+import { useBuffs, useDebuffs } from "./helpers";
+type SkillBaseArgs = Omit<ISkillEngine, "rarity" | "level" | "currentCooldown">;
 
 let id_skill_common = 0;
 let id_skill_rare = 100;
@@ -28,11 +31,68 @@ export class SkillEngine implements ISkillEngine {
   // manaCost: number;
   awakenings?: React.ReactNode[];
   data: IDataAwakenings;
+  currentCooldown: number;
 
   getCurrentAwakeningData(): unknown {
     if (this.data && this.level) {
       return [this.data];
     }
+  }
+
+  setCooldown() {
+    this.currentCooldown = this.data.cooldown[this.level];
+  }
+  resetCooldown() {
+    this.currentCooldown = 0;
+  }
+  tickCooldown() {
+    if (this.currentCooldown > 0) {
+      this.currentCooldown--;
+    }
+  }
+
+  useSkill(enemies: IEnemy[], index: number, hero: IHero) {
+    const skillLevel = this.level;
+    const aoeDmg = this.data.useDmgToAOE;
+    if (aoeDmg) {
+      Object.entries(aoeDmg).forEach(([elementName, dmgValues]) => {
+        let dmgAmount = dmgValues[skillLevel];
+        dmgAmount = useBuffs(hero, dmgAmount, elementName as IElementName);
+        console.log(dmgAmount);
+        enemies.forEach((enemy) => {
+          enemy.takeDamage({ element: elementName as IElementName, value: dmgAmount });
+        });
+      });
+    }
+    const singleDmg = this.data.useDmgToTarget;
+    if (singleDmg) {
+      Object.entries(singleDmg).forEach(([elementName, dmgValues]) => {
+        let dmgAmount = dmgValues[skillLevel];
+        dmgAmount = useBuffs(hero, dmgAmount, elementName as IElementName);
+        enemies[index].takeDamage({ element: elementName as IElementName, value: dmgAmount });
+      });
+    }
+    const actionAoe = this.data.useActionToAOE;
+    if (actionAoe) {
+      enemies.forEach((enemy) => {
+        enemy.takeActions(actionAoe[skillLevel]);
+      });
+    }
+    const actionSingle = this.data.useActionToTarget;
+    if (actionSingle) {
+      enemies[index].takeActions(actionSingle[skillLevel]);
+    }
+    const actionSelf = this.data.useActionToSelf;
+    if (actionSelf) {
+      hero.takeActions(actionSelf[skillLevel]);
+    }
+    const healSelf = this.data.useHealSelf;
+    if (healSelf) {
+      const healValue = (healSelf[skillLevel] * hero.stats.maxHp) / 100;
+      hero.takeHeal(healValue);
+    }
+    hero.useMana(this.data.manaCost[skillLevel]);
+    this.setCooldown();
   }
 
   constructor(args: SkillBaseArgs, rarity: Rarity) {
@@ -47,6 +107,7 @@ export class SkillEngine implements ISkillEngine {
     // this.manaCost = args.manaCost;
     this.awakenings = args.awakenings;
     this.data = args.data;
+    this.currentCooldown = 0;
   }
 
   static generateId(rarity: Rarity) {
@@ -76,6 +137,11 @@ export class SkillEngine implements ISkillEngine {
       awakenings: this.awakenings,
       data: this.data,
       getCurrentAwakeningData: this.getCurrentAwakeningData,
+      currentCooldown: this.currentCooldown,
+      setCooldown: this.setCooldown,
+      resetCooldown: this.resetCooldown,
+      tickCooldown: this.tickCooldown,
+      useSkill: this.useSkill,
     };
   }
 }
