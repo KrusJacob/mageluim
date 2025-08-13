@@ -6,8 +6,8 @@ const url = "https://masterpiecer-images.s3.yandex.net/7ae49ce76a0511ee8e2992669
 export const createHero = () => {
   return new Hero("Hero", url, {
     maxHp: 1000,
-    atk: 120,
-    def: 10,
+    atk: 150,
+    def: 40,
     currentMana: 15,
     maxMana: 15,
     manaRegen: {

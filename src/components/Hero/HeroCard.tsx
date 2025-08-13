@@ -10,7 +10,7 @@ const HeroCard = ({ battleActions }: { battleActions: number }) => {
   const currentHp = useHeroSkillStore((state) => state.hero.stats.currentHp);
   const hero = useHeroSkillStore((state) => state.hero);
   const { takenLastDamage } = hero;
-  console.log(hero);
+
   return (
     <Stack>
       <Text fontSize={20} fontWeight={"bold"}>

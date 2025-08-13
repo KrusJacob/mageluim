@@ -18,6 +18,7 @@ import {
   useInspiration,
 } from "../skills/helpers";
 import type { IEnemy } from "@/types/enemy";
+import { START_GOLD, START_SHARD as START_SHARDS } from "@/constant/hero";
 
 type HeroBaseArgs = Omit<HeroStats, "currentHp">;
 export class Hero implements IHeroEngine {
@@ -92,7 +93,7 @@ export class Hero implements IHeroEngine {
   }
   useAttack(enemy: IEnemy) {
     let damage = useBuffDebuffAttack(this) * this.stats.atk;
-    let defense = useBuffDebuffDeffense(this) * enemy.stats.def;
+    let defense = useBuffDebuffDeffense(enemy) * enemy.stats.def;
     damage = useDefense(damage, defense);
     enemy.takeDamage({ element: "physical", value: damage });
   }
@@ -128,8 +129,8 @@ export class Hero implements IHeroEngine {
     this.image = image;
     this.skills = [];
     this.battleDeck = [];
-    this.shards = 3;
-    this.gold = 0;
+    this.shards = START_SHARDS;
+    this.gold = START_GOLD;
     this.stats = { ...stats, currentHp: stats.maxHp };
   }
 }

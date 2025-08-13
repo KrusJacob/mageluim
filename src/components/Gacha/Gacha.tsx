@@ -1,78 +1,54 @@
-import { Button, ButtonGroup, Center, HStack, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
-import GachaSkillList from "./GachaSkillList";
-import { SiCrystal } from "react-icons/si";
-import GachaHistory from "./GachaHistory";
-import { toaster } from "../ui/toaster";
-import type { ISkill, ISkillHistory } from "@/types/skill";
-import { getRandomSkills } from "@/utils/getRandomSkills";
-import GachaInfo from "./GachaInfo";
-import { useHeroSkillStore } from "@/store/heroSkillStore";
-import { IconShard } from "../ui/icons";
+// const LazyGacha = lazy(() => import("../Gacha/GachaSkill"));
+// const LazyBag = lazy(() => import("../Bag/Bag"));
+// const LazyBattle = lazy(() => import("../Battle/Battle"));
+// const LazyShop = lazy(() => import("../Shop/Shop"));
+
+import { Suspense, useState } from "react";
+import GachaArtifact from "./Artifact/GachaArtifact";
+import GachaSkillItem from "./Skill/GachaSkillItem";
+import { Center, For, Grid, Loader, Text } from "@chakra-ui/react";
+import GachaSkill from "./Skill/GachaSkill";
+
+type IGasha = "skill" | "artifact";
 
 const Gacha = () => {
-  const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
-  const heroShards = useHeroSkillStore((state) => state.shards);
-  const useShard = useHeroSkillStore((state) => state.useShard);
-  const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
-  const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
-  const [selectedSkill, setSelectedSkill] = useState<ISkill | null>(null);
-
-  const handleRoll = () => {
-    useShard();
-    setRandomedSkills(getRandomSkills());
-    setSelectedSkill(null);
-  };
-
-  const handleSelect = () => {
-    if (selectedSkill) {
-      addGachaHistory(selectedSkill);
-      toaster.create({ title: "Поздравляем", description: `Вы получили карту заклинания: ${selectedSkill.name}` });
-      addNewSkill(selectedSkill);
-    }
-    setRandomedSkills(null);
-    setSelectedSkill(null);
-  };
-
-  const addGachaHistory = (newSkill: ISkill) => {
-    setGachaHistory((prev) => [
-      ...prev,
-      { name: newSkill.name, rarity: newSkill.rarity, dateOfRecipe: new Date() },
-    ]);
-  };
-
+  const [selectGacha, setSelectGacha] = useState<string | null>(null);
   return (
-    <Center flexDir={"column"} maxW={{ base: "6xl" }} w={"100%"}>
-      <HStack mb={4} w={"100%"} gap={4}>
-        {/* <BsArrowLeftSquareFill size={28} cursor={"pointer"} onClick={back} /> */}
-        <GachaHistory skills={gachaHistory} />
-        <GachaInfo />
-        <HStack ml={"auto"}>
-          {heroShards}
-          <IconShard />
-        </HStack>
-      </HStack>
-      <HStack minH={"400px"}>
-        <GachaSkillList
-          skills={randomedSkills}
-          selectedSkill={selectedSkill}
-          select={(skill: ISkill) => setSelectedSkill(skill)}
-        />
-        {!randomedSkills && (
-          <Center w={"100%"} flexDir={"column"} gap={2}>
-            <Text>У вас имеются {heroShards} кристаллов</Text>
-            <Button disabled={heroShards === 0} onClick={handleRoll}>
-              Использовать
-            </Button>
-          </Center>
-        )}
-      </HStack>
-
-      {randomedSkills && (
-        <Button mt={4} disabled={!selectedSkill} onClick={handleSelect}>
-          Выбрать
-        </Button>
+    <Center w={"100%"}>
+      {!selectGacha && (
+        <Grid templateColumns="repeat(2, 1fr)" maxW={{ base: "6xl" }} w={"100%"} gap={8}>
+          <For
+            each={[
+              { label: "Способности", img: "/img/bg_gacha.png", name: "skill" },
+              { label: "Артефакты", img: "/img/bg_bag.png", name: "artifact" },
+            ]}
+          >
+            {(item, index) => (
+              <Center
+                bgImage={item.img ? `url(${item.img})` : "none"}
+                bgSize="cover"
+                bgPos={"center"}
+                key={index}
+                h="300px"
+                border={"1px solid gray"}
+                onClick={() => setSelectGacha(item.name)}
+                borderRadius={8}
+                cursor={"pointer"}
+                _hover={{ scale: 1.025 }}
+                transition={"all 200ms ease-in-out"}
+              >
+                <Text fontSize="4xl" fontWeight="semibold">
+                  {item.label}
+                </Text>
+              </Center>
+            )}
+          </For>
+        </Grid>
       )}
+      <Suspense fallback={<Loader mt={10} />}>
+        {selectGacha === "skill" && <GachaSkill />}
+        {selectGacha === "artifact" && <GachaArtifact />}
+      </Suspense>
     </Center>
   );
 };

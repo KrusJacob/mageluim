@@ -6,8 +6,8 @@ const src1 =
 const src2 = "https://images.playground.com/2193de56ef404f7a867a4f60c285709d.jpeg";
 export function createGreenGoblin(level: number = 1): Enemy {
   return new Enemy("Green Goblin", level, "Гоблин-разбойник", "/img/enemies/greenGoblin.png", {
-    atk: 70,
-    def: 8,
+    atk: 100,
+    def: 30,
     maxHp: 1100,
     chanceCrit: 10,
     critValue: 150,
@@ -30,8 +30,8 @@ export function createBlueGoblin(level: number = 1): Enemy {
     "Гоблин-воин",
     "/img/enemies/blueGoblin.png",
     {
-      atk: 85,
-      def: 12,
+      atk: 115,
+      def: 40,
       maxHp: 1300,
       chanceCrit: 15,
       critValue: 150,
@@ -57,12 +57,12 @@ export function createGoldGobin(level: number = 1): Enemy {
     "Гоблин-заклинатель",
     "/img/enemies/goldGoblin.png",
     {
-      atk: 30,
-      def: 5,
+      atk: 80,
+      def: 25,
       maxHp: 1250,
       chanceCrit: 0,
       critValue: 150,
-      resistance: 25,
+      resistance: 20,
       durability: {
         fire: 10,
         physical: 0,
@@ -84,8 +84,8 @@ export function createGoldGobin(level: number = 1): Enemy {
 
 export function createRedGoblin(level: number = 1): Enemy {
   return new Enemy("Red Goblin", level, "Главарь гоблинов", "/img/enemies/redGoblin.png", {
-    atk: 120,
-    def: 15,
+    atk: 160,
+    def: 40,
     maxHp: 2500,
     chanceCrit: 15,
     critValue: 150,

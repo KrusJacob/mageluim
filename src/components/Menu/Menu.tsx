@@ -1,11 +1,6 @@
 import { Box, Center, Container, For, Grid, GridItem, Loader, Text } from "@chakra-ui/react";
 import React, { Suspense, lazy, useState } from "react";
-import Gacha from "../Gacha/Gacha";
-import Bag from "../Bag/Bag";
-import { BsArrowLeftSquareFill } from "react-icons/bs";
 import Header from "../Header/Header";
-import Battle from "../Battle/Battle";
-import Shop from "../Shop/Shop";
 
 const LazyGacha = lazy(() => import("../Gacha/Gacha"));
 const LazyBag = lazy(() => import("../Bag/Bag"));

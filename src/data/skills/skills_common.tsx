@@ -1,6 +1,6 @@
 import { SkillEngine } from "./class";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
-import { BURN, FREEZE, POISON, WET } from "../effects/effects_all";
+import { BLIND, BURN, FREEZE, POISON, WET } from "../effects/effects_all";
 import { FIRE, FOREST, PHYSICAL, WATER, WIND } from "../elements/elements_all";
 import {
   DEBUFF_ATTACK_1,
@@ -10,7 +10,7 @@ import {
   DEBUFF_WIND_1,
   DEBUFF_WIND_2,
 } from "../buffs&debuffs/debuffs_all";
-import { BUFF_BURN_1, BUFF_BURN_2, BUFF_WATER_1 } from "../buffs&debuffs/buffs_all";
+import { BUFF_ATTACK_1, BUFF_BURN_1, BUFF_BURN_2, BUFF_WATER_1 } from "../buffs&debuffs/buffs_all";
 import { actionTarget } from "../dmg/dmg_all";
 
 export const SKILLS_COMMON = [
@@ -27,14 +27,14 @@ export const SKILLS_COMMON = [
       tags: [BUFF_BURN_1],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
-        <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>{useActionTo(BUFF_BURN_2, 2)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
         cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
-          fire: [225, 300, 375, 375],
+          fire: [225, 300, 400, 400],
         },
         useActionToSelf: [
           [actionTarget(BUFF_BURN_1, 2)],
@@ -237,6 +237,38 @@ export const SKILLS_COMMON = [
     },
     "common"
   ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Слепящий песок",
+      description: (
+        <>
+          Наносит {useDmgToElement(225, PHYSICAL)} урона всем врагам и {useEffectTo(BLIND, 1)}
+        </>
+      ),
+      img: "/img/skills/Слепящий_песок.png",
+      element: [PHYSICAL],
+      tags: [BLIND],
+      awakenings: [
+        <>Расход маны уменьшен на 1</>,
+        <>Урон увеличен на {useDmgToElement(100, PHYSICAL)}</>,
+        <>{useEffectTo(BLIND, 2)}</>,
+      ],
+      data: {
+        manaCost: [4, 3, 3, 3],
+        cooldown: [4, 4, 4, 4],
+        useDmgToAOE: {
+          physical: [225, 225, 325, 325],
+        },
+        useActionToAOE: [
+          [actionTarget(BLIND, 1)],
+          [actionTarget(BLIND, 1)],
+          [actionTarget(BLIND, 1)],
+          [actionTarget(BLIND, 2)],
+        ],
+      },
+    },
+    "common"
+  ).getSkill(),
 ];
 
-// 7
+// 8

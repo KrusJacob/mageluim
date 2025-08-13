@@ -1,4 +1,4 @@
-import { FREEZE, HEAL, POISON } from "../effects/effects_all";
+import { FREEZE, HEAL, POISON, STUN } from "../effects/effects_all";
 import { SkillEngine } from "./class";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
 import { DARK, FIRE, FOREST, LIGHT, PHYSICAL, WATER, WIND } from "../elements/elements_all";
@@ -13,6 +13,7 @@ import {
   DEBUFF_PHYSICAL_2,
 } from "../buffs&debuffs/debuffs_all";
 import {
+  BUFF_ATTACK_1,
   BUFF_ATTACK_2,
   BUFF_DARK_1,
   BUFF_DARK_2,
@@ -35,15 +36,15 @@ export const SKILLS_EPIC = [
       element: [PHYSICAL, FOREST],
       awakenings: [
         <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(125, PHYSICAL)}</>,
-        <>Урон увеличен на {useDmgToElement(125, FOREST)}</>,
+        <>Урон увеличен на {useDmgToElement(150, PHYSICAL)}</>,
+        <>Урон увеличен на {useDmgToElement(150, FOREST)}</>,
       ],
       data: {
         manaCost: [7, 7, 7, 7],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          physical: [250, 250, 375, 375],
-          forest: [250, 250, 250, 375],
+          physical: [250, 250, 400, 400],
+          forest: [250, 250, 250, 400],
         },
         useActionToSelf: [
           [],
@@ -213,6 +214,40 @@ export const SKILLS_EPIC = [
     },
     "epic"
   ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Молот правосудия",
+      description: (
+        <>
+          Наносит {useDmgToElement(300, PHYSICAL)} и {useDmgToElement(300, LIGHT)} урона одному врагу и{" "}
+          {useEffectTo(STUN, 1)}
+        </>
+      ),
+      img: "/img/skills/Молот_правосудия.png",
+      element: [PHYSICAL, LIGHT],
+      tags: [STUN, BUFF_ATTACK_2],
+      awakenings: [
+        <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(200, LIGHT)}</>,
+        <>{useEffectTo(STUN, 2)}</>,
+      ],
+      data: {
+        manaCost: [6, 6, 6, 6],
+        cooldown: [5, 5, 5, 5],
+        useDmgToAOE: {
+          physical: [300, 300, 300, 300],
+          light: [300, 300, 300, 500],
+        },
+        useActionToSelf: [
+          [],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+        ],
+      },
+    },
+    "epic"
+  ).getSkill(),
 ];
 
-// 6
+// 7

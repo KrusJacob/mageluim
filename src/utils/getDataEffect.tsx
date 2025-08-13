@@ -59,7 +59,7 @@ export const getDataEffect = (effectName: IEffect["name"]) => {
       Icon = <IoIosWater />;
       label = "Влажность"; // повышает шанс дебафов
       color = "var(--color-water)";
-      description = `Снижает сопротивление на ${WET_CHANCE_REDUCTION}%`;
+      description = `Снижает сопротивление на ${WET_CHANCE_REDUCTION}%. Эффект накладывается гарантированно.`;
       break;
     case "darkness":
       Icon = <IoSkull />;

@@ -3,11 +3,9 @@ import React, { useState } from "react";
 import SkillCard from "../Skill/SkillCard";
 import DetailedBag from "./DetailedBag";
 import type { ISkillHero } from "@/types/skill";
-import { FaStar } from "react-icons/fa";
 import SkillLevel from "../Skill/SkilLevel";
 import BagDeck from "./BagDeck";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
-import SkillCooldown from "../Skill/SkillCooldown";
 import { IconGold, IconShard } from "../ui/icons";
 
 const Bag = () => {

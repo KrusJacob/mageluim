@@ -3,7 +3,7 @@ import React from "react";
 import type { ISkill } from "@/types/skill";
 import { getColorRarity } from "@/utils/getColorRarity";
 import { getDataElement } from "@/utils/getDataElement";
-import SkillCard from "../Skill/SkillCard";
+import SkillCard from "../../Skill/SkillCard";
 
 interface Props {
   skill: ISkill;

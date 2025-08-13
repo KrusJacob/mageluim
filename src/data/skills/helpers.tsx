@@ -52,12 +52,6 @@ export const useActionTo = (action: IAction, duration: number) => {
       на {duration} {plural}
     </span>
   );
-
-  // return (
-  //   <span style={{ display: "inline-flex", alignItems: "center", gap: "2px", color, fontWeight: "bold" }}>
-  //     {target} {label} {Icon}
-  //   </span>
-  // );
 };
 
 export function useBuffs(target: IHero | IEnemy, dmgValue: number, elementName: IElementName) {
@@ -103,8 +97,8 @@ export function useBuffDebuffAttack(target: IHero | IEnemy) {
 export function useBuffDebuffDeffense(target: IHero | IEnemy) {
   let debuffModifier = 0;
   let buffModifier = 0;
-  const debuffDef = target.debuffs.find((effect) => effect.action.elementName === "def");
-  const buffDef = target.buffs.find((effect) => effect.action.elementName === "def");
+  const debuffDef = target.debuffs.find((buff) => buff.action.elementName === "def");
+  const buffDef = target.buffs.find((buff) => buff.action.elementName === "def");
   if (debuffDef) debuffModifier = (debuffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
   if (buffDef) buffModifier = (buffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
   return buffModifier - debuffModifier + 1;

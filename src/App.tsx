@@ -1,4 +1,4 @@
-import Gacha from "./components/Gacha/Gacha";
+import GachaSkill from "./components/Gacha/Skill/GachaSkill";
 import Header from "./components/Header/Header";
 import { Center, Container } from "@chakra-ui/react";
 import Menu from "./components/Menu/Menu";

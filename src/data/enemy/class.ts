@@ -38,7 +38,7 @@ export class Enemy implements IEnemyEngine {
     if (isControl(this)) return;
     if (isBlindTriggered(this)) return;
     let damage = useBuffDebuffAttack(this) * this.stats.atk;
-    let defense = useBuffDebuffDeffense(this) * hero.stats.def;
+    let defense = useBuffDebuffDeffense(hero) * hero.stats.def;
     damage = useDefense(damage, defense);
     hero.takeDamage({ element: "physical", value: damage });
   }

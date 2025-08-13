@@ -1,7 +1,7 @@
 import { SkillEngine } from "./class";
 import { DARK, FIRE, FOREST, LIGHT, WATER, WIND } from "../elements/elements_all";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
-import { BURN, DARKNESS, WET } from "../effects/effects_all";
+import { BURN, DARKNESS, HEAL, INSPIRATION, INVULNERABILITY, WET } from "../effects/effects_all";
 import { actionTarget } from "../dmg/dmg_all";
 import { BUFF_LIGHT_2 } from "../buffs&debuffs/buffs_all";
 import { DEBUFF_WATER_2 } from "../buffs&debuffs/debuffs_all";
@@ -104,7 +104,7 @@ export const SKILLS_LEGENDARY = [
       name: "Армагедон",
       description: (
         <>
-          Наносит {useDmgToElement(600, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
+          Наносит {useDmgToElement(600, FIRE)} урона всем врагам и {useEffectTo(BURN, 2, 2)}
         </>
       ),
       img: "/img/skills/Армагедон.png",
@@ -131,6 +131,38 @@ export const SKILLS_LEGENDARY = [
     },
     "legendary"
   ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Ледяной панцирь",
+      description: (
+        <>
+          Наносит {useDmgToElement(300, WATER)} урона всем и {useEffectTo(INVULNERABILITY, 2, 2)} на героя.
+        </>
+      ),
+      img: "/img/skills/Ледяной_панцирь.png",
+      element: [WATER],
+      tags: [HEAL],
+      awakenings: [
+        <>{useEffectTo(HEAL, 2, 2)}</>,
+        <>{useEffectTo(INSPIRATION, 2)}</>,
+        <>Расход маны уменьшен на 1</>,
+      ],
+      data: {
+        manaCost: [6, 6, 6, 5],
+        cooldown: [5, 5, 5, 5],
+        useDmgToAOE: {
+          water: [300, 300, 300, 300],
+        },
+        useActionToSelf: [
+          [actionTarget(INVULNERABILITY, 2, 2)],
+          [actionTarget(INVULNERABILITY, 2, 2), actionTarget(HEAL, 2, 2)],
+          [actionTarget(INVULNERABILITY, 2, 2), actionTarget(HEAL, 2, 2), actionTarget(INSPIRATION, 2)],
+          [actionTarget(INVULNERABILITY, 2, 2), actionTarget(HEAL, 2, 2), actionTarget(INSPIRATION, 2)],
+        ],
+      },
+    },
+    "legendary"
+  ).getSkill(),
 ];
 
-// 4
+// 5

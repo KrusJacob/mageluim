@@ -1,18 +1,16 @@
-import { HERO } from "@/data/hero/hero";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
-import { useHeroStatStore } from "@/store/heroStatStore";
 import { calcWidthHPBar } from "@/utils/getWidthBar";
 import { Box, Center, Text } from "@chakra-ui/react";
 import React from "react";
 
 const HeroMpBar = () => {
-  // const mana = useHeroStatStore((state) => state.mana);
-  // const maxMana = useHeroStatStore((state) => state.maxMana);
   const currentMana = useHeroSkillStore((state) => state.hero.stats.currentMana);
   const maxMana = useHeroSkillStore((state) => state.hero.stats.maxMana);
-  // const hero = useHeroSkillStore((state) => state.hero);
+  const manaRegenValue = useHeroSkillStore((state) => state.hero.stats.manaRegen.value);
+  const manaRegenInsperation = useHeroSkillStore((state) => state.hero.stats.manaRegen.insperationValue);
 
-  // console.log(hero, currentMana);
+  const totalManaRegen = manaRegenValue + manaRegenInsperation;
+
   return (
     <Box
       position={"relative"}
@@ -31,6 +29,9 @@ const HeroMpBar = () => {
       >
         <Text position={"absolute"} top={"0"} left={"50%"} transform={"translateX(-50%)"} fontSize={24}>
           {currentMana}/{maxMana}
+        </Text>
+        <Text opacity={0.5} position={"absolute"} top={"4px"} right={"5%"} fontSize={20}>
+          + {totalManaRegen}
         </Text>
       </Box>
     </Box>

@@ -63,14 +63,15 @@ export function applyStatusAction<T extends ITypeTargetAction>(
 }
 
 export function applyStatusEffect(list: ITypeTargetEffect[], incoming: ITypeTargetEffect, resistance: number) {
-  let isWet = false;
   const name = incoming.action.name;
-  if (name === "wet") {
-    isWet = true;
-  }
-  if (isTriggerResistance(resistance, isWet)) return;
+  let incomingIsWet = name === "wet";
 
   const index = list.findIndex((e) => e.action.name === name);
+  let alreadyisWet = list.some((e) => e.action.name === "wet");
+
+  if (!incomingIsWet) {
+    if (isTriggerResistance(resistance, alreadyisWet)) return;
+  }
 
   if (index !== -1) {
     const existing = list[index];
@@ -168,5 +169,6 @@ export function resetTarget(target: IHero | IEnemy) {
 }
 
 export function useDefense(attack: number, defense: number) {
+  console.log(defense);
   return attack - defense > 0 ? attack - defense : 1;
 }
