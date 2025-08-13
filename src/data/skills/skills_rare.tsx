@@ -59,16 +59,16 @@ export const SKILLS_RARE = [
       tags: [HEAL, WET],
       awakenings: [
         <>{useEffectTo(HEAL, 3)}</>,
-        <>Расход маны уменьшен на 1</>,
         <>{useEffectTo(INSPIRATION, 3)}</>,
+        <>Расход маны уменьшен на 1</>,
       ],
       data: {
-        manaCost: [4, 4, 3, 3],
+        manaCost: [4, 4, 4, 3],
         cooldown: [4, 4, 4, 4],
         useActionToSelf: [
           [actionTarget(HEAL, 3)],
           [actionTarget(HEAL, 3, 2)],
-          [actionTarget(HEAL, 3, 2)],
+          [actionTarget(HEAL, 3, 2), actionTarget(INSPIRATION, 3)],
           [actionTarget(HEAL, 3, 2), actionTarget(INSPIRATION, 3)],
         ],
         useActionToAOE: [
@@ -119,11 +119,11 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Луч_света.png",
       element: [LIGHT],
-      tags: [BLIND],
+      tags: [BLIND, DEBUFF_LIGHT_1, INSPIRATION],
       awakenings: [
         <>{useActionTo(DEBUFF_LIGHT_1, 2)}</>,
         <>Урон увеличен на {useDmgToElement(150, LIGHT)}</>,
-        <>Исцеляет герою 10% здоровья</>,
+        <>{useEffectTo(INSPIRATION, 2)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
@@ -131,13 +131,13 @@ export const SKILLS_RARE = [
         useDmgToTarget: {
           wind: [600, 750, 750, 750],
         },
-        useHealSelf: [0, 0, 0, 10],
         useActionToTarget: [
           [actionTarget(BLIND, 1)],
           [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
           [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
           [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
         ],
+        useActionToSelf: [[], [], [], [actionTarget(INSPIRATION, 2)]],
       },
     },
     "rare"
@@ -178,12 +178,13 @@ export const SKILLS_RARE = [
       tags: [BUFF_PHYSICAL_1, BUFF_DEF_1],
       awakenings: [
         <>{useActionTo(BUFF_DEF_2, 2)}</>,
-        <>Исцеляет герою 10% здоровья</>,
+        <>Исцеляет герою 15% здоровья</>,
         <>{useActionTo(BUFF_PHYSICAL_2, 2)}</>,
       ],
       data: {
         manaCost: [3, 3, 3, 3],
         cooldown: [4, 4, 4, 4],
+        useHealSelf: [0, 0, 15, 15],
         useActionToSelf: [
           [actionTarget(BUFF_PHYSICAL_1, 2), actionTarget(BUFF_DEF_1, 2)],
           [actionTarget(BUFF_PHYSICAL_1, 2), actionTarget(BUFF_DEF_2, 2)],
@@ -227,3 +228,5 @@ export const SKILLS_RARE = [
     "rare"
   ).getSkill(),
 ];
+
+// 7

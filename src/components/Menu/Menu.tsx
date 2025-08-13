@@ -26,7 +26,7 @@ const Menu = () => {
                   { name: "Призыв", img: "/img/bg_gacha.png" },
                   { name: "Инвентарь", img: "/img/bg_bag.png" },
                   { name: "Бой", img: "/img/bg_battle.png" },
-                  { name: "Магазин", img: null },
+                  { name: "Магазин", img: "/img/bg_shop.png" },
                 ]}
               >
                 {(item, index) => (

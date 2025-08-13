@@ -2,7 +2,7 @@ import { GACHA_CHANCE_SKILL } from "@/constant";
 import { ALL_SKILL_LIST } from "@/data/skills/skills_all";
 import type { ISkill, Rarity } from "@/types/skill";
 
-export function getThreeRandomSkills(skills: ISkill[] = ALL_SKILL_LIST) {
+export function getRandomSkills(skills: ISkill[] = ALL_SKILL_LIST, count: number = 3) {
   function pickSkill() {
     const roll = Math.random() * 100;
     let cumulative = 0;
@@ -19,7 +19,7 @@ export function getThreeRandomSkills(skills: ISkill[] = ALL_SKILL_LIST) {
   }
 
   const selected: ISkill[] = [];
-  while (selected.length < 3) {
+  while (selected.length < count) {
     const skill = pickSkill();
     if (!selected.some((s) => s.id === skill.id)) {
       selected.push(skill);

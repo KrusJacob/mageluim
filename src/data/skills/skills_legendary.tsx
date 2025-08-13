@@ -104,7 +104,7 @@ export const SKILLS_LEGENDARY = [
       name: "Армагедон",
       description: (
         <>
-          Наносит {useDmgToElement(575, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
+          Наносит {useDmgToElement(600, FIRE)} урона всем и {useEffectTo(BURN, 2, 2)}
         </>
       ),
       img: "/img/skills/Армагедон.png",
@@ -113,13 +113,13 @@ export const SKILLS_LEGENDARY = [
       awakenings: [
         <>Урон увеличен на {useDmgToElement(175, FIRE)}</>,
         <>{useEffectTo(BURN, 2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(175, WATER)}</>,
+        <>Урон увеличен на {useDmgToElement(175, FIRE)}</>,
       ],
       data: {
         manaCost: [9, 9, 9, 9],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          fire: [550, 750, 750, 875],
+          fire: [600, 775, 775, 950],
         },
         useActionToAOE: [
           [actionTarget(BURN, 2, 2)],
@@ -132,3 +132,5 @@ export const SKILLS_LEGENDARY = [
     "legendary"
   ).getSkill(),
 ];
+
+// 4

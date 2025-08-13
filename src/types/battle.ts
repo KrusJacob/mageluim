@@ -5,6 +5,7 @@ export interface IBattleFloor {
   enemies: IEnemy[];
   isCleared: boolean;
   reward: IReward;
+  isOpen: boolean;
 }
 
 interface IReward {

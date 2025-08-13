@@ -238,3 +238,5 @@ export const SKILLS_COMMON = [
     "common"
   ).getSkill(),
 ];
+
+// 7

@@ -89,7 +89,7 @@ export const SKILLS_EPIC = [
   ).getSkill(),
   new SkillEngine(
     {
-      name: "Замораживающее дыхание",
+      name: "Дыхание мороза",
       description: (
         <>
           Наносит {useDmgToElement(125, WATER)} и {useDmgToElement(125, WIND)} всем врагам и{" "}
@@ -128,14 +128,14 @@ export const SKILLS_EPIC = [
       img: "/img/skills/Цветок_жизни.png",
       element: [FOREST],
       awakenings: [
-        <>Исцеляет герою 10% здоровья</>,
+        <>Исцеляет герою 15% здоровья</>,
         <>{useActionTo(BUFF_FOREST_2, 2)}</>,
         <>{useEffectTo(HEAL, 2, 2)}</>,
       ],
       data: {
         manaCost: [4, 4, 4, 4],
         cooldown: [4, 4, 4, 4],
-        useHealSelf: [20, 30, 30, 30],
+        useHealSelf: [20, 35, 35, 35],
         useActionToSelf: [
           [],
           [],
@@ -214,3 +214,5 @@ export const SKILLS_EPIC = [
     "epic"
   ).getSkill(),
 ];
+
+// 6

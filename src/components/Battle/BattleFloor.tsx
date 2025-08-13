@@ -41,7 +41,7 @@ const BattleFloor = ({ item, onClick }: Props) => {
             )}
           </Stack>
         </Stack>
-        <Button disabled={item.isCleared} onClick={onClick} size={"lg"}>
+        <Button disabled={item.isCleared || !item.isOpen} onClick={onClick} size={"lg"}>
           Битва
         </Button>
         <HStack>

@@ -5,7 +5,7 @@ import { SiCrystal } from "react-icons/si";
 import GachaHistory from "./GachaHistory";
 import { toaster } from "../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
-import { getThreeRandomSkills } from "@/utils/getRandomSkills";
+import { getRandomSkills } from "@/utils/getRandomSkills";
 import GachaInfo from "./GachaInfo";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import { IconShard } from "../ui/icons";
@@ -20,7 +20,7 @@ const Gacha = () => {
 
   const handleRoll = () => {
     useShard();
-    setRandomedSkills(getThreeRandomSkills());
+    setRandomedSkills(getRandomSkills());
     setSelectedSkill(null);
   };
 

@@ -3,6 +3,9 @@ import React from "react";
 import { IconGold, IconShard } from "../ui/icons";
 import type { IBattleFloor } from "@/types/battle";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
+import { useShopStore } from "@/store/shopStore";
+import { toaster } from "../ui/toaster";
+import { ALL_FLOOR } from "@/constant/enemies";
 
 interface Props {
   battleFloor: IBattleFloor;
@@ -13,6 +16,7 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
   const addGold = useHeroSkillStore((state) => state.addGold);
   const enemiesIsDead = battleFloor.enemies.every((enemy) => enemy.stats.currentHp <= 0);
   const currentHp = useHeroSkillStore((state) => state.hero.stats.currentHp);
+  const updateShopSkills = useShopStore((state) => state.updateShopSkills);
 
   if (!enemiesIsDead && currentHp > 0) return null;
 
@@ -37,6 +41,13 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
               setSelectedFloor(null);
               addGold(battleFloor.reward.gold);
               addShards(battleFloor.reward.shards || 0);
+              if (battleFloor.floor % 3 === 0) {
+                updateShopSkills();
+                toaster.create({ title: "Внимание", description: "Ассортимент магазина обновлен" });
+              }
+              if (ALL_FLOOR[battleFloor.floor]) {
+                ALL_FLOOR[battleFloor.floor].isOpen = true;
+              }
             }}
           >
             Закрыть

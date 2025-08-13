@@ -36,7 +36,7 @@ const BattleField = ({ battleFloor, selectedSkill, isAttack, setSelectedSkill, s
         liveEnemies.forEach((enemy) => tickAllStatuses(enemy));
         setBattleActions(2);
         beforeMoveHero();
-      }, 4000);
+      }, liveEnemies.length * 1500);
     }
     return () => clearTimeout(timer);
   }, [battleActions]);
