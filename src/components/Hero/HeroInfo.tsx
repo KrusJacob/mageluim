@@ -29,6 +29,10 @@ const HeroInfo = ({ hero }: { hero: IHeroEngine }) => {
             <DataList.ItemValue>{hero.stats.critValue}</DataList.ItemValue>
           </DataList.Item>
           <DataList.Item>
+            <DataList.ItemLabel>Точность</DataList.ItemLabel>
+            <DataList.ItemValue>{hero.stats.accuracy}</DataList.ItemValue>
+          </DataList.Item>
+          <DataList.Item>
             <DataList.ItemLabel>Сопротивление</DataList.ItemLabel>
             <DataList.ItemValue>{hero.stats.resistance}</DataList.ItemValue>
           </DataList.Item>

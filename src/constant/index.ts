@@ -22,9 +22,10 @@ export const DARKNESS_DOT_DMG = 10;
 export const DARKNESS_MAX_LAYERS = 3;
 
 export const HEAL_DOT_HEAL = 5;
-export const HEAL_DOT_LAYERS = 3;
+export const HEAL_DOT_LAYERS = 5;
 
 export const ACTION_VALUE_1 = 25; //  %
 export const ACTION_VALUE_2 = 50; //  %
 
 export const INSPIRATION_REGEN_VALUE = 1;
+export const INSPIRATION_MAX_LAYERS = 3;

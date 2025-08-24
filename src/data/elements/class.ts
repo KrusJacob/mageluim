@@ -3,7 +3,7 @@ import type { IElement, IElementName } from "@/types/skill";
 import { getDataElement } from "@/utils/getDataElement";
 import type { ReactNode } from "react";
 
-export class ElementEngine implements IElement {
+export class Element implements IElement {
   name: IElementName;
   label: string;
   Icon: ReactNode;

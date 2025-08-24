@@ -19,12 +19,12 @@ export interface ISkillEngine {
   description: string | React.ReactNode;
   img: string;
   level: ILevelSkill;
-  getCurrentAwakeningData?(): unknown;
+  currentCooldown: number;
+  // getCurrentAwakeningData?(): unknown;
   data: IDataAwakenings;
   awakenings?: React.ReactNode[];
   element: IElement[];
   tags?: Array<IEffect | IAction>;
-  currentCooldown: number;
 }
 // Record<ILevelSkill, IDataUse>
 export type IDataAwakenings = {
@@ -41,6 +41,7 @@ export type IDataAwakenings = {
 export interface ITypeDMG {
   value: number;
   element: IElementName;
+  isDot?: boolean;
 }
 
 export type ITypeTargetAction = ITypeTargetBuff | ITypeTargetDebuff | ITypeTargetEffect;
@@ -65,6 +66,7 @@ export interface ISkill extends ISkillEngine {
   resetCooldown(): void;
   tickCooldown(): void;
   useSkill(enemies: IEnemy[], index: number, hero: IHero): void;
+  upgradeSkill(): void;
 }
 export interface ISkillHero extends ISkill {
   copies: number;

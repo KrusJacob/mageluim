@@ -1,5 +1,5 @@
-import { Box, Center, Container, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, Center, Stack } from "@chakra-ui/react";
+import { useState } from "react";
 import type { IBattleFloor } from "@/types/battle";
 import BattleInfo from "./BattleInfo";
 import BattleFloor from "./BattleFloor";

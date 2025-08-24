@@ -1,25 +1,27 @@
-import { Button, ButtonGroup, Center, HStack, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
-import GachaSkillList from "./GachaSkillList";
+import { Button, Center, HStack, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import GachaHistory from "../GachaHistory";
 import { toaster } from "../../ui/toaster";
 import type { ISkill, ISkillHistory } from "@/types/skill";
-import { getRandomSkills } from "@/utils/getRandomSkills";
+import { getRandomGacha } from "@/utils/getRandomSkills";
 import GachaInfo from "../GachaInfo";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
-import { IconShard } from "../../ui/icons";
+import { IconSkillShard } from "../../ui/icons";
+import { ALL_SKILL_LIST } from "@/data/skills/skills_all";
+import GachaList from "../GachaList";
+import SkillCard from "@/components/Skill/SkillCard";
 
 const GachaSkill = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
-  const heroShards = useHeroSkillStore((state) => state.shards);
-  const useShard = useHeroSkillStore((state) => state.useShard);
+  const heroShards = useHeroSkillStore((state) => state.shardsSkill);
+  const useShard = useHeroSkillStore((state) => state.useShardSkill);
   const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
   const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<ISkill | null>(null);
 
   const handleRoll = () => {
     useShard();
-    setRandomedSkills(getRandomSkills());
+    setRandomedSkills(getRandomGacha(ALL_SKILL_LIST));
     setSelectedSkill(null);
   };
 
@@ -43,18 +45,19 @@ const GachaSkill = () => {
   return (
     <Center flexDir={"column"} maxW={{ base: "6xl" }} w={"100%"}>
       <HStack mb={4} w={"100%"} gap={4}>
-        <GachaHistory skills={gachaHistory} />
+        <GachaHistory items={gachaHistory} />
         <GachaInfo />
         <HStack ml={"auto"}>
           {heroShards}
-          <IconShard />
+          <IconSkillShard />
         </HStack>
       </HStack>
       <HStack minH={"400px"}>
-        <GachaSkillList
-          skills={randomedSkills}
-          selectedSkill={selectedSkill}
-          select={(skill: ISkill) => setSelectedSkill(skill)}
+        <GachaList
+          items={randomedSkills}
+          selected={selectedSkill}
+          select={(item: ISkill) => setSelectedSkill(item)}
+          Card={({ item, isSelected }) => <SkillCard skill={item} isSelected={isSelected} />}
         />
         {!randomedSkills && (
           <Center w={"100%"} flexDir={"column"} gap={2}>

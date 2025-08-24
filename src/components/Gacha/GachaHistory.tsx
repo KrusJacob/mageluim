@@ -3,11 +3,12 @@ import { IoList } from "react-icons/io5";
 import { DialogWrapper } from "../ui/dialog";
 import type { ISkillHistory } from "@/types/skill";
 import { getColorRarity } from "@/utils/getColorRarity";
+import type { IArtifactHistory } from "@/types/artifact";
 
-const GachaHistory = ({ skills }: { skills: ISkillHistory[] }) => {
+const GachaHistory = ({ items }: { items: ISkillHistory[] | IArtifactHistory[] }) => {
   return (
     <DialogWrapper
-      title="История получения навыков"
+      title="История получения"
       body={
         <Box maxH="500px" overflowY="auto">
           <Table.Root size="sm">
@@ -18,7 +19,7 @@ const GachaHistory = ({ skills }: { skills: ISkillHistory[] }) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {skills.map((item, i) => (
+              {items.map((item, i) => (
                 <Table.Row key={i}>
                   <Table.Cell color={getColorRarity(item.rarity)}>{item.name}</Table.Cell>
                   <Table.Cell textAlign="end">{item.dateOfRecipe.toLocaleString()}</Table.Cell>

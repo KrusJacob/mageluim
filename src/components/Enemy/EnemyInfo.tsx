@@ -1,10 +1,9 @@
 import type { IEnemy } from "@/types/enemy";
 import { Box, Center, DataList, Image, Stack, Text } from "@chakra-ui/react";
-import React from "react";
 
 const EnemyInfo = ({ enemy }: { enemy: IEnemy }) => {
   return (
-    <Box>
+    <Box w={"160px"}>
       <Center>{enemy.label}</Center>
       <Image w={"160px"} src={enemy.image} />
       <Stack gap={1}>
@@ -29,6 +28,10 @@ const EnemyInfo = ({ enemy }: { enemy: IEnemy }) => {
             <DataList.ItemValue>{enemy.stats.critValue}</DataList.ItemValue>
           </DataList.Item>
           <DataList.Item>
+            <DataList.ItemLabel>Точность</DataList.ItemLabel>
+            <DataList.ItemValue>{enemy.stats.accuracy}</DataList.ItemValue>
+          </DataList.Item>
+          <DataList.Item>
             <DataList.ItemLabel>Сопротивление</DataList.ItemLabel>
             <DataList.ItemValue>{enemy.stats.resistance}</DataList.ItemValue>
           </DataList.Item>
@@ -43,6 +46,14 @@ const EnemyInfo = ({ enemy }: { enemy: IEnemy }) => {
               <DataList.ItemValue>{item}</DataList.ItemValue>
             </DataList.Item>
           ))}
+        </DataList.Root>
+      </Box>
+      <Box mt={2}>
+        <Text>Способности: </Text>
+        <DataList.Root gap={0.5} orientation="horizontal">
+          <DataList.Item>
+            <DataList.ItemLabel>{enemy.descriptionSkill}</DataList.ItemLabel>
+          </DataList.Item>
         </DataList.Root>
       </Box>
     </Box>

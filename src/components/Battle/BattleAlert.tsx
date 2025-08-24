@@ -1,6 +1,5 @@
-import { Box, Button, Center, HStack, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import { IconGold, IconShard } from "../ui/icons";
+import { Box, Button, Center, HStack, Text } from "@chakra-ui/react";
+import { IconArtifactShard, IconGold, IconSkillShard } from "../ui/icons";
 import type { IBattleFloor } from "@/types/battle";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import { useShopStore } from "@/store/shopStore";
@@ -12,11 +11,13 @@ interface Props {
   setSelectedFloor: (floor: IBattleFloor | null) => void;
 }
 const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
-  const addShards = useHeroSkillStore((state) => state.addShards);
+  const addShardSkill = useHeroSkillStore((state) => state.addShardSkill);
+  const addShardArtifact = useHeroSkillStore((state) => state.addShardArtifact);
   const addGold = useHeroSkillStore((state) => state.addGold);
   const enemiesIsDead = battleFloor.enemies.every((enemy) => enemy.stats.currentHp <= 0);
   const currentHp = useHeroSkillStore((state) => state.hero.stats.currentHp);
   const updateShopSkills = useShopStore((state) => state.updateShopSkills);
+  const updateShopArtifacts = useShopStore((state) => state.updateShopArtifacts);
 
   if (!enemiesIsDead && currentHp > 0) return null;
 
@@ -30,9 +31,14 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
               +{battleFloor.reward.gold} <IconGold />
             </HStack>
           </Box>
-          {battleFloor.reward.shards && (
+          {battleFloor.reward.shardSkill && (
             <HStack>
-              +{battleFloor.reward.shards} <IconShard />
+              +{battleFloor.reward.shardSkill} <IconSkillShard />
+            </HStack>
+          )}
+          {battleFloor.reward.shardArtifact && (
+            <HStack>
+              +{battleFloor.reward.shardArtifact} <IconArtifactShard />
             </HStack>
           )}
           <Button
@@ -40,9 +46,12 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
               battleFloor.isCleared = true;
               setSelectedFloor(null);
               addGold(battleFloor.reward.gold);
-              addShards(battleFloor.reward.shards || 0);
+              addShardSkill(battleFloor.reward.shardSkill || 0);
+              addShardArtifact(battleFloor.reward.shardArtifact || 0);
+
               if (battleFloor.floor % 3 === 0) {
                 updateShopSkills();
+                updateShopArtifacts();
                 toaster.create({ title: "Внимание", description: "Ассортимент магазина обновлен" });
               }
               if (ALL_FLOOR[battleFloor.floor]) {

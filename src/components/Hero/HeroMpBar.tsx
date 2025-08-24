@@ -8,8 +8,9 @@ const HeroMpBar = () => {
   const maxMana = useHeroSkillStore((state) => state.hero.stats.maxMana);
   const manaRegenValue = useHeroSkillStore((state) => state.hero.stats.manaRegen.value);
   const manaRegenInsperation = useHeroSkillStore((state) => state.hero.stats.manaRegen.insperationValue);
+  const manaRegenartifact = useHeroSkillStore((state) => state.hero.amplifications.manaRegen);
 
-  const totalManaRegen = manaRegenValue + manaRegenInsperation;
+  const totalManaRegen = manaRegenValue + manaRegenInsperation + manaRegenartifact;
 
   return (
     <Box

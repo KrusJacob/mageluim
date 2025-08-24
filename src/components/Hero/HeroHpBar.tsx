@@ -1,17 +1,11 @@
-import { HERO } from "@/data/hero/hero";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
-import { useHeroStatStore } from "@/store/heroStatStore";
 import { calcWidthHPBar } from "@/utils/getWidthBar";
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 
 const HeroHpBar = () => {
-  // const currentHp = useHeroStatStore((state) => state.hp);
-  // const maxHp = useHeroStatStore((state) => state.maxHp);
   const currentHp = useHeroSkillStore((state) => state.hero.stats.currentHp);
   const maxHp = useHeroSkillStore((state) => state.hero.stats.maxHp);
-
-  // const { currentHp, maxHp } = hero.stats;
 
   return (
     <Box

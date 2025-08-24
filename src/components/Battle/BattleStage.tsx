@@ -1,6 +1,6 @@
 import type { IBattleFloor } from "@/types/battle";
-import { Box, HStack, Stack, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, HStack, Stack } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import type { ISkillHero } from "@/types/skill";
@@ -21,9 +21,9 @@ const BattleStage = ({ battleFloor, setSelectedFloor }: Props) => {
   const [selectedSkill, setSelectedSkill] = useState<ISkillHero | null>(null);
   const [isAttack, setIsAttack] = useState(false);
 
-  const enemiesIsDead = battleFloor.enemies.every((enemy) => enemy.stats.currentHp <= 0);
+  // const enemiesIsDead = battleFloor.enemies.every((enemy) => enemy.stats.currentHp <= 0);
 
-  console.log("render");
+  // console.log("render");
 
   useEffect(() => {
     resetLevel();

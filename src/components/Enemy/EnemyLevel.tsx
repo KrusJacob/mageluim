@@ -1,4 +1,4 @@
-import { HStack, Stack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { IoSkull } from "react-icons/io5";
 import { GiDaemonSkull } from "react-icons/gi";
 import { GiCrownedSkull } from "react-icons/gi";

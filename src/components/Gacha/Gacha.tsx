@@ -1,16 +1,10 @@
-// const LazyGacha = lazy(() => import("../Gacha/GachaSkill"));
-// const LazyBag = lazy(() => import("../Bag/Bag"));
-// const LazyBattle = lazy(() => import("../Battle/Battle"));
-// const LazyShop = lazy(() => import("../Shop/Shop"));
-
-import { Suspense, useState } from "react";
-import GachaArtifact from "./Artifact/GachaArtifact";
-import GachaSkillItem from "./Skill/GachaSkillItem";
+import { Suspense, lazy, useState } from "react";
 import { Center, For, Grid, Loader, Text } from "@chakra-ui/react";
-import GachaSkill from "./Skill/GachaSkill";
 
-type IGasha = "skill" | "artifact";
+// type IGasha = "skill" | "artifact";
 
+const LazyGachaSkill = lazy(() => import("./Skill/GachaSkill"));
+const LazyGachaArtifact = lazy(() => import("./Artifact/GachaArtifact"));
 const Gacha = () => {
   const [selectGacha, setSelectGacha] = useState<string | null>(null);
   return (
@@ -20,7 +14,7 @@ const Gacha = () => {
           <For
             each={[
               { label: "Способности", img: "/img/bg_gacha.png", name: "skill" },
-              { label: "Артефакты", img: "/img/bg_bag.png", name: "artifact" },
+              { label: "Артефакты", img: "/img/bg_gacha_artifact.png", name: "artifact" },
             ]}
           >
             {(item, index) => (
@@ -46,8 +40,8 @@ const Gacha = () => {
         </Grid>
       )}
       <Suspense fallback={<Loader mt={10} />}>
-        {selectGacha === "skill" && <GachaSkill />}
-        {selectGacha === "artifact" && <GachaArtifact />}
+        {selectGacha === "skill" && <LazyGachaSkill />}
+        {selectGacha === "artifact" && <LazyGachaArtifact />}
       </Suspense>
     </Center>
   );

@@ -1,3 +1,4 @@
+import type { IArtifact, IArtifactHero } from "./artifact";
 import type { IEnemy } from "./enemy";
 import type {
   IElementName,
@@ -13,11 +14,16 @@ import type {
 export interface IHeroEngine {
   name: string;
   image: string;
-  shards: number;
+  shardsSkill: number;
+  shardsArtifact: number;
   gold: number;
   skills: ISkillHero[];
-  battleDeck: ISkillHero[];
+  battleDeckSkills: ISkillHero[];
+  artifacts: IArtifactHero[];
+  battleDeckArtifacts: IArtifactHero[];
+  baseStats: HeroStats;
   stats: HeroStats;
+  amplifications: IAmpifications;
 }
 
 export interface IHero extends IHeroEngine {
@@ -27,18 +33,24 @@ export interface IHero extends IHeroEngine {
   effects: ITypeTargetEffect[];
   takeHeal: (value: number) => void;
   takeDamage: (type: ITypeDMG) => void;
-  takeActions: (actions: ITypeTargetAction[]) => void;
+  takeActions: (actions: ITypeTargetAction[], accuracy?: number) => void;
   addNewSkill(newSkill: ISkill): void;
-  upgradeSkill(upgradedSkill: ISkillHero): void;
+  addNewArtifact(newArtifact: IArtifact): void;
+  // upgradeSkill(upgradedSkill: ISkillHero): void;
+  // upgradeArtifact(upgradedArtifact: IArtifactHero): void;
   addSkillToDeck(skill: ISkill): void;
+  addArtifactToDeck(artifact: IArtifact): void;
   removeSkillFromDeck(skill: ISkillHero): void;
+  removeArtifactFromDeck(artifact: IArtifactHero): void;
   resetCooldownBattleDeck(): void;
   useAttack: (enemy: IEnemy) => void;
   useMana: (value: number) => void;
   regenMana: () => void;
-  addShards: (amount: number) => void;
+  addShardSkill: (amount: number) => void;
+  useShardSkill: () => void;
+  addShardArtifact: (amount: number) => void;
+  useShardArtifact: () => void;
   addGold: (amount: number) => void;
-  useShard: () => void;
   reset: () => void;
 }
 
@@ -54,11 +66,18 @@ export interface HeroStats {
   critValue: number;
   resistance: number;
   durability: IDurability;
+  accuracy: number;
+}
+
+export interface IAmpifications
+  extends Omit<Record<IElementName | keyof HeroStats, number>, "currentHp" | "currentMana"> {
+  dotDamage: number;
 }
 
 interface IManaRegen {
   value: number;
   insperationValue: number;
+  artifactValue: number;
 }
 
 export type IDurability = Record<IElementName, number>;

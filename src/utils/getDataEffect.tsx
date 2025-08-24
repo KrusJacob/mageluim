@@ -17,6 +17,7 @@ import {
   DARKNESS_MAX_LAYERS,
   HEAL_DOT_HEAL,
   HEAL_DOT_LAYERS,
+  INSPIRATION_MAX_LAYERS,
   POSION_DOT_DMG,
   POSION_MAX_LAYERS,
   WET_CHANCE_REDUCTION,
@@ -85,6 +86,7 @@ export const getDataEffect = (effectName: IEffect["name"]) => {
       Icon = <MdElectricBolt />;
       label = "Вдохновение"; // регенирирует ману +
       color = "turquoise";
+      maxLayer = INSPIRATION_MAX_LAYERS;
       description = `Каждый ход восстанавливает 1 ед. маны.`;
       break;
     case "invulnerability":

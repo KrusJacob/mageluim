@@ -1,5 +1,4 @@
-import { Box, Dialog, Table } from "@chakra-ui/react";
-import React from "react";
+import { Box, Table } from "@chakra-ui/react";
 import { DialogWrapper } from "../ui/dialog";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { GACHA_CHANCE_SKILL } from "@/constant";
@@ -9,7 +8,7 @@ import type { Rarity } from "@/types/skill";
 const GachaInfo = () => {
   return (
     <DialogWrapper
-      title="Шанс получения навыков"
+      title="Шанс получения"
       body={
         <Box>
           <Table.Root size="sm">

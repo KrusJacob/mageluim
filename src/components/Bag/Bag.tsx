@@ -1,52 +1,66 @@
-import { Box, Center, Flex, HStack, Stack, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
-import SkillCard from "../Skill/SkillCard";
-import DetailedBag from "./DetailedBag";
+import { Box, HStack, Tabs } from "@chakra-ui/react";
+import { useState } from "react";
+import DetailedSkillBag from "./DetailedSkillBag";
 import type { ISkillHero } from "@/types/skill";
-import SkillLevel from "../Skill/SkilLevel";
-import BagDeck from "./BagDeck";
+import BagDeckSkill from "./BagDeckSkill";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
-import { IconGold, IconShard } from "../ui/icons";
+import BagDeckArtifact from "./BagDeckArtifact";
+import BagSkill from "./BagSkills";
+import BagResources from "./BagResources";
+import { GiBurningEye, GiScrollUnfurled } from "react-icons/gi";
+import BagArtifacts from "./BagArtifacts";
+import DetailedArtifactBag from "./DetailedArtifactBag";
+import type { IArtifactHero } from "@/types/artifact";
 
 const Bag = () => {
   const [selectedSkill, setSelectedSkill] = useState<ISkillHero | null>(null);
+  const [selectedArtifact, setSelectedArtifact] = useState<IArtifactHero | null>(null);
   const skills = useHeroSkillStore((state) => state.skills);
-  const shards = useHeroSkillStore((state) => state.shards);
-  const gold = useHeroSkillStore((state) => state.gold);
+  const artifacts = useHeroSkillStore((state) => state.artifacts);
+
+  const handleSelectSkill = (skill: ISkillHero) => {
+    setSelectedArtifact(null);
+    setSelectedSkill(skill);
+  };
+
+  const handleSelectArtifact = (artifact: IArtifactHero) => {
+    setSelectedSkill(null);
+    setSelectedArtifact(artifact);
+  };
 
   return (
     <HStack w={"100%"} alignItems={"start"}>
       <Box flexDir={"column"} maxW={{ base: "8xl" }} w={"100%"}>
         <HStack gap={4}>
-          <BagDeck />
-          <Stack>
-            <HStack>
-              <IconGold /> {gold}
-            </HStack>
-            <HStack>
-              <IconShard /> {shards}
-            </HStack>
-          </Stack>
+          <HStack gap={4}>
+            <BagDeckSkill />
+            <BagDeckArtifact />
+          </HStack>
+          <BagResources />
         </HStack>
-        <Box overflow={"auto"} h={"700px"}>
-          <Flex w={"100%"} justifyContent={"start"} alignItems={"start"} flexWrap={"wrap"} gap={1}>
-            {skills?.map((skill, i) => (
-              <Box
-                position={"relative"}
-                key={i + skill.name}
-                onClick={() => setSelectedSkill(skill)}
-                w={"260px"}
-                h={"400px"}
-              >
-                <SkillLevel level={skill.level} />
-
-                <SkillCard key={i + skill.name} skill={skill} isSelected={false} />
-              </Box>
-            ))}
-          </Flex>
-        </Box>
+        <Tabs.Root mt={1} lazyMount defaultValue="skills" size={"lg"} variant={"line"}>
+          <Tabs.List>
+            <Tabs.Trigger value="skills">
+              <GiScrollUnfurled />
+              Способности
+            </Tabs.Trigger>
+            <Tabs.Trigger value="artifacts">
+              <GiBurningEye />
+              Артефакты
+            </Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content _open={{ animationName: "fade-in", animationDuration: "300ms" }} value="skills">
+            <BagSkill skills={skills} setSelectedSkill={handleSelectSkill} />
+          </Tabs.Content>
+          <Tabs.Content _open={{ animationName: "fade-in", animationDuration: "300ms" }} value="artifacts">
+            <BagArtifacts artifacts={artifacts} setSelectedArtifact={handleSelectArtifact} />
+          </Tabs.Content>
+        </Tabs.Root>
       </Box>
-      <DetailedBag skill={selectedSkill} />
+      <Box w={"450px"}>
+        {selectedSkill && <DetailedSkillBag skill={selectedSkill} />}
+        {selectedArtifact && <DetailedArtifactBag artifact={selectedArtifact} />}
+      </Box>
     </HStack>
   );
 };

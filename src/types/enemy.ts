@@ -17,6 +17,7 @@ export interface IEnemyEngine {
   stats: EnemyStats;
   skill?: (hero: IHero, enemies: IEnemy[]) => void;
   useSkill?: (hero: IHero, enemies: IEnemy[]) => void;
+  descriptionSkill?: string;
 }
 
 export interface IEnemy extends IEnemyEngine {
@@ -26,7 +27,7 @@ export interface IEnemy extends IEnemyEngine {
   effects: ITypeTargetEffect[];
   takeHeal: (value: number) => void;
   takeDamage: (type: ITypeDMG) => void;
-  takeActions: (actions: ITypeTargetAction[]) => void;
+  takeActions: (actions: ITypeTargetAction[], accuracy?: number) => void;
   useAttack: (hero: IHero) => void;
   reset: () => void;
 
@@ -42,4 +43,5 @@ export interface EnemyStats {
   critValue: number;
   resistance: number;
   durability: IDurability;
+  accuracy: number;
 }

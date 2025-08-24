@@ -1,10 +1,6 @@
 import type { IBattleFloor } from "@/types/battle";
-import type { IEnemy, IEnemyEngine } from "@/types/enemy";
 import { Box, Button, Center, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import { BiCoinStack } from "react-icons/bi";
-import { SiCrystal } from "react-icons/si";
-import { IconGold, IconShard } from "../ui/icons";
+import { IconArtifactShard, IconGold, IconSkillShard } from "../ui/icons";
 import EnemyLevel from "../Enemy/EnemyLevel";
 
 interface Props {
@@ -34,9 +30,14 @@ const BattleFloor = ({ item, onClick }: Props) => {
             <HStack>
               <IconGold /> {item.reward.gold}
             </HStack>
-            {item.reward.shards && (
+            {item.reward.shardSkill && (
               <HStack>
-                <IconShard /> {item.reward.shards}
+                <IconSkillShard /> {item.reward.shardSkill}
+              </HStack>
+            )}
+            {item.reward.shardArtifact && (
+              <HStack>
+                <IconArtifactShard /> {item.reward.shardArtifact}
               </HStack>
             )}
           </Stack>

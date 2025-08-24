@@ -1,25 +1,23 @@
 import { Box, Center, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import SkillCard from "../Skill/SkillCard";
 import { MdRemoveCircle } from "react-icons/md";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 
-const BagDeck = () => {
-  const battleDeck = useHeroSkillStore((state) => state.battleDeck);
-  const removeFromDeck = useHeroSkillStore((state) => state.removeFromDeck);
+const BagDeckSkill = () => {
+  const battleDeck = useHeroSkillStore((state) => state.battleDeckSkills);
+  const removeFromDeck = useHeroSkillStore((state) => state.removeSkillDeck);
   const plugCount = 5 - battleDeck.length;
 
   return (
-    <HStack>
+    <Stack>
       <Center px={2}>
         <Text fontSize={24} fontWeight={"semibold"}>
           Боевая колода:
         </Text>
       </Center>
-      <HStack my={4}>
+      <HStack my={2} gap={1}>
         {battleDeck.map((skill) => {
           return (
-            <Box position={"relative"} key={skill.name} w={"100px"} h={"100px"}>
+            <Box border={"1px solid gray"} position={"relative"} key={skill.name} w={"90px"} h={"90px"}>
               <MdRemoveCircle
                 onClick={() => removeFromDeck(skill)}
                 size={24}
@@ -30,11 +28,11 @@ const BagDeck = () => {
           );
         })}
         {Array.from({ length: plugCount }).map((_, index) => (
-          <Box bg={"gray.800"} key={index} w={"100px"} h={"100px"} border={"1px solid gray"}></Box>
+          <Box bg={"gray.800"} key={index} w={"90px"} h={"90px"} border={"1px solid gray"}></Box>
         ))}
       </HStack>
-    </HStack>
+    </Stack>
   );
 };
 
-export default BagDeck;
+export default BagDeckSkill;

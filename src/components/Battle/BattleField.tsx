@@ -1,5 +1,5 @@
 import { Box, Center, HStack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeroCard from "../Hero/HeroCard";
 import EnemyCard from "../Enemy/EnemyCard";
 import BattleInfo from "./BattleInfo";
@@ -26,14 +26,14 @@ const BattleField = ({ battleFloor, selectedSkill, isAttack, setSelectedSkill, s
   const beforeMoveHero = useHeroSkillStore((state) => state.beforeMoveHero);
 
   const liveEnemies = battleFloor.enemies.filter((enemy) => enemy.stats.currentHp > 0);
-  console.log(battleFloor.enemies);
+  // console.log(battleFloor.enemies, hero);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (battleActions === 0) {
       attackToHero(liveEnemies);
       timer = setTimeout(() => {
-        liveEnemies.forEach((enemy) => tickAllStatuses(enemy));
+        liveEnemies.forEach((enemy) => tickAllStatuses(enemy, hero.amplifications));
         setBattleActions(2);
         beforeMoveHero();
       }, liveEnemies.length * 1500);
@@ -47,7 +47,6 @@ const BattleField = ({ battleFloor, selectedSkill, isAttack, setSelectedSkill, s
     if (!selectedSkill && !isAttack) return;
     if (selectedSkill) {
       // проверка на ману
-      console.log(selectedSkill?.data.manaCost[selectedSkill.level], hero.stats.currentMana);
       if (selectedSkill?.data.manaCost[selectedSkill.level] > hero.stats.currentMana) {
         toaster.info({ title: "Недостаточно маны" });
         return;
@@ -56,7 +55,6 @@ const BattleField = ({ battleFloor, selectedSkill, isAttack, setSelectedSkill, s
     }
     setSelectedSkill(null);
     if (isAttack) {
-      // battleFloor.enemies[i].takeDamage({ element: "physical", value: hero.stats.atk });
       hero.useAttack(battleFloor.enemies[i]);
       setIsAttack(false);
     }

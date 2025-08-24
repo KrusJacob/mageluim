@@ -14,8 +14,9 @@ import {
   isBlindTriggered,
   isControl,
   isInvulnerability,
-  useBuffDebuffAttack,
-  useBuffDebuffDeffense,
+  useBuffDebuffModifier,
+  // useBuffDebuffAttack,
+  // useBuffDebuffDeffense,
   useDebuffs,
 } from "../skills/helpers";
 
@@ -33,12 +34,13 @@ export class Enemy implements IEnemyEngine {
   debuffs: ITypeTargetDebuff[] = [];
   effects: ITypeTargetEffect[] = [];
   skill?: (hero: IHero, enemies: IEnemy[]) => void;
+  descriptionSkill?: string | undefined;
 
   useAttack(hero: IHero) {
     if (isControl(this)) return;
     if (isBlindTriggered(this)) return;
-    let damage = useBuffDebuffAttack(this) * this.stats.atk;
-    let defense = useBuffDebuffDeffense(hero) * hero.stats.def;
+    let damage = useBuffDebuffModifier(this, "attack") * this.stats.atk;
+    let defense = useBuffDebuffModifier(hero, "def") * hero.stats.def;
     damage = useDefense(damage, defense);
     hero.takeDamage({ element: "physical", value: damage });
   }
@@ -77,8 +79,8 @@ export class Enemy implements IEnemyEngine {
       this.stats.currentHp -= dmgAfterResists;
     }
   }
-  takeActions(actions: ITypeTargetAction[]) {
-    applyAllStatus.call(this, actions);
+  takeActions(actions: ITypeTargetAction[], attackerAccuracy: number = 0) {
+    applyAllStatus.call(this, actions, attackerAccuracy);
   }
   reset() {
     resetTarget(this);
@@ -89,6 +91,7 @@ export class Enemy implements IEnemyEngine {
     label: string,
     image: string,
     stats: EnemyBaseArgs,
+    descriptionSkill?: string,
     skill?: (hero: IHero, enemies: IEnemy[]) => void
   ) {
     this.id = id_enemy++;
@@ -98,6 +101,7 @@ export class Enemy implements IEnemyEngine {
     this.label = label;
     this.stats = getEnemyStats(stats, level);
     this.skill = skill;
+    this.descriptionSkill = descriptionSkill;
   }
 }
 

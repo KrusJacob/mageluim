@@ -85,22 +85,32 @@ export function isBlindTriggered(target: IHero | IEnemy) {
   return Math.random() < 0.5;
 }
 
-export function useBuffDebuffAttack(target: IHero | IEnemy) {
-  let debuffModifier = 0;
-  let buffModifier = 0;
-  const debuffAttack = target.debuffs.find((effect) => effect.action.elementName === "attack");
-  const buffAttack = target.buffs.find((effect) => effect.action.elementName === "attack");
-  if (debuffAttack) debuffModifier = (debuffAttack.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
-  if (buffAttack) buffModifier = (buffAttack.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
-  return buffModifier - debuffModifier + 1;
-}
-export function useBuffDebuffDeffense(target: IHero | IEnemy) {
-  let debuffModifier = 0;
-  let buffModifier = 0;
-  const debuffDef = target.debuffs.find((buff) => buff.action.elementName === "def");
-  const buffDef = target.buffs.find((buff) => buff.action.elementName === "def");
-  if (debuffDef) debuffModifier = (debuffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
-  if (buffDef) buffModifier = (buffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
+// export function useBuffDebuffAttack(target: IHero | IEnemy) {
+//   let debuffModifier = 0;
+//   let buffModifier = 0;
+//   const debuffAttack = target.debuffs.find((effect) => effect.action.elementName === "attack");
+//   const buffAttack = target.buffs.find((effect) => effect.action.elementName === "attack");
+//   if (debuffAttack) debuffModifier = (debuffAttack.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
+//   if (buffAttack) buffModifier = (buffAttack.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
+//   return buffModifier - debuffModifier + 1;
+// }
+// export function useBuffDebuffDeffense(target: IHero | IEnemy) {
+//   let debuffModifier = 0;
+//   let buffModifier = 0;
+//   const debuffDef = target.debuffs.find((buff) => buff.action.elementName === "def");
+//   const buffDef = target.buffs.find((buff) => buff.action.elementName === "def");
+//   if (debuffDef) debuffModifier = (debuffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
+//   if (buffDef) buffModifier = (buffDef.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100;
+//   return buffModifier - debuffModifier + 1;
+// }
+
+export function useBuffDebuffModifier(target: IHero | IEnemy, elementName: "attack" | "def") {
+  const debuff = target.debuffs.find((effect) => effect.action.elementName === elementName);
+  const buff = target.buffs.find((effect) => effect.action.elementName === elementName);
+
+  const debuffModifier = debuff ? (debuff.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100 : 0;
+  const buffModifier = buff ? (buff.action.level === 1 ? ACTION_VALUE_1 : ACTION_VALUE_2) / 100 : 0;
+
   return buffModifier - debuffModifier + 1;
 }
 

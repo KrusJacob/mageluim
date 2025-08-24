@@ -1,5 +1,4 @@
 import { Box, Center, HStack } from "@chakra-ui/react";
-import React from "react";
 import SkillCard from "../Skill/SkillCard";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import type { ISkillHero } from "@/types/skill";
@@ -10,10 +9,10 @@ interface Props {
 }
 
 const BattleDeck = ({ selectedSkill, onSelectSkill }: Props) => {
-  const battleDeck = useHeroSkillStore((state) => state.battleDeck);
+  const battleDeck = useHeroSkillStore((state) => state.battleDeckSkills);
   const plugCount = 5 - battleDeck.length;
 
-  console.log("BattleDeck render", battleDeck);
+  // console.log("BattleDeck render", battleDeck);
 
   return (
     <Center>

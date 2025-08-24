@@ -12,6 +12,7 @@ export function createGreenGoblin(level: number = 1): Enemy {
     chanceCrit: 10,
     critValue: 150,
     resistance: 5,
+    accuracy: 0,
     durability: {
       fire: 5,
       physical: 5,
@@ -24,30 +25,24 @@ export function createGreenGoblin(level: number = 1): Enemy {
   });
 }
 export function createBlueGoblin(level: number = 1): Enemy {
-  return new Enemy(
-    "Blue Goblin",
-    level,
-    "Гоблин-воин",
-    "/img/enemies/blueGoblin.png",
-    {
-      atk: 115,
-      def: 40,
-      maxHp: 1300,
-      chanceCrit: 15,
-      critValue: 150,
-      resistance: 10,
-      durability: {
-        fire: 5,
-        physical: 5,
-        dark: 5,
-        light: 5,
-        forest: 5,
-        water: 15,
-        wind: 10,
-      },
+  return new Enemy("Blue Goblin", level, "Гоблин-воин", "/img/enemies/blueGoblin.png", {
+    atk: 115,
+    def: 40,
+    maxHp: 1300,
+    chanceCrit: 15,
+    critValue: 150,
+    resistance: 10,
+    accuracy: 0,
+    durability: {
+      fire: 5,
+      physical: 5,
+      dark: 5,
+      light: 5,
+      forest: 5,
+      water: 15,
+      wind: 10,
     },
-    function (hero) {}
-  );
+  });
 }
 
 export function createGoldGobin(level: number = 1): Enemy {
@@ -63,6 +58,7 @@ export function createGoldGobin(level: number = 1): Enemy {
       chanceCrit: 0,
       critValue: 150,
       resistance: 20,
+      accuracy: 0,
       durability: {
         fire: 10,
         physical: 0,
@@ -73,6 +69,7 @@ export function createGoldGobin(level: number = 1): Enemy {
         wind: 10,
       },
     },
+    "Исцеляет союзников каждый свой ход",
     function (hero, enemies) {
       enemies.forEach((enemy) => {
         const heal = Math.floor((200 * (level + 1)) / 2);
@@ -90,6 +87,7 @@ export function createRedGoblin(level: number = 1): Enemy {
     chanceCrit: 15,
     critValue: 150,
     resistance: 50,
+    accuracy: 0,
     durability: {
       fire: 25,
       physical: 15,
@@ -100,4 +98,35 @@ export function createRedGoblin(level: number = 1): Enemy {
       wind: 15,
     },
   });
+}
+
+export function createPirpleGoblin(level: number = 1): Enemy {
+  return new Enemy(
+    "Pirple Goblin",
+    level,
+    "Маг гоблинов",
+    "/img/enemies/pirpleGoblin.png",
+    {
+      atk: 175,
+      def: 30,
+      maxHp: 1600,
+      chanceCrit: 15,
+      critValue: 150,
+      resistance: 35,
+      accuracy: 0,
+      durability: {
+        fire: 20,
+        physical: 10,
+        dark: 20,
+        light: 20,
+        forest: 20,
+        water: 20,
+        wind: 20,
+      },
+    },
+    "Крадет ману при атаке",
+    function (hero, enemies) {
+      hero.useMana(1);
+    }
+  );
 }

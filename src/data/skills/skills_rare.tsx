@@ -3,6 +3,7 @@ import { SkillEngine } from "./class";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
 import { FIRE, FOREST, LIGHT, PHYSICAL, WATER, WIND } from "../elements/elements_all";
 import {
+  BUFF_ATTACK_2,
   BUFF_DEF_1,
   BUFF_DEF_2,
   BUFF_PHYSICAL_1,
@@ -28,13 +29,13 @@ export const SKILLS_RARE = [
       awakenings: [
         <>{useActionTo(BUFF_WIND_2, 2)}</>,
         <>Расход маны уменьшен на 1</>,
-        <>Урон увеличен на {useDmgToElement(125, WIND)}</>,
+        <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
       ],
       data: {
         manaCost: [7, 7, 6, 6],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          wind: [400, 400, 400, 525],
+          wind: [400, 400, 400, 550],
         },
         useActionToSelf: [
           [actionTarget(BUFF_WIND_1, 2)],
@@ -51,7 +52,7 @@ export const SKILLS_RARE = [
       name: "Утренний дождик",
       description: (
         <>
-          {useEffectTo(HEAL, 3)} на героя. {useEffectTo(WET, 2)} на всех врагов
+          {useEffectTo(HEAL, 3, 2)} на героя. {useEffectTo(WET, 2)} на всех врагов
         </>
       ),
       img: "/img/skills/Утренний_дождик.png",
@@ -66,10 +67,10 @@ export const SKILLS_RARE = [
         manaCost: [4, 4, 4, 3],
         cooldown: [4, 4, 4, 4],
         useActionToSelf: [
-          [actionTarget(HEAL, 3)],
           [actionTarget(HEAL, 3, 2)],
-          [actionTarget(HEAL, 3, 2), actionTarget(INSPIRATION, 3)],
-          [actionTarget(HEAL, 3, 2), actionTarget(INSPIRATION, 3)],
+          [actionTarget(HEAL, 3, 3)],
+          [actionTarget(HEAL, 3, 3), actionTarget(INSPIRATION, 3)],
+          [actionTarget(HEAL, 3, 3), actionTarget(INSPIRATION, 3)],
         ],
         useActionToAOE: [
           [actionTarget(WET, 2)],
@@ -93,18 +94,23 @@ export const SKILLS_RARE = [
       img: "/img/skills/Удар_метеорита.png",
       element: [FIRE, PHYSICAL],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(150, FIRE)}</>,
-        <>Урон увеличен на {useDmgToElement(150, PHYSICAL)}</>,
         <>{useActionTo(DEBUFF_DEF_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(175, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(175, PHYSICAL)}</>,
       ],
       data: {
         manaCost: [6, 6, 6, 6],
         cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
-          fire: [400, 550, 550, 550],
-          physical: [400, 400, 550, 550],
+          fire: [400, 400, 575, 575],
+          physical: [400, 400, 400, 575],
         },
-        useActionToTarget: [[], [], [], [actionTarget(DEBUFF_DEF_2, 2)]],
+        useActionToTarget: [
+          [actionTarget(DEBUFF_DEF_2, 2)],
+          [actionTarget(DEBUFF_DEF_2, 2)],
+          [actionTarget(DEBUFF_DEF_2, 2)],
+          [actionTarget(DEBUFF_DEF_2, 2)],
+        ],
       },
     },
     "rare"
@@ -207,15 +213,15 @@ export const SKILLS_RARE = [
       element: [FIRE],
       tags: [BURN],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
+        <>Расход маны уменьшен на 1</>,
         <>{useEffectTo(BURN, 2)}</>,
         <>Перезарядка уменьшена на 1 ход</>,
       ],
       data: {
-        manaCost: [3, 3, 3, 3],
+        manaCost: [4, 3, 3, 3],
         cooldown: [4, 4, 4, 3],
         useDmgToAOE: {
-          fire: [150, 250, 250, 250],
+          fire: [150, 150, 150, 150],
         },
         useActionToAOE: [
           [actionTarget(BURN, 2)],
@@ -227,6 +233,38 @@ export const SKILLS_RARE = [
     },
     "rare"
   ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Гнев земли",
+      description: (
+        <>
+          Наносит {useDmgToElement(225, PHYSICAL)} и {useDmgToElement(225, FOREST)} урона всем врагам
+        </>
+      ),
+      img: "/img/skills/Гнев_земли.png",
+      element: [PHYSICAL, FOREST],
+      awakenings: [
+        <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(175, PHYSICAL)}</>,
+        <>Урон увеличен на {useDmgToElement(175, FOREST)}</>,
+      ],
+      data: {
+        manaCost: [7, 7, 7, 7],
+        cooldown: [5, 5, 5, 5],
+        useDmgToAOE: {
+          physical: [225, 225, 400, 400],
+          forest: [225, 225, 225, 400],
+        },
+        useActionToSelf: [
+          [],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+          [actionTarget(BUFF_ATTACK_2, 2)],
+        ],
+      },
+    },
+    "rare"
+  ).getSkill(),
 ];
 
-// 7
+// 8

@@ -1,4 +1,3 @@
-import type { ISkill } from "@/types/skill";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import React from "react";
 import SkillCard from "../Skill/SkillCard";
@@ -7,43 +6,74 @@ import { SHOP_PRICE } from "@/constant/shop";
 import { IconGold } from "../ui/icons";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import { toaster } from "../ui/toaster";
+import type { IShopTypeItem } from "./Shop";
+import { isSkill } from "@/data/skills/class";
+import { isArtifact } from "@/data/artifacts/class";
+import ArtifactCard from "../Artifact/ArtifactCard";
 
 interface Props {
-  skill: ISkill | null;
+  item: IShopTypeItem;
 }
-const DetailedShop = ({ skill }: Props) => {
+const DetailedShop = ({ item }: Props) => {
   const heroGold = useHeroSkillStore((state) => state.gold);
   const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
+  const addNewArtifact = useHeroSkillStore((state) => state.addNewArtifact);
   const addGold = useHeroSkillStore((state) => state.addGold);
-  const addShards = useHeroSkillStore((state) => state.addShards);
-  const price = skill ? SHOP_PRICE.skills[skill.rarity] : SHOP_PRICE.shard;
+  const addShardSkill = useHeroSkillStore((state) => state.addShardSkill);
+  const addShardArtifact = useHeroSkillStore((state) => state.addShardArtifact);
 
-  const onBye = () => {
-    if (skill) {
-      addNewSkill(skill);
-    } else {
-      addShards(1);
+  const getPrice = () => {
+    if (item === "shardSkill") return SHOP_PRICE.shardSkill;
+    if (item === "shardArtifact") return SHOP_PRICE.shardsArtifact;
+    if (isSkill(item)) return SHOP_PRICE.skills[item.rarity];
+    if (isArtifact(item)) return SHOP_PRICE.artifacts[item.rarity];
+
+    return 0;
+  };
+
+  const price = getPrice();
+
+  const onBuy = () => {
+    if (item === "shardSkill") {
+      addShardSkill(1);
+      toaster.create({ title: "Покупка", description: "Вы получили кристалл заклинания" });
+    } else if (item === "shardArtifact") {
+      addShardArtifact(1);
+      toaster.create({ title: "Покупка", description: "Вы получили кристалл артефакта" });
+    } else if (isSkill(item)) {
+      addNewSkill(item);
+      toaster.create({ title: "Покупка", description: `Вы купили заклинание: ${item.name}` });
+    } else if (isArtifact(item)) {
+      addNewArtifact(item);
+      toaster.create({ title: "Покупка", description: `Вы купили артефакт: ${item.name}` });
     }
     addGold(-price);
-    toaster.create({
-      title: "Поздравляем",
-      description: `Вы купили карту заклинания: ${skill ? skill.name : "Кристалл призыва"}`,
-    });
   };
 
   return (
     <Box w={"450px"}>
-      {skill && (
+      {item === "shardSkill" && (
         <Stack gap={2} position={"relative"}>
-          <SkillCard skill={skill} isSelected={true} />
+          <ShardCard type={"shardSkill"} />
         </Stack>
       )}
-      {!skill && (
+      {item === "shardArtifact" && (
         <Stack gap={2} position={"relative"}>
-          <ShardCard />
+          <ShardCard type={"shardArtifact"} />
         </Stack>
       )}
-      <Button onClick={onBye} disabled={heroGold < price} w={"100%"}>
+      {isSkill(item) && (
+        <Stack gap={2} position={"relative"}>
+          <SkillCard skill={item} isSelected={true} />
+        </Stack>
+      )}
+      {isArtifact(item) && (
+        <Stack gap={2} position={"relative"}>
+          <ArtifactCard artifact={item} isSelected={true} />
+        </Stack>
+      )}
+
+      <Button mt={2} onClick={onBuy} disabled={heroGold < price} w={"100%"}>
         {price} <IconGold /> {heroGold >= price ? `Купить` : "Недостаточно золота"}
       </Button>
     </Box>

@@ -1,14 +1,10 @@
-// import { useEnemyStatStore } from "@/store/enemyStatStore";
 import type { IEnemy } from "@/types/enemy";
 import { calcWidthHPBar } from "@/utils/getWidthBar";
-import { Box, Center, HStack, Image, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+import { Box, Center, Image, Stack, Text } from "@chakra-ui/react";
 import { TfiTarget } from "react-icons/tfi";
 import FloatDamage from "../ui/floatDamage";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import StatusPanel from "../ui/statusPanel";
-import SkillLevel from "../Skill/SkilLevel";
 import EnemyLevel from "./EnemyLevel";
 
 const EnemyCard = ({

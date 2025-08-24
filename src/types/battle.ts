@@ -10,5 +10,6 @@ export interface IBattleFloor {
 
 interface IReward {
   gold: number;
-  shards?: number;
+  shardSkill?: number;
+  shardArtifact?: number;
 }

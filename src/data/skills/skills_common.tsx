@@ -1,7 +1,7 @@
 import { SkillEngine } from "./class";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
 import { BLIND, BURN, FREEZE, POISON, WET } from "../effects/effects_all";
-import { FIRE, FOREST, PHYSICAL, WATER, WIND } from "../elements/elements_all";
+import { DARK, FIRE, FOREST, PHYSICAL, WATER, WIND } from "../elements/elements_all";
 import {
   DEBUFF_ATTACK_1,
   DEBUFF_BURN_1,
@@ -10,7 +10,14 @@ import {
   DEBUFF_WIND_1,
   DEBUFF_WIND_2,
 } from "../buffs&debuffs/debuffs_all";
-import { BUFF_ATTACK_1, BUFF_BURN_1, BUFF_BURN_2, BUFF_WATER_1 } from "../buffs&debuffs/buffs_all";
+import {
+  BUFF_ATTACK_1,
+  BUFF_BURN_1,
+  BUFF_BURN_2,
+  BUFF_DARK_1,
+  BUFF_DARK_2,
+  BUFF_WATER_1,
+} from "../buffs&debuffs/buffs_all";
 import { actionTarget } from "../dmg/dmg_all";
 
 export const SKILLS_COMMON = [
@@ -84,14 +91,14 @@ export const SKILLS_COMMON = [
       name: "Искры молнии",
       description: (
         <>
-          Наносит {useDmgToElement(275, WIND)} урона всем врагам и {useActionTo(DEBUFF_WIND_1, 2)}
+          Наносит {useDmgToElement(300, WIND)} урона всем врагам и {useActionTo(DEBUFF_WIND_1, 2)}
         </>
       ),
       img: "/img/skills/Искры_молнии.png",
       element: [WIND],
       tags: [DEBUFF_WIND_1],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(75, WIND)}</>,
+        <>Урон увеличен на {useDmgToElement(100, WIND)}</>,
         <>Урон увеличен на {useDmgToElement(100, WIND)}</>,
         <>{useActionTo(DEBUFF_WIND_2, 2)}</>,
       ],
@@ -99,7 +106,7 @@ export const SKILLS_COMMON = [
         manaCost: [6, 6, 6, 6],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          wind: [275, 350, 450, 450],
+          wind: [300, 400, 500, 500],
         },
         useActionToAOE: [
           [actionTarget(DEBUFF_WIND_1, 2)],
@@ -119,17 +126,22 @@ export const SKILLS_COMMON = [
       element: [FIRE],
       tags: [DEBUFF_BURN_1],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
         <>{useActionTo(DEBUFF_BURN_1, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          fire: [275, 350, 350, 425],
+          fire: [275, 275, 375, 475],
         },
-        useActionToAOE: [[], [], [actionTarget(DEBUFF_BURN_1, 2)], [actionTarget(DEBUFF_BURN_1, 2)]],
+        useActionToAOE: [
+          [],
+          [actionTarget(DEBUFF_BURN_1, 2)],
+          [actionTarget(DEBUFF_BURN_1, 2)],
+          [actionTarget(DEBUFF_BURN_1, 2)],
+        ],
       },
     },
     "common"
@@ -149,13 +161,13 @@ export const SKILLS_COMMON = [
       awakenings: [
         <>Урон увеличен на {useDmgToElement(75, FOREST)}</>,
         <>{useEffectTo(POISON, 2, 1)}</>,
-        <>Урон увеличен на {useDmgToElement(75, FOREST)}</>,
+        <>Урон увеличен на {useDmgToElement(100, FOREST)}</>,
       ],
       data: {
         manaCost: [3, 3, 3, 3],
         cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
-          forest: [100, 175, 175, 250],
+          forest: [100, 175, 175, 275],
         },
         useActionToAOE: [
           [actionTarget(POISON, 2, 1)],
@@ -269,6 +281,38 @@ export const SKILLS_COMMON = [
     },
     "common"
   ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Темная метка",
+      description: (
+        <>
+          Наносит {useDmgToElement(350, DARK)} урона одному врагу и {useActionTo(BUFF_DARK_1, 2)}
+        </>
+      ),
+      img: "/img/skills/Темная_метка.png",
+      element: [DARK],
+      tags: [BUFF_DARK_1],
+      awakenings: [
+        <>Перезарядка уменьшена на 1 ход</>,
+        <>Урон увеличен на {useDmgToElement(100, DARK)}</>,
+        <>{useActionTo(BUFF_DARK_2, 2)}</>,
+      ],
+      data: {
+        manaCost: [2, 2, 2, 2],
+        cooldown: [3, 2, 2, 2],
+        useDmgToTarget: {
+          dark: [350, 450, 450, 450],
+        },
+        useActionToSelf: [
+          [actionTarget(BUFF_DARK_1, 2)],
+          [actionTarget(BUFF_DARK_1, 2)],
+          [actionTarget(BUFF_DARK_1, 2)],
+          [actionTarget(BUFF_DARK_2, 2)],
+        ],
+      },
+    },
+    "common"
+  ).getSkill(),
 ];
 
-// 8
+// 9

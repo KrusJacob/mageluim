@@ -1,4 +1,4 @@
-import { FREEZE, HEAL, POISON, STUN } from "../effects/effects_all";
+import { FREEZE, HEAL, INSPIRATION, POISON, STUN } from "../effects/effects_all";
 import { SkillEngine } from "./class";
 import { useActionTo, useDmgToElement, useEffectTo } from "./helpers";
 import { DARK, FIRE, FOREST, LIGHT, PHYSICAL, WATER, WIND } from "../elements/elements_all";
@@ -17,45 +17,16 @@ import {
   BUFF_ATTACK_2,
   BUFF_DARK_1,
   BUFF_DARK_2,
+  BUFF_FOREST_1,
   BUFF_FOREST_2,
   BUFF_PHYSICAL_1,
   BUFF_PHYSICAL_2,
+  BUFF_WIND_1,
+  BUFF_WIND_2,
 } from "../buffs&debuffs/buffs_all";
 import { actionTarget } from "../dmg/dmg_all";
 
 export const SKILLS_EPIC = [
-  new SkillEngine(
-    {
-      name: "Гнев земли",
-      description: (
-        <>
-          Наносит {useDmgToElement(250, PHYSICAL)} и {useDmgToElement(250, FOREST)} урона всем врагам
-        </>
-      ),
-      img: "/img/skills/Гнев_земли.png",
-      element: [PHYSICAL, FOREST],
-      awakenings: [
-        <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(150, PHYSICAL)}</>,
-        <>Урон увеличен на {useDmgToElement(150, FOREST)}</>,
-      ],
-      data: {
-        manaCost: [7, 7, 7, 7],
-        cooldown: [5, 5, 5, 5],
-        useDmgToAOE: {
-          physical: [250, 250, 400, 400],
-          forest: [250, 250, 250, 400],
-        },
-        useActionToSelf: [
-          [],
-          [actionTarget(BUFF_ATTACK_2, 2)],
-          [actionTarget(BUFF_ATTACK_2, 2)],
-          [actionTarget(BUFF_ATTACK_2, 2)],
-        ],
-      },
-    },
-    "epic"
-  ).getSkill(),
   new SkillEngine(
     {
       name: "Сокрушительный удар",
@@ -69,14 +40,14 @@ export const SKILLS_EPIC = [
       tags: [BUFF_PHYSICAL_1],
       awakenings: [
         <>{useActionTo(BUFF_PHYSICAL_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(200, PHYSICAL)}</>,
-        <>Урон увеличен на {useDmgToElement(200, PHYSICAL)}</>,
+        <>Урон увеличен на {useDmgToElement(225, PHYSICAL)}</>,
+        <>Урон увеличен на {useDmgToElement(225, PHYSICAL)}</>,
       ],
       data: {
         manaCost: [7, 7, 7, 7],
         cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
-          physical: [800, 800, 1000, 1200],
+          physical: [800, 800, 1025, 1250],
         },
         useActionToSelf: [
           [actionTarget(BUFF_PHYSICAL_1, 2)],
@@ -125,21 +96,21 @@ export const SKILLS_EPIC = [
   new SkillEngine(
     {
       name: "Цветок жизни",
-      description: <>Исцеляет герою 20% здоровья</>,
+      description: <>Исцеляет герою 20% здоровья и {useActionTo(BUFF_FOREST_1, 2)}</>,
       img: "/img/skills/Цветок_жизни.png",
       element: [FOREST],
       awakenings: [
-        <>Исцеляет герою 15% здоровья</>,
+        <>Исцеляет герою 10% здоровья</>,
         <>{useActionTo(BUFF_FOREST_2, 2)}</>,
         <>{useEffectTo(HEAL, 2, 2)}</>,
       ],
       data: {
         manaCost: [4, 4, 4, 4],
-        cooldown: [4, 4, 4, 4],
-        useHealSelf: [20, 35, 35, 35],
+        cooldown: [6, 6, 6, 6],
+        useHealSelf: [25, 35, 35, 35],
         useActionToSelf: [
-          [],
-          [],
+          [actionTarget(BUFF_FOREST_1, 2)],
+          [actionTarget(BUFF_FOREST_1, 2)],
           [actionTarget(BUFF_FOREST_2, 2)],
           [actionTarget(BUFF_FOREST_2, 2), actionTarget(HEAL, 2, 2)],
         ],
@@ -243,6 +214,38 @@ export const SKILLS_EPIC = [
           [actionTarget(BUFF_ATTACK_2, 2)],
           [actionTarget(BUFF_ATTACK_2, 2)],
           [actionTarget(BUFF_ATTACK_2, 2)],
+        ],
+      },
+    },
+    "epic"
+  ).getSkill(),
+  new SkillEngine(
+    {
+      name: "Статический разряд",
+      description: (
+        <>
+          Наносит {useDmgToElement(450, WIND)} урона одному врагу и {useActionTo(BUFF_WIND_1, 2)}
+        </>
+      ),
+      img: "/img/skills/Статический_разряд.png",
+      element: [WIND],
+      tags: [BUFF_WIND_1, INSPIRATION],
+      awakenings: [
+        <>{useActionTo(BUFF_WIND_2, 2)}</>,
+        <>{useEffectTo(INSPIRATION, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
+      ],
+      data: {
+        manaCost: [3, 3, 3, 3],
+        cooldown: [3, 3, 3, 3],
+        useDmgToAOE: {
+          wind: [450, 450, 450, 600],
+        },
+        useActionToSelf: [
+          [actionTarget(BUFF_WIND_1, 2)],
+          [actionTarget(BUFF_WIND_2, 2)],
+          [actionTarget(BUFF_WIND_2, 2)],
+          [actionTarget(BUFF_WIND_2, 2)],
         ],
       },
     },

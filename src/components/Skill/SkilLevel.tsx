@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 
-const SkillLevel = ({ level }: { level: number }) => {
+const LevelItem = ({ level }: { level: number }) => {
   return (
     <Stack position={"absolute"} zIndex={100} left={4} top={4}>
       {Array.from({ length: level }, (_, index) => (
@@ -11,4 +11,4 @@ const SkillLevel = ({ level }: { level: number }) => {
   );
 };
 
-export default SkillLevel;
+export default LevelItem;

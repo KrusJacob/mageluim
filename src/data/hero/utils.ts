@@ -1,7 +1,13 @@
 import { BURN_DOT_DMG, DARKNESS_DOT_DMG, HEAL_DOT_HEAL, POSION_DOT_DMG, WET_CHANCE_REDUCTION } from "@/constant";
 import type { IEnemy } from "@/types/enemy";
-import type { IHero } from "@/types/hero";
-import type { ITypeTargetAction, ITypeTargetBuff, ITypeTargetDebuff, ITypeTargetEffect } from "@/types/skill";
+import type { IAmpifications, IHero } from "@/types/hero";
+import type {
+  IElementName,
+  ITypeTargetAction,
+  ITypeTargetBuff,
+  ITypeTargetDebuff,
+  ITypeTargetEffect,
+} from "@/types/skill";
 
 export function isBuff(action: ITypeTargetAction): action is ITypeTargetBuff {
   return action.action.type === "buff";
@@ -15,7 +21,7 @@ export function isEffect(action: ITypeTargetAction): action is ITypeTargetEffect
   return action.action.type === "effect";
 }
 
-export function applyAllStatus(this: IHero | IEnemy, actions: ITypeTargetAction[]) {
+export function applyAllStatus(this: IHero | IEnemy, actions: ITypeTargetAction[], attackerAccuracy: number) {
   actions.forEach((item) => {
     if (isBuff(item)) {
       applyStatusAction(
@@ -32,7 +38,7 @@ export function applyAllStatus(this: IHero | IEnemy, actions: ITypeTargetAction[
         (i) => i.action.level
       );
     } else if (isEffect(item)) {
-      applyStatusEffect(this.effects, item, this.stats.resistance);
+      applyStatusEffect(this.effects, item, Math.max(0, this.stats.resistance - attackerAccuracy));
     }
   });
 }
@@ -99,10 +105,10 @@ function isTriggerResistance(resistance: number, isWet: boolean) {
   return roll < effectiveResistance;
 }
 
-export function tickAllStatuses(target: IEnemy | IHero) {
+export function tickAllStatuses(target: IEnemy | IHero, heroAmplifications?: IAmpifications) {
   target.takenLastDamage = [];
   useTickHeal(target);
-  useDotDamage(target);
+  useDotDamage(target, heroAmplifications);
   target.buffs = tickAction(target.buffs);
   target.debuffs = tickAction(target.debuffs);
   target.effects = tickAction(target.effects);
@@ -115,7 +121,7 @@ function tickAction<T extends ITypeTargetAction>(actions: T[]) {
     .filter((action) => action.duration > 0);
 }
 
-export function useDotDamage(target: IHero | IEnemy) {
+export function useDotDamage(target: IHero | IEnemy, heroAmplifications?: IAmpifications) {
   let posion: ITypeTargetEffect | null = null;
   let burn: ITypeTargetEffect | null = null;
   let darkness: ITypeTargetEffect | null = null;
@@ -126,21 +132,40 @@ export function useDotDamage(target: IHero | IEnemy) {
     if (effect.action.name === "darkness") darkness = effect;
   });
 
-  if (posion) takePosionDotDamage(target, posion);
-  if (burn) takeBurnDotDamage(target, burn);
-  if (darkness) takeDarknessDotDamage(target, darkness);
+  if (posion) takePosionDotDamage(target, posion, heroAmplifications);
+  if (burn) takeBurnDotDamage(target, burn, heroAmplifications);
+  if (darkness) takeDarknessDotDamage(target, darkness, heroAmplifications);
 }
 
-export function takePosionDotDamage(target: IHero | IEnemy, effect: ITypeTargetEffect) {
-  const dmgPosion = POSION_DOT_DMG * effect.layer;
+export function takePosionDotDamage(
+  target: IHero | IEnemy,
+  effect: ITypeTargetEffect,
+  amplification: IAmpifications | undefined
+) {
+  const forestAmplification = amplification ? 1 + amplification.forest / 100 : 1;
+  const dotAmlification = amplification ? 1 + amplification.dotDamage / 100 : 1;
+  const dmgPosion = POSION_DOT_DMG * effect.layer * forestAmplification * dotAmlification;
   target.takeDamage({ element: "forest", value: dmgPosion });
 }
-export function takeBurnDotDamage(target: IHero | IEnemy, effect: ITypeTargetEffect) {
-  const dmgBurn = ((target.stats.maxHp * BURN_DOT_DMG) / 100) * effect.layer;
+export function takeBurnDotDamage(
+  target: IHero | IEnemy,
+  effect: ITypeTargetEffect,
+  amplification: IAmpifications | undefined
+) {
+  const fireAmplification = amplification ? 1 + amplification.fire / 100 : 1;
+  const dotAmlification = amplification ? 1 + amplification.dotDamage / 100 : 1;
+  const dmgBurn = ((target.stats.maxHp * BURN_DOT_DMG) / 100) * effect.layer * fireAmplification * dotAmlification;
   target.takeDamage({ element: "fire", value: dmgBurn });
 }
-export function takeDarknessDotDamage(target: IHero | IEnemy, effect: ITypeTargetEffect) {
-  const dmgDarkness = ((target.stats.maxHp * DARKNESS_DOT_DMG) / 100) * effect.layer;
+export function takeDarknessDotDamage(
+  target: IHero | IEnemy,
+  effect: ITypeTargetEffect,
+  amplification: IAmpifications | undefined
+) {
+  const darkAmplification = amplification ? 1 + amplification.dark / 100 : 1;
+  const dotAmlification = amplification ? 1 + amplification.dotDamage / 100 : 1;
+  const dmgDarkness =
+    ((target.stats.maxHp * DARKNESS_DOT_DMG) / 100) * effect.layer * darkAmplification * dotAmlification;
   target.takeDamage({ element: "dark", value: dmgDarkness });
 }
 
@@ -152,7 +177,7 @@ export function useTickHeal(target: IHero | IEnemy) {
 }
 
 function isHero(target: IHero | IEnemy): target is IHero {
-  return "shards" in target && "skills" in target;
+  return "skills" in target;
 }
 
 export function resetTarget(target: IHero | IEnemy) {
@@ -169,6 +194,12 @@ export function resetTarget(target: IHero | IEnemy) {
 }
 
 export function useDefense(attack: number, defense: number) {
-  console.log(defense);
   return attack - defense > 0 ? attack - defense : 1;
+}
+
+export function useAmplifyDmg(attacker: IHero, dmgValue: number, elementName: IElementName) {
+  if (attacker.amplifications[elementName] > 0) {
+    return dmgValue * (1 + attacker.amplifications[elementName] / 100);
+  }
+  return dmgValue;
 }

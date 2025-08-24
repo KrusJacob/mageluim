@@ -1,4 +1,4 @@
-import type { HeroStats, IHeroEngine, ITakenDamage } from "@/types/hero";
+import type { HeroStats, IAmpifications, IHeroEngine, ITakenDamage } from "@/types/hero";
 import type {
   ISkill,
   ISkillHero,
@@ -9,26 +9,34 @@ import type {
   ITypeTargetEffect,
 } from "@/types/skill";
 import { getCalculatedDMG } from "@/utils/getCalculatedDMG";
-import { applyAllStatus, resetTarget, useDefense } from "./utils";
+import { applyAllStatus, resetTarget, useAmplifyDmg, useDefense } from "./utils";
 import {
   isInvulnerability,
-  useBuffDebuffAttack,
-  useBuffDebuffDeffense,
+  useBuffDebuffModifier,
+  useBuffs,
+  // useBuffDebuffAttack,
+  // useBuffDebuffDeffense,
   useDebuffs,
   useInspiration,
 } from "../skills/helpers";
 import type { IEnemy } from "@/types/enemy";
-import { START_GOLD, START_SHARD as START_SHARDS } from "@/constant/hero";
+import { START_GOLD, START_SHARD_SKILL, START_SHARD_ARTIFACT } from "@/constant/hero";
+import type { IArtifact, IArtifactHero } from "@/types/artifact";
 
 type HeroBaseArgs = Omit<HeroStats, "currentHp">;
 export class Hero implements IHeroEngine {
   name: string;
   image: string;
   skills: ISkillHero[];
-  battleDeck: ISkillHero[];
-  shards: number;
+  battleDeckSkills: ISkillHero[];
+  artifacts: IArtifactHero[];
+  battleDeckArtifacts: IArtifactHero[];
+  shardsSkill: number;
+  shardsArtifact: number;
   gold: number;
+  baseStats: HeroStats;
   stats: HeroStats;
+  amplifications: IAmpifications;
   takenLastDamage: ITakenDamage[] = [];
   buffs: ITypeTargetBuff[] = [];
   debuffs: ITypeTargetDebuff[] = [];
@@ -41,26 +49,53 @@ export class Hero implements IHeroEngine {
       this.skills.unshift({ ...newSkill, copies: 1, currentCooldown: 0 });
     }
   }
-  upgradeSkill(upgradedSkill: ISkillHero) {
-    if (upgradedSkill.copies >= 2) {
-      upgradedSkill.copies--;
-      upgradedSkill.level++;
+  addNewArtifact(newArtifact: IArtifact) {
+    const existingArtifact = this.artifacts.find((artifact) => artifact.id === newArtifact.id);
+    if (existingArtifact) {
+      existingArtifact.copies += 1;
+    } else {
+      this.artifacts.unshift({ ...newArtifact, copies: 1 });
     }
   }
+  // upgradeSkill(upgradedSkill: ISkillHero) {
+  //   if (upgradedSkill.copies >= 2) {
+  //     upgradedSkill.copies--;
+  //     upgradedSkill.level++;
+  //   }
+  // }
+  // upgradeArtifact(upgradedArtifact: IArtifactHero) {
+  //   if (upgradedArtifact.copies >= 2) {
+  //     upgradedArtifact.copies--;
+  //     upgradedArtifact.level++;
+  //     // перенести метод, и пофиксить прокачку
+  //   }
+  // }
   addSkillToDeck(skill: ISkillHero) {
-    if (this.battleDeck.length < 5) {
-      this.battleDeck.push(skill);
+    if (this.battleDeckSkills.length < 5) {
+      this.battleDeckSkills.push(skill);
     }
   }
-  addShards(amount: number) {
-    this.shards += amount;
+  addArtifactToDeck(artifact: IArtifactHero) {
+    if (this.battleDeckArtifacts.length < 5) {
+      this.battleDeckArtifacts.push(artifact);
+    }
+  }
+  addShardSkill(amount: number) {
+    this.shardsSkill += amount;
+  }
+  addShardArtifact(amount: number) {
+    this.shardsArtifact += amount;
   }
   addGold(amount: number) {
     this.gold += amount;
   }
-  useShard() {
-    if (this.shards <= 0) return;
-    this.shards -= 1;
+  useShardSkill() {
+    if (this.shardsSkill <= 0) return;
+    this.shardsSkill -= 1;
+  }
+  useShardArtifact() {
+    if (this.shardsArtifact <= 0) return;
+    this.shardsArtifact -= 1;
   }
   useMana(value: number) {
     if (this.stats.currentMana >= value) {
@@ -70,15 +105,19 @@ export class Hero implements IHeroEngine {
   regenMana() {
     this.stats.currentMana += this.stats.manaRegen.value;
     this.stats.currentMana += useInspiration(this);
+    this.stats.currentMana += this.amplifications.manaRegen;
     if (this.stats.currentMana > this.stats.maxMana) {
       this.stats.currentMana = this.stats.maxMana;
     }
   }
   removeSkillFromDeck(skill: ISkillHero) {
-    this.battleDeck = this.battleDeck.filter((s) => s.id !== skill.id);
+    this.battleDeckSkills = this.battleDeckSkills.filter((s) => s.id !== skill.id);
+  }
+  removeArtifactFromDeck(artifact: IArtifactHero) {
+    this.battleDeckArtifacts = this.battleDeckArtifacts.filter((a) => a.id !== artifact.id);
   }
   resetCooldownBattleDeck() {
-    this.battleDeck.forEach((skill) => (skill.currentCooldown = 0));
+    this.battleDeckSkills.forEach((skill) => (skill.currentCooldown = 0));
   }
   takeHeal(value: number) {
     this.stats.currentHp += Math.floor(value);
@@ -92,8 +131,10 @@ export class Hero implements IHeroEngine {
     });
   }
   useAttack(enemy: IEnemy) {
-    let damage = useBuffDebuffAttack(this) * this.stats.atk;
-    let defense = useBuffDebuffDeffense(enemy) * enemy.stats.def;
+    let damage = useBuffDebuffModifier(this, "attack") * this.stats.atk;
+    let defense = useBuffDebuffModifier(enemy, "def") * enemy.stats.def;
+    damage = useAmplifyDmg(this, damage, "physical");
+    damage = useBuffs(this, damage, "physical");
     damage = useDefense(damage, defense);
     enemy.takeDamage({ element: "physical", value: damage });
   }
@@ -117,8 +158,8 @@ export class Hero implements IHeroEngine {
       this.stats.currentHp -= dmgAfterResists;
     }
   }
-  takeActions(actions: ITypeTargetAction[]) {
-    applyAllStatus.call(this, actions);
+  takeActions(actions: ITypeTargetAction[], attackerAccuracy: number = 0) {
+    applyAllStatus.call(this, actions, attackerAccuracy);
   }
   reset() {
     resetTarget(this);
@@ -128,9 +169,37 @@ export class Hero implements IHeroEngine {
     this.name = name;
     this.image = image;
     this.skills = [];
-    this.battleDeck = [];
-    this.shards = START_SHARDS;
+    this.battleDeckSkills = [];
+    this.artifacts = [];
+    this.battleDeckArtifacts = [];
+    this.shardsSkill = START_SHARD_SKILL;
+    this.shardsArtifact = START_SHARD_ARTIFACT;
     this.gold = START_GOLD;
     this.stats = { ...stats, currentHp: stats.maxHp };
+    this.baseStats = { ...this.stats };
+    this.amplifications = getStartAmplification();
   }
+}
+
+function getStartAmplification(): IAmpifications {
+  return {
+    atk: 0,
+    def: 0,
+    maxHp: 0,
+    maxMana: 0,
+    manaRegen: 0,
+    dark: 0,
+    fire: 0,
+    forest: 0,
+    light: 0,
+    physical: 0,
+    water: 0,
+    wind: 0,
+    dotDamage: 0,
+    durability: 0,
+    chanceCrit: 0,
+    critValue: 0,
+    resistance: 0,
+    accuracy: 0,
+  };
 }
