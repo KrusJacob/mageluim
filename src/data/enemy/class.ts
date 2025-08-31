@@ -27,7 +27,6 @@ export class Enemy implements IEnemyEngine {
   name: string;
   level: number;
   image: string;
-  label: string;
   stats: EnemyStats;
   takenLastDamage: ITakenDamage[] = [];
   buffs: ITypeTargetBuff[] = [];
@@ -88,7 +87,6 @@ export class Enemy implements IEnemyEngine {
   constructor(
     name: string,
     level: number,
-    label: string,
     image: string,
     stats: EnemyBaseArgs,
     descriptionSkill?: string,
@@ -98,7 +96,7 @@ export class Enemy implements IEnemyEngine {
     this.name = name;
     this.level = level;
     this.image = image;
-    this.label = label;
+
     this.stats = getEnemyStats(stats, level);
     this.skill = skill;
     this.descriptionSkill = descriptionSkill;

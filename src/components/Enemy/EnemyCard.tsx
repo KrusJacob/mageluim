@@ -27,7 +27,7 @@ const EnemyCard = ({
   return (
     <Stack>
       <Text fontSize={20} fontWeight={"bold"}>
-        {enemy.label}
+        {enemy.name}
       </Text>
 
       <Box

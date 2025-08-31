@@ -1,11 +1,9 @@
+import { actionTarget } from "../dmg/dmg_all";
+import { BURN, POISON } from "../effects/effects_all";
 import { Enemy } from "./class";
 
-const src1 =
-  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6f3fed49-4124-4f0b-bbe4-fa97b88afb29/dg5hqo0-2a4bb6b2-ff75-41e6-9cea-348d74d9f002.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzZmM2ZlZDQ5LTQxMjQtNGYwYi1iYmU0LWZhOTdiODhhZmIyOVwvZGc1aHFvMC0yYTRiYjZiMi1mZjc1LTQxZTYtOWNlYS0zNDhkNzRkOWYwMDIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.HzZjib_h9DkdrjdZpZ1wqCz0yklRbJ--cH032HI60HY";
-
-const src2 = "https://images.playground.com/2193de56ef404f7a867a4f60c285709d.jpeg";
 export function createGreenGoblin(level: number = 1): Enemy {
-  return new Enemy("Green Goblin", level, "Гоблин-разбойник", "/img/enemies/greenGoblin.png", {
+  return new Enemy("Гоблин-разбойник", level, "/img/enemies/greenGoblin.png", {
     atk: 100,
     def: 30,
     maxHp: 1100,
@@ -25,7 +23,7 @@ export function createGreenGoblin(level: number = 1): Enemy {
   });
 }
 export function createBlueGoblin(level: number = 1): Enemy {
-  return new Enemy("Blue Goblin", level, "Гоблин-воин", "/img/enemies/blueGoblin.png", {
+  return new Enemy("Гоблин-воин", level, "/img/enemies/blueGoblin.png", {
     atk: 115,
     def: 40,
     maxHp: 1300,
@@ -47,12 +45,11 @@ export function createBlueGoblin(level: number = 1): Enemy {
 
 export function createGoldGobin(level: number = 1): Enemy {
   return new Enemy(
-    "Gold Goblin",
-    level,
     "Гоблин-заклинатель",
+    level,
     "/img/enemies/goldGoblin.png",
     {
-      atk: 80,
+      atk: 60,
       def: 25,
       maxHp: 1250,
       chanceCrit: 0,
@@ -80,8 +77,8 @@ export function createGoldGobin(level: number = 1): Enemy {
 }
 
 export function createRedGoblin(level: number = 1): Enemy {
-  return new Enemy("Red Goblin", level, "Главарь гоблинов", "/img/enemies/redGoblin.png", {
-    atk: 160,
+  return new Enemy("Главарь гоблинов", level, "/img/enemies/redGoblin.png", {
+    atk: 150,
     def: 40,
     maxHp: 2500,
     chanceCrit: 15,
@@ -102,23 +99,22 @@ export function createRedGoblin(level: number = 1): Enemy {
 
 export function createPirpleGoblin(level: number = 1): Enemy {
   return new Enemy(
-    "Pirple Goblin",
-    level,
     "Маг гоблинов",
+    level,
     "/img/enemies/pirpleGoblin.png",
     {
-      atk: 175,
+      atk: 165,
       def: 30,
       maxHp: 1600,
       chanceCrit: 15,
       critValue: 150,
-      resistance: 35,
+      resistance: 30,
       accuracy: 0,
       durability: {
         fire: 20,
         physical: 10,
-        dark: 20,
-        light: 20,
+        dark: 10,
+        light: 10,
         forest: 20,
         water: 20,
         wind: 20,
@@ -127,6 +123,81 @@ export function createPirpleGoblin(level: number = 1): Enemy {
     "Крадет ману при атаке",
     function (hero, enemies) {
       hero.useMana(1);
+    }
+  );
+}
+export function createGreenTroll(level: number = 1): Enemy {
+  return new Enemy("Лесный тролль", level, "/img/enemies/greenTroll.png", {
+    atk: 170,
+    def: 50,
+    maxHp: 2600,
+    chanceCrit: 0,
+    critValue: 150,
+    resistance: 15,
+    accuracy: 0,
+    durability: {
+      fire: 15,
+      physical: 15,
+      dark: 10,
+      light: 10,
+      forest: 15,
+      water: 15,
+      wind: 15,
+    },
+  });
+}
+export function createGrayTroll(level: number = 1): Enemy {
+  return new Enemy(
+    "Каменный тролль",
+    level,
+    "/img/enemies/grayTroll.png",
+    {
+      atk: 185,
+      def: 100,
+      maxHp: 2800,
+      chanceCrit: 0,
+      critValue: 150,
+      resistance: 30,
+      accuracy: 0,
+      durability: {
+        fire: 20,
+        physical: 30,
+        dark: 10,
+        light: 10,
+        forest: 50,
+        water: 30,
+        wind: 10,
+      },
+    },
+    "Обладает повышеннной защитой и стойкостью"
+  );
+}
+export function createRedTroll(level: number = 1): Enemy {
+  return new Enemy(
+    "Огненный тролль",
+    level,
+    "/img/enemies/redTroll.png",
+    {
+      atk: 180,
+      def: 55,
+      maxHp: 3100,
+      chanceCrit: 15,
+      critValue: 150,
+      resistance: 25,
+      accuracy: 0,
+      durability: {
+        fire: 100,
+        physical: 10,
+        dark: 10,
+        light: 10,
+        forest: 10,
+        water: 0,
+        wind: 10,
+      },
+    },
+    "Накладывает поджог при атаке. Иммунитет к огню",
+    function (hero, enemies) {
+      hero.takeActions([actionTarget(BURN, 1, 1)]);
     }
   );
 }

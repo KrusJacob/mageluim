@@ -4,7 +4,7 @@ import { Box, Center, DataList, Image, Stack, Text } from "@chakra-ui/react";
 const EnemyInfo = ({ enemy }: { enemy: IEnemy }) => {
   return (
     <Box w={"160px"}>
-      <Center>{enemy.label}</Center>
+      <Center>{enemy.name}</Center>
       <Image w={"160px"} src={enemy.image} />
       <Stack gap={1}>
         <Center>

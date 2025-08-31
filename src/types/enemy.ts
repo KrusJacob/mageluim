@@ -12,7 +12,6 @@ import type {
 export interface IEnemyEngine {
   name: string;
   level: number;
-  label: string;
   image: string;
   stats: EnemyStats;
   skill?: (hero: IHero, enemies: IEnemy[]) => void;

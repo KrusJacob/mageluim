@@ -37,6 +37,7 @@ export class Hero implements IHeroEngine {
   baseStats: HeroStats;
   stats: HeroStats;
   amplifications: IAmpifications;
+  description: string;
   takenLastDamage: ITakenDamage[] = [];
   buffs: ITypeTargetBuff[] = [];
   debuffs: ITypeTargetDebuff[] = [];
@@ -57,19 +58,6 @@ export class Hero implements IHeroEngine {
       this.artifacts.unshift({ ...newArtifact, copies: 1 });
     }
   }
-  // upgradeSkill(upgradedSkill: ISkillHero) {
-  //   if (upgradedSkill.copies >= 2) {
-  //     upgradedSkill.copies--;
-  //     upgradedSkill.level++;
-  //   }
-  // }
-  // upgradeArtifact(upgradedArtifact: IArtifactHero) {
-  //   if (upgradedArtifact.copies >= 2) {
-  //     upgradedArtifact.copies--;
-  //     upgradedArtifact.level++;
-  //     // перенести метод, и пофиксить прокачку
-  //   }
-  // }
   addSkillToDeck(skill: ISkillHero) {
     if (this.battleDeckSkills.length < 5) {
       this.battleDeckSkills.push(skill);
@@ -165,7 +153,12 @@ export class Hero implements IHeroEngine {
     resetTarget(this);
   }
 
-  constructor(name: string, image: string, stats: HeroBaseArgs) {
+  constructor(
+    name: string,
+    image: string,
+    stats: HeroBaseArgs,
+    other: { amplifications?: Partial<IAmpifications>; description: string }
+  ) {
     this.name = name;
     this.image = image;
     this.skills = [];
@@ -177,7 +170,8 @@ export class Hero implements IHeroEngine {
     this.gold = START_GOLD;
     this.stats = { ...stats, currentHp: stats.maxHp };
     this.baseStats = { ...this.stats };
-    this.amplifications = getStartAmplification();
+    this.amplifications = { ...getStartAmplification(), ...other.amplifications };
+    this.description = other.description;
   }
 }
 

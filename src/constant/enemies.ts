@@ -1,9 +1,12 @@
 import {
   createBlueGoblin,
   createGoldGobin,
+  createGrayTroll,
   createGreenGoblin,
+  createGreenTroll,
   createPirpleGoblin,
   createRedGoblin,
+  createRedTroll,
 } from "@/data/enemy/enemy_all";
 import type { IBattleFloor } from "@/types/battle";
 
@@ -101,16 +104,44 @@ export const ALL_FLOOR: IBattleFloor[] = [
   },
   {
     floor: 14,
-    enemies: [createGreenGoblin(3), createGreenGoblin(3), createGreenGoblin(3)],
+    enemies: [createGreenGoblin(3), createPirpleGoblin(2), createGreenGoblin(3)],
     isCleared: false,
     reward: { gold: 165, shardSkill: 1 },
     isOpen: false,
   },
   {
     floor: 15,
-    enemies: [createBlueGoblin(3), createBlueGoblin(3), createGoldGobin(2)],
+    enemies: [createGreenGoblin(3), createBlueGoblin(3), createGoldGobin(3)],
     isCleared: false,
     reward: { gold: 170, shardArtifact: 1 },
+    isOpen: false,
+  },
+  {
+    floor: 16,
+    enemies: [createGreenTroll(), createRedGoblin(2), createGreenTroll()],
+    isCleared: false,
+    reward: { gold: 175, shardSkill: 1 },
+    isOpen: false,
+  },
+  {
+    floor: 16,
+    enemies: [createGreenGoblin(4), createGrayTroll(), createGreenTroll()],
+    isCleared: false,
+    reward: { gold: 180, shardArtifact: 1 },
+    isOpen: false,
+  },
+  {
+    floor: 17,
+    enemies: [createGreenTroll(), createGrayTroll(), createGoldGobin(3)],
+    isCleared: false,
+    reward: { gold: 185, shardSkill: 1 },
+    isOpen: false,
+  },
+  {
+    floor: 18,
+    enemies: [createGreenTroll(), createRedTroll(), createGrayTroll()],
+    isCleared: false,
+    reward: { gold: 190, shardArtifact: 1 },
     isOpen: false,
   },
 ];

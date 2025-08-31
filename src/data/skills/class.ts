@@ -100,6 +100,7 @@ export class SkillEngine implements ISkillEngine {
       const healValue = (healSelf[skillLevel] * hero.stats.maxHp) / 100;
       hero.takeHeal(healValue);
     }
+
     hero.useMana(this.data.manaCost[skillLevel]);
     this.setCooldown();
   }

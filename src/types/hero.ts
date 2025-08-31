@@ -24,6 +24,7 @@ export interface IHeroEngine {
   baseStats: HeroStats;
   stats: HeroStats;
   amplifications: IAmpifications;
+  description: string;
 }
 
 export interface IHero extends IHeroEngine {

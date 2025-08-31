@@ -26,7 +26,7 @@ const BattleField = ({ battleFloor, selectedSkill, isAttack, setSelectedSkill, s
   const beforeMoveHero = useHeroSkillStore((state) => state.beforeMoveHero);
 
   const liveEnemies = battleFloor.enemies.filter((enemy) => enemy.stats.currentHp > 0);
-  // console.log(battleFloor.enemies, hero);
+  console.log(battleFloor.enemies, hero);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;

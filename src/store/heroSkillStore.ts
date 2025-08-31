@@ -3,7 +3,7 @@ import { create } from "zustand";
 import type { ISkill, ISkillHero } from "@/types/skill";
 import type { IEnemy } from "@/types/enemy";
 import type { IHero } from "@/types/hero";
-import { HERO, createHero } from "@/data/hero/hero";
+import { HERO, createHero_1 } from "@/data/hero/hero";
 import { tickAllStatuses } from "@/data/hero/utils";
 import type { IArtifact, IArtifactHero } from "@/types/artifact";
 
