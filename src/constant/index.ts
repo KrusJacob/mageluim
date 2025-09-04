@@ -1,4 +1,3 @@
-import { INSPIRATION } from "@/data/effects/effects_all";
 import type { GachaChanses } from "@/types/skill";
 
 export const GACHA_CHANCE_SKILL: GachaChanses = {
