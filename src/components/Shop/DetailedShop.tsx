@@ -10,6 +10,7 @@ import type { IShopTypeItem } from "./Shop";
 import { isSkill } from "@/data/skills/class";
 import { isArtifact } from "@/data/artifacts/class";
 import ArtifactCard from "../Artifact/ArtifactCard";
+import { getPrice } from "@/utils/getPrice";
 
 interface Props {
   item: IShopTypeItem;
@@ -22,16 +23,7 @@ const DetailedShop = ({ item }: Props) => {
   const addShardSkill = useHeroSkillStore((state) => state.addShardSkill);
   const addShardArtifact = useHeroSkillStore((state) => state.addShardArtifact);
 
-  const getPrice = () => {
-    if (item === "shardSkill") return SHOP_PRICE.shardSkill;
-    if (item === "shardArtifact") return SHOP_PRICE.shardsArtifact;
-    if (isSkill(item)) return SHOP_PRICE.skills[item.rarity];
-    if (isArtifact(item)) return SHOP_PRICE.artifacts[item.rarity];
-
-    return 0;
-  };
-
-  const price = getPrice();
+  const price = getPrice(item);
 
   const onBuy = () => {
     if (item === "shardSkill") {

@@ -4,16 +4,20 @@ import LevelItem from "../Skill/SkilLevel";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
 import ArtifactCard from "../Artifact/ArtifactCard";
 import type { IArtifactHero } from "@/types/artifact";
+import { getPrice } from "@/utils/getPrice";
 
 interface Props {
   artifact: IArtifactHero;
+  setSelectedArtifact: (artifact: IArtifactHero | null) => void;
 }
-const DetailedArtifactBag = ({ artifact }: Props) => {
+const DetailedArtifactBag = ({ artifact, setSelectedArtifact }: Props) => {
   const addArtifactToDeck = useHeroSkillStore((state) => state.addArtifactToDeck);
   const battleDeckArtifacts = useHeroSkillStore((state) => state.battleDeckArtifacts);
   const upgradeArtifact = useHeroSkillStore((state) => state.upgradeArtifact);
+  const sellArtifact = useHeroSkillStore((state) => state.sellArtifact);
 
   const isBattleDeck = battleDeckArtifacts.some((s) => s.id === artifact?.id);
+  const sellPrice = Math.floor(getPrice(artifact) / 2);
 
   return (
     <Stack gap={2} position={"relative"}>
@@ -31,6 +35,16 @@ const DetailedArtifactBag = ({ artifact }: Props) => {
         w={"100%"}
       >
         {!isBattleDeck ? "Взять с собой" : "Уже исользуется"}
+      </Button>
+      <Button
+        disabled={isBattleDeck}
+        onClick={() => {
+          setSelectedArtifact(null);
+          sellArtifact(artifact, sellPrice);
+        }}
+        w={"100%"}
+      >
+        Продать
       </Button>
     </Stack>
   );

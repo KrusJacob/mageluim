@@ -37,8 +37,8 @@ export interface IHero extends IHeroEngine {
   takeActions: (actions: ITypeTargetAction[], accuracy?: number) => void;
   addNewSkill(newSkill: ISkill): void;
   addNewArtifact(newArtifact: IArtifact): void;
-  // upgradeSkill(upgradedSkill: ISkillHero): void;
-  // upgradeArtifact(upgradedArtifact: IArtifactHero): void;
+  removeSkill(id: number): void;
+  removeArtifact(id: number): void;
   addSkillToDeck(skill: ISkill): void;
   addArtifactToDeck(artifact: IArtifact): void;
   removeSkillFromDeck(skill: ISkillHero): void;

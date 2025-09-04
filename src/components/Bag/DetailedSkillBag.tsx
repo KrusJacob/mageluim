@@ -3,16 +3,21 @@ import { Button, Stack, Text } from "@chakra-ui/react";
 import SkillCard from "../Skill/SkillCard";
 import LevelItem from "../Skill/SkilLevel";
 import { useHeroSkillStore } from "@/store/heroSkillStore";
+import { getPrice } from "@/utils/getPrice";
+import { IconGold } from "../ui/icons";
 
 interface Props {
   skill: ISkillHero;
+  setSelectedSkill: (skill: ISkillHero | null) => void;
 }
-const DetailedSkillBag = ({ skill }: Props) => {
+const DetailedSkillBag = ({ skill, setSelectedSkill }: Props) => {
   const addSkillToDeck = useHeroSkillStore((state) => state.addSkillToDeck);
   const battleDeckSkills = useHeroSkillStore((state) => state.battleDeckSkills);
   const upgradeSkill = useHeroSkillStore((state) => state.upgradeSkill);
+  const sellSkill = useHeroSkillStore((state) => state.sellSkill);
 
   const isBattleDeck = battleDeckSkills.some((s) => s.id === skill?.id);
+  const sellPrice = Math.floor(getPrice(skill) / 2);
 
   return (
     <Stack gap={2} position={"relative"}>
@@ -30,6 +35,17 @@ const DetailedSkillBag = ({ skill }: Props) => {
         w={"100%"}
       >
         {!isBattleDeck ? "Взять с собой" : "Уже исользуется"}
+      </Button>
+      <Button
+        disabled={isBattleDeck}
+        onClick={() => {
+          setSelectedSkill(null);
+          sellSkill(skill, sellPrice);
+        }}
+        w={"100%"}
+      >
+        Продать за {sellPrice}
+        <IconGold />
       </Button>
     </Stack>
   );

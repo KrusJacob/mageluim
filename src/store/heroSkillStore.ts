@@ -6,6 +6,7 @@ import type { IHero } from "@/types/hero";
 import { HERO, createHero_1 } from "@/data/hero/hero";
 import { tickAllStatuses } from "@/data/hero/utils";
 import type { IArtifact, IArtifactHero } from "@/types/artifact";
+import { getPrice } from "@/utils/getPrice";
 
 interface HeroSkillState {
   hero: IHero;
@@ -38,6 +39,8 @@ interface HeroSkillState {
   beforeMoveHero: () => void;
   attackToHero: (enemies: IEnemy[]) => void;
   useSkill: (skill: ISkillHero, enemies: IEnemy[], index: number) => void;
+  sellSkill: (skill: ISkillHero, gold: number) => void;
+  sellArtifact: (artifact: IArtifactHero, gold: number) => void;
 }
 
 export const useHeroSkillStore = create<HeroSkillState>((set, get) => ({
@@ -145,6 +148,24 @@ export const useHeroSkillStore = create<HeroSkillState>((set, get) => ({
     artifact.upgradeArtifact(hero);
     set((state) => ({
       artifacts: [...hero.artifacts],
+    }));
+  },
+  sellSkill: (skill, gold) => {
+    const hero = get().hero;
+    hero.removeSkill(skill.id);
+    hero.addGold(gold);
+    set((state) => ({
+      skills: [...hero.skills],
+      gold: hero.gold,
+    }));
+  },
+  sellArtifact: (artifact, gold) => {
+    const hero = get().hero;
+    hero.removeArtifact(artifact.id);
+    hero.addGold(gold);
+    set((state) => ({
+      artifacts: [...hero.artifacts],
+      gold: hero.gold,
     }));
   },
   resetLevel: () => {

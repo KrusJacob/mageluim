@@ -58,8 +58,10 @@ const Bag = () => {
         </Tabs.Root>
       </Box>
       <Box w={"450px"}>
-        {selectedSkill && <DetailedSkillBag skill={selectedSkill} />}
-        {selectedArtifact && <DetailedArtifactBag artifact={selectedArtifact} />}
+        {selectedSkill && <DetailedSkillBag skill={selectedSkill} setSelectedSkill={setSelectedSkill} />}
+        {selectedArtifact && (
+          <DetailedArtifactBag artifact={selectedArtifact} setSelectedArtifact={setSelectedArtifact} />
+        )}
       </Box>
     </HStack>
   );

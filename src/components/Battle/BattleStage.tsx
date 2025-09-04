@@ -51,8 +51,6 @@ const BattleStage = ({ battleFloor, setSelectedFloor }: Props) => {
 
   // Добавить механику смерти
 
-  console.log("BattleStage render");
-
   return (
     <>
       <Stack h={"780px"}>

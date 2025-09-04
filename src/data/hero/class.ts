@@ -50,6 +50,9 @@ export class Hero implements IHeroEngine {
       this.skills.unshift({ ...newSkill, copies: 1, currentCooldown: 0 });
     }
   }
+  removeSkill(skillId: number) {
+    this.skills = this.skills.filter((s) => s.id !== skillId);
+  }
   addNewArtifact(newArtifact: IArtifact) {
     const existingArtifact = this.artifacts.find((artifact) => artifact.id === newArtifact.id);
     if (existingArtifact) {
@@ -57,6 +60,9 @@ export class Hero implements IHeroEngine {
     } else {
       this.artifacts.unshift({ ...newArtifact, copies: 1 });
     }
+  }
+  removeArtifact(artifactId: number) {
+    this.artifacts = this.artifacts.filter((a) => a.id !== artifactId);
   }
   addSkillToDeck(skill: ISkillHero) {
     if (this.battleDeckSkills.length < 5) {
