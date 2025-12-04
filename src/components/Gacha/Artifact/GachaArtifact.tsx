@@ -16,6 +16,7 @@ const GachaArtifact = () => {
   const shardsArtifact = useHeroSkillStore((state) => state.shardsArtifact);
   const useShardArtifact = useHeroSkillStore((state) => state.useShardArtifact);
   const addNewArtifact = useHeroSkillStore((state) => state.addNewArtifact);
+  const sellMaxLevelSkill = useHeroSkillStore((state) => state.sellMaxLevelItem);
   const [randomedArtifacts, setRandomedArtifacts] = useState<IArtifact[] | null>(null);
   const [selectedArtifacts, setSelectedArtifacts] = useState<IArtifact | null>(null);
 
@@ -27,9 +28,17 @@ const GachaArtifact = () => {
 
   const handleSelect = () => {
     if (selectedArtifacts) {
+      const selledGold = sellMaxLevelSkill(selectedArtifacts);
+      if (selledGold > 0) {
+        toaster.create({
+          title: "Поздравляем",
+          description: `Вы получили ${selledGold} золота, так как артефакт: ${selectedArtifacts.name} уже максимального уровня`,
+        });
+      } else {
+        toaster.create({ title: "Поздравляем", description: `Вы получили артефакт: ${selectedArtifacts.name}` });
+        addNewArtifact(selectedArtifacts);
+      }
       addGachaHistory(selectedArtifacts);
-      toaster.create({ title: "Поздравляем", description: `Вы получили артефакт: ${selectedArtifacts.name}` });
-      addNewArtifact(selectedArtifacts);
     }
     setRandomedArtifacts(null);
     setSelectedArtifacts(null);
@@ -52,7 +61,7 @@ const GachaArtifact = () => {
           <IconArtifactShard />
         </HStack>
       </HStack>
-      <HStack minH={"400px"}>
+      <HStack minH={"600px"} bg={"whiteAlpha.100"} rounded={"md"} w={"100%"}>
         <GachaList
           items={randomedArtifacts}
           selected={selectedArtifacts}

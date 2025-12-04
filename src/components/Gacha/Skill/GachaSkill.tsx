@@ -14,6 +14,7 @@ import SkillCard from "@/components/Skill/SkillCard";
 const GachaSkill = () => {
   const [gachaHistory, setGachaHistory] = useState<ISkillHistory[]>([]);
   const heroShards = useHeroSkillStore((state) => state.shardsSkill);
+  const sellMaxLevelSkill = useHeroSkillStore((state) => state.sellMaxLevelItem);
   const useShard = useHeroSkillStore((state) => state.useShardSkill);
   const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
   const [randomedSkills, setRandomedSkills] = useState<ISkill[] | null>(null);
@@ -27,9 +28,20 @@ const GachaSkill = () => {
 
   const handleSelect = () => {
     if (selectedSkill) {
+      const selledGold = sellMaxLevelSkill(selectedSkill);
+      if (selledGold > 0) {
+        toaster.create({
+          title: "Поздравляем",
+          description: `Вы получили ${selledGold} золота, так как карта заклинания: ${selectedSkill.name} уже максимального уровня`,
+        });
+      } else {
+        addNewSkill(selectedSkill);
+        toaster.create({
+          title: "Поздравляем",
+          description: `Вы получили карту заклинания: ${selectedSkill.name}`,
+        });
+      }
       addGachaHistory(selectedSkill);
-      toaster.create({ title: "Поздравляем", description: `Вы получили карту заклинания: ${selectedSkill.name}` });
-      addNewSkill(selectedSkill);
     }
     setRandomedSkills(null);
     setSelectedSkill(null);
@@ -52,7 +64,7 @@ const GachaSkill = () => {
           <IconSkillShard />
         </HStack>
       </HStack>
-      <HStack minH={"400px"}>
+      <HStack minH={"600px"} bg={"whiteAlpha.100"} rounded={"md"} w={"100%"}>
         <GachaList
           items={randomedSkills}
           selected={selectedSkill}

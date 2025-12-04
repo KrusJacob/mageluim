@@ -13,7 +13,7 @@ interface Props<T extends ISkill | IArtifact> {
 
 const GachaList = <T extends ISkill | IArtifact>({ items, selected, select, Card }: Props<T>) => {
   return (
-    <Box>
+    <Box mx="auto">
       <HStack gap={12} alignItems={"self-start"} minH={"450px"}>
         {items?.map((item, i) => {
           const isSelected = selected?.id === item.id;

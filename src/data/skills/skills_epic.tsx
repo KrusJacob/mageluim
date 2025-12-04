@@ -11,6 +11,8 @@ import {
   DEBUFF_FOREST_2,
   DEBUFF_PHYSICAL_1,
   DEBUFF_PHYSICAL_2,
+  DEBUFF_WATER_2,
+  DEBUFF_WIND_2,
 } from "../buffs&debuffs/debuffs_all";
 import {
   BUFF_ATTACK_1,
@@ -36,7 +38,7 @@ export const SKILLS_EPIC = [
         </>
       ),
       img: "/img/skills/Сокрушительный_удар.png",
-      element: [PHYSICAL, FOREST],
+      element: [PHYSICAL],
       tags: [BUFF_PHYSICAL_1],
       awakenings: [
         <>{useActionTo(BUFF_PHYSICAL_2, 2)}</>,
@@ -73,21 +75,21 @@ export const SKILLS_EPIC = [
       tags: [FREEZE],
       awakenings: [
         <>Расход маны уменьшен на 1</>,
-        <>Урон увеличен на {useDmgToElement(125, WATER)}</>,
-        <>Урон увеличен на {useDmgToElement(125, WIND)}</>,
+        <>{useActionTo(DEBUFF_WATER_2, 2)}</>,
+        <>{useActionTo(DEBUFF_WIND_2, 2)}</>,
       ],
       data: {
         manaCost: [7, 6, 6, 6],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          water: [125, 125, 250, 250],
-          wind: [125, 125, 125, 250],
+          water: [125, 125, 125, 125],
+          wind: [125, 125, 125, 125],
         },
         useActionToAOE: [
           [actionTarget(FREEZE, 1)],
           [actionTarget(FREEZE, 1)],
-          [actionTarget(FREEZE, 1)],
-          [actionTarget(FREEZE, 1)],
+          [actionTarget(FREEZE, 1), actionTarget(DEBUFF_WATER_2, 2)],
+          [actionTarget(FREEZE, 1), actionTarget(DEBUFF_WATER_2, 2), actionTarget(DEBUFF_WIND_2, 2)],
         ],
       },
     },
@@ -107,7 +109,7 @@ export const SKILLS_EPIC = [
       data: {
         manaCost: [4, 4, 4, 4],
         cooldown: [6, 6, 6, 6],
-        useHealSelf: [25, 35, 35, 35],
+        useHealSelf: [20, 30, 30, 30],
         useActionToSelf: [
           [actionTarget(BUFF_FOREST_1, 2)],
           [actionTarget(BUFF_FOREST_1, 2)],
@@ -137,7 +139,7 @@ export const SKILLS_EPIC = [
       ],
       data: {
         manaCost: [6, 6, 6, 5],
-        cooldown: [4, 4, 4, 4],
+        cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
           forest: [150, 150, 150, 150],
         },
@@ -156,7 +158,7 @@ export const SKILLS_EPIC = [
       name: "Туман ужаса",
       description: (
         <>
-          Наносит {useDmgToElement(175, WIND)} и {useDmgToElement(175, DARK)} урона всем врагам.{" "}
+          Наносит {useDmgToElement(150, WIND)} и {useDmgToElement(200, DARK)} урона всем врагам.{" "}
           {useActionTo(DEBUFF_DARK_1, 2)}
         </>
       ),
@@ -172,8 +174,8 @@ export const SKILLS_EPIC = [
         manaCost: [5, 5, 5, 5],
         cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
-          wind: [175, 175, 175, 175],
-          dark: [175, 175, 175, 175],
+          wind: [150, 150, 150, 150],
+          dark: [200, 200, 200, 200],
         },
         useActionToAOE: [
           [actionTarget(DEBUFF_DARK_1, 2)],
@@ -199,15 +201,15 @@ export const SKILLS_EPIC = [
       tags: [STUN, BUFF_ATTACK_2],
       awakenings: [
         <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(200, LIGHT)}</>,
+        <>Урон увеличен на {useDmgToElement(225, LIGHT)}</>,
         <>{useEffectTo(STUN, 2)}</>,
       ],
       data: {
         manaCost: [6, 6, 6, 6],
         cooldown: [5, 5, 5, 5],
-        useDmgToAOE: {
+        useDmgToTarget: {
           physical: [300, 300, 300, 300],
-          light: [300, 300, 300, 500],
+          light: [300, 300, 300, 525],
         },
         useActionToSelf: [
           [],

@@ -12,7 +12,7 @@ import {
   BUFF_WIND_2,
 } from "../buffs&debuffs/buffs_all";
 import { actionTarget } from "../dmg/dmg_all";
-import { DEBUFF_DEF_2, DEBUFF_LIGHT_1 } from "../buffs&debuffs/debuffs_all";
+import { DEBUFF_DEF_2, DEBUFF_LIGHT_1, DEBUFF_LIGHT_2 } from "../buffs&debuffs/debuffs_all";
 
 export const SKILLS_RARE = [
   new SkillEngine(
@@ -20,7 +20,7 @@ export const SKILLS_RARE = [
       name: "Лютый вихрь",
       description: (
         <>
-          Наносит {useDmgToElement(400, WIND)} урона всем врагам и {useActionTo(BUFF_WIND_1, 2)}
+          Наносит {useDmgToElement(425, WIND)} урона всем врагам и {useActionTo(BUFF_WIND_1, 2)}
         </>
       ),
       img: "/img/skills/Лютый_вихрь.png",
@@ -29,13 +29,13 @@ export const SKILLS_RARE = [
       awakenings: [
         <>{useActionTo(BUFF_WIND_2, 2)}</>,
         <>Расход маны уменьшен на 1</>,
-        <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
+        <>Урон увеличен на {useDmgToElement(200, WIND)}</>,
       ],
       data: {
         manaCost: [7, 7, 6, 6],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          wind: [400, 400, 400, 550],
+          wind: [425, 425, 425, 625],
         },
         useActionToSelf: [
           [actionTarget(BUFF_WIND_1, 2)],
@@ -92,9 +92,10 @@ export const SKILLS_RARE = [
         </>
       ),
       img: "/img/skills/Удар_метеорита.png",
+      tags: [STUN],
       element: [FIRE, PHYSICAL],
       awakenings: [
-        <>{useActionTo(DEBUFF_DEF_2, 2)}</>,
+        <>{useEffectTo(STUN, 1)}</>,
         <>Урон увеличен на {useDmgToElement(175, FIRE)}</>,
         <>Урон увеличен на {useDmgToElement(175, PHYSICAL)}</>,
       ],
@@ -105,12 +106,7 @@ export const SKILLS_RARE = [
           fire: [400, 400, 575, 575],
           physical: [400, 400, 400, 575],
         },
-        useActionToTarget: [
-          [actionTarget(DEBUFF_DEF_2, 2)],
-          [actionTarget(DEBUFF_DEF_2, 2)],
-          [actionTarget(DEBUFF_DEF_2, 2)],
-          [actionTarget(DEBUFF_DEF_2, 2)],
-        ],
+        useActionToTarget: [[], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)]],
       },
     },
     "rare"
@@ -125,25 +121,25 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Луч_света.png",
       element: [LIGHT],
-      tags: [BLIND, DEBUFF_LIGHT_1, INSPIRATION],
+      tags: [BLIND, DEBUFF_LIGHT_2, INSPIRATION],
       awakenings: [
-        <>{useActionTo(DEBUFF_LIGHT_1, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(150, LIGHT)}</>,
-        <>{useEffectTo(INSPIRATION, 2)}</>,
+        <>{useActionTo(DEBUFF_LIGHT_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(175, LIGHT)}</>,
+        <>Исцеляет герою 12% здоровья</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
         cooldown: [4, 4, 4, 4],
         useDmgToTarget: {
-          wind: [600, 750, 750, 750],
+          light: [600, 775, 775, 775],
         },
         useActionToTarget: [
           [actionTarget(BLIND, 1)],
-          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
-          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
-          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_1, 2)],
+          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_2, 2)],
+          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_2, 2)],
+          [actionTarget(BLIND, 1), actionTarget(DEBUFF_LIGHT_2, 2)],
         ],
-        useActionToSelf: [[], [], [], [actionTarget(INSPIRATION, 2)]],
+        useHealSelf: [0, 0, 0, 12],
       },
     },
     "rare"
@@ -151,22 +147,31 @@ export const SKILLS_RARE = [
   new SkillEngine(
     {
       name: "Удар молнии",
-      description: <>Наносит {useDmgToElement(575, WIND)} урона одному врагу</>,
+      description: (
+        <>
+          Наносит {useDmgToElement(550, WIND)} урона одному врагу и {useEffectTo(STUN, 1)}
+        </>
+      ),
       img: "/img/skills/Удар_молнии.png",
       element: [WIND],
       tags: [STUN],
       awakenings: [
-        <>{useEffectTo(STUN, 1)}</>,
-        <>Урон увеличен на {useDmgToElement(125, WIND)}</>,
         <>Урон увеличен на {useDmgToElement(150, WIND)}</>,
+        <>Урон увеличен на {useDmgToElement(175, WIND)}</>,
+        <>Урон увеличен на {useDmgToElement(175, WIND)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
         cooldown: [5, 5, 5, 5],
         useDmgToTarget: {
-          wind: [575, 575, 700, 850],
+          wind: [550, 700, 875, 1050],
         },
-        useActionToTarget: [[], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)], [actionTarget(STUN, 1)]],
+        useActionToTarget: [
+          [actionTarget(STUN, 1)],
+          [actionTarget(STUN, 1)],
+          [actionTarget(STUN, 1)],
+          [actionTarget(STUN, 1)],
+        ],
       },
     },
     "rare"
@@ -238,23 +243,24 @@ export const SKILLS_RARE = [
       name: "Гнев земли",
       description: (
         <>
-          Наносит {useDmgToElement(225, PHYSICAL)} и {useDmgToElement(225, FOREST)} урона всем врагам
+          Наносит {useDmgToElement(200, PHYSICAL)} и {useDmgToElement(200, FOREST)} урона всем врагам
         </>
       ),
       img: "/img/skills/Гнев_земли.png",
       element: [PHYSICAL, FOREST],
       awakenings: [
         <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(175, PHYSICAL)}</>,
-        <>Урон увеличен на {useDmgToElement(175, FOREST)}</>,
+        <>{useActionTo(DEBUFF_DEF_2, 2)}</>,
+        <>Расход маны уменьшен на 1</>,
       ],
       data: {
-        manaCost: [7, 7, 7, 7],
+        manaCost: [6, 6, 6, 5],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          physical: [225, 225, 400, 400],
-          forest: [225, 225, 225, 400],
+          physical: [200, 200, 200, 200],
+          forest: [200, 200, 200, 200],
         },
+        useActionToAOE: [[], [], [actionTarget(DEBUFF_DEF_2, 2)], [actionTarget(DEBUFF_DEF_2, 2)]],
         useActionToSelf: [
           [],
           [actionTarget(BUFF_ATTACK_2, 2)],

@@ -44,7 +44,6 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
           <Button
             onClick={() => {
               battleFloor.isCleared = true;
-              setSelectedFloor(null);
               addGold(battleFloor.reward.gold);
               addShardSkill(battleFloor.reward.shardSkill || 0);
               addShardArtifact(battleFloor.reward.shardArtifact || 0);
@@ -57,6 +56,7 @@ const BattleAlert = ({ battleFloor, setSelectedFloor }: Props) => {
               if (ALL_FLOOR[battleFloor.floor]) {
                 ALL_FLOOR[battleFloor.floor].isOpen = true;
               }
+              setSelectedFloor(null);
             }}
           >
             Закрыть

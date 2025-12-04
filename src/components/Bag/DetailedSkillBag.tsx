@@ -17,7 +17,7 @@ const DetailedSkillBag = ({ skill, setSelectedSkill }: Props) => {
   const sellSkill = useHeroSkillStore((state) => state.sellSkill);
 
   const isBattleDeck = battleDeckSkills.some((s) => s.id === skill?.id);
-  const sellPrice = Math.floor(getPrice(skill) / 2);
+  const sellPrice = Math.floor(getPrice(skill) / 2) * (skill.level + 1);
 
   return (
     <Stack gap={2} position={"relative"}>
@@ -26,7 +26,11 @@ const DetailedSkillBag = ({ skill, setSelectedSkill }: Props) => {
       <Text lineHeight={1} fontSize={40} fontWeight={"bold"} right={4} top={4} position={"absolute"}>
         x{skill.copies}
       </Text>
-      <Button onClick={() => upgradeSkill(skill)} disabled={skill.copies < 2} w={"100%"}>
+      <Button
+        onClick={() => upgradeSkill(skill)}
+        disabled={skill.copies < 2 || skill.level >= skill.maxLevel}
+        w={"100%"}
+      >
         {skill.copies < 2 ? "Недостаточно копий" : "Улучшить"}
       </Button>
       <Button

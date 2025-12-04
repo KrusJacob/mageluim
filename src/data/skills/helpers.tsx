@@ -115,9 +115,9 @@ export function useBuffDebuffModifier(target: IHero | IEnemy, elementName: "atta
 }
 
 export function useInspiration(target: IHero) {
-  const isInspiration = target.effects.some((effect) => effect.action.name === "inspiration");
-  if (!isInspiration) return 0;
-  return INSPIRATION_REGEN_VALUE;
+  const inspiration = target.effects.find((effect) => effect.action.name === "inspiration");
+  if (!inspiration) return 0;
+  return inspiration.layer * INSPIRATION_REGEN_VALUE;
 }
 
 export function isInvulnerability(target: IHero | IEnemy) {

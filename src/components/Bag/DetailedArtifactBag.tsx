@@ -26,7 +26,11 @@ const DetailedArtifactBag = ({ artifact, setSelectedArtifact }: Props) => {
       <Text lineHeight={1} fontSize={40} fontWeight={"bold"} right={4} top={4} position={"absolute"}>
         x{artifact.copies}
       </Text>
-      <Button onClick={() => upgradeArtifact(artifact)} disabled={artifact.copies < 2} w={"100%"}>
+      <Button
+        onClick={() => upgradeArtifact(artifact)}
+        disabled={artifact.copies < 2 || artifact.level >= artifact.maxLevel}
+        w={"100%"}
+      >
         {artifact.copies < 2 ? "Недостаточно копий" : "Улучшить"}
       </Button>
       <Button

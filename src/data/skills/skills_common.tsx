@@ -5,6 +5,7 @@ import { DARK, FIRE, FOREST, PHYSICAL, WATER, WIND } from "../elements/elements_
 import {
   DEBUFF_ATTACK_1,
   DEBUFF_BURN_1,
+  DEBUFF_BURN_2,
   DEBUFF_PHYSICAL_1,
   DEBUFF_PHYSICAL_2,
   DEBUFF_WIND_1,
@@ -26,22 +27,22 @@ export const SKILLS_COMMON = [
       name: "Огненные угли",
       description: (
         <>
-          Наносит {useDmgToElement(225, FIRE)} урона всем врагам и {useActionTo(BUFF_BURN_1, 2)}
+          Наносит {useDmgToElement(200, FIRE)} урона всем врагам и {useActionTo(BUFF_BURN_1, 2)}
         </>
       ),
       img: "/img/skills/Огненные_угли.png",
       element: [FIRE],
       tags: [BUFF_BURN_1],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(75, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>{useActionTo(BUFF_BURN_2, 2)}</>,
       ],
       data: {
-        manaCost: [5, 5, 5, 5],
+        manaCost: [4, 4, 4, 4],
         cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
-          fire: [225, 300, 400, 400],
+          fire: [200, 300, 400, 400],
         },
         useActionToSelf: [
           [actionTarget(BUFF_BURN_1, 2)],
@@ -74,7 +75,7 @@ export const SKILLS_COMMON = [
         manaCost: [4, 4, 4, 4],
         cooldown: [4, 4, 4, 4],
         useDmgToAOE: {
-          wind: [200, 275, 275, 350],
+          water: [200, 275, 275, 350],
         },
         useActionToAOE: [
           [actionTarget(WET, 2)],
@@ -121,26 +122,30 @@ export const SKILLS_COMMON = [
   new SkillEngine(
     {
       name: "Языки пламени",
-      description: <>Наносит {useDmgToElement(275, FIRE)} урона всем врагам</>,
+      description: (
+        <>
+          Наносит {useDmgToElement(275, FIRE)} урона всем врагам и {useActionTo(DEBUFF_BURN_1, 2)}
+        </>
+      ),
       img: "/img/skills/Языки_пламени.png",
       element: [FIRE],
       tags: [DEBUFF_BURN_1],
       awakenings: [
-        <>{useActionTo(DEBUFF_BURN_1, 2)}</>,
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
-        <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
+        <>{useActionTo(DEBUFF_BURN_2, 2)}</>,
+        <>Урон увеличен на {useDmgToElement(125, FIRE)}</>,
       ],
       data: {
         manaCost: [5, 5, 5, 5],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          fire: [275, 275, 375, 475],
+          fire: [275, 375, 375, 500],
         },
         useActionToAOE: [
-          [],
           [actionTarget(DEBUFF_BURN_1, 2)],
           [actionTarget(DEBUFF_BURN_1, 2)],
-          [actionTarget(DEBUFF_BURN_1, 2)],
+          [actionTarget(DEBUFF_BURN_2, 2)],
+          [actionTarget(DEBUFF_BURN_2, 2)],
         ],
       },
     },

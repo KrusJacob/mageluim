@@ -49,10 +49,22 @@ const Bag = () => {
               Артефакты
             </Tabs.Trigger>
           </Tabs.List>
-          <Tabs.Content _open={{ animationName: "fade-in", animationDuration: "300ms" }} value="skills">
+          <Tabs.Content
+            bg={"whiteAlpha.100"}
+            rounded={"md"}
+            p={1}
+            _open={{ animationName: "fade-in", animationDuration: "300ms" }}
+            value="skills"
+          >
             <BagSkill skills={skills} setSelectedSkill={handleSelectSkill} />
           </Tabs.Content>
-          <Tabs.Content _open={{ animationName: "fade-in", animationDuration: "300ms" }} value="artifacts">
+          <Tabs.Content
+            bg={"whiteAlpha.100"}
+            rounded={"md"}
+            p={1}
+            _open={{ animationName: "fade-in", animationDuration: "300ms" }}
+            value="artifacts"
+          >
             <BagArtifacts artifacts={artifacts} setSelectedArtifact={handleSelectArtifact} />
           </Tabs.Content>
         </Tabs.Root>

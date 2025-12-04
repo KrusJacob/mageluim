@@ -1,4 +1,5 @@
-import type { IArtifact, IArtifactEngine, IArtifactHero, ILevelArtifact, IStat } from "@/types/artifact";
+import { MAX_LEVEL_ARTIFACT } from "@/constant/hero";
+import type { IArtifact, IArtifactEngine, IArtifactHero, IStat } from "@/types/artifact";
 import type { IAmpifications, IHero } from "@/types/hero";
 import type { IElement, Rarity } from "@/types/skill";
 
@@ -7,13 +8,14 @@ let id_artifact_rare = 100;
 let id_artifact_epic = 200;
 let id_artifact_legendary = 300;
 
-type ArtifactBaseArgs = Omit<IArtifactEngine, "rarity" | "level">;
+type ArtifactBaseArgs = Omit<IArtifactEngine, "rarity" | "level" | "maxLevel">;
 export class Artifact implements IArtifactEngine {
   name: string;
   img: string;
   description: string;
   id: number;
-  level: ILevelArtifact;
+  level: number;
+  maxLevel: number;
   rarity: Rarity;
   data: {
     [K in keyof IAmpifications]?: number[];
@@ -51,6 +53,7 @@ export class Artifact implements IArtifactEngine {
     recalculateStatsFromAmplifications(hero);
   }
   upgradeArtifact(this: IArtifactHero, hero: IHero) {
+    if (this.level >= this.maxLevel) return;
     if (this.copies >= 2) {
       this.removeArifact(hero);
       this.copies--;
@@ -68,6 +71,7 @@ export class Artifact implements IArtifactEngine {
     this.awakenings = args.awakenings;
     this.rarity = rarity;
     this.level = 0;
+    this.maxLevel = MAX_LEVEL_ARTIFACT;
     this.element = args.element;
     this.id = Artifact.generateId(rarity);
   }
@@ -81,6 +85,7 @@ export class Artifact implements IArtifactEngine {
       element: this.element,
       rarity: this.rarity,
       level: this.level,
+      maxLevel: this.maxLevel,
       data: this.data,
       awakenings: this.awakenings,
       useArtifact: this.useArtifact,

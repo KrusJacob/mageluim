@@ -13,12 +13,13 @@ export interface IElement {
   Icon: ReactNode;
 }
 
-export type ILevelSkill = 0 | 1 | 2 | 3;
+// export type ILevelSkill = 0 | 1 | 2 | 3;
 export interface ISkillEngine {
   name: string;
   description: string | React.ReactNode;
   img: string;
-  level: ILevelSkill;
+  level: number;
+  maxLevel: number;
   currentCooldown: number;
   // getCurrentAwakeningData?(): unknown;
   data: IDataAwakenings;

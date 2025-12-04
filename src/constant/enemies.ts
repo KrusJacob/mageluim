@@ -79,7 +79,7 @@ export const ALL_FLOOR: IBattleFloor[] = [
     enemies: [createPirpleGoblin(), createRedGoblin(2), createGoldGobin(2)],
     isCleared: false,
     reward: { gold: 145, shardSkill: 1 },
-    isOpen: true,
+    isOpen: false,
   },
   {
     floor: 11,
@@ -124,24 +124,31 @@ export const ALL_FLOOR: IBattleFloor[] = [
     isOpen: false,
   },
   {
-    floor: 16,
+    floor: 17,
     enemies: [createGreenGoblin(4), createGrayTroll(), createGreenTroll()],
     isCleared: false,
     reward: { gold: 180, shardArtifact: 1 },
     isOpen: false,
   },
   {
-    floor: 17,
+    floor: 18,
     enemies: [createGreenTroll(), createGrayTroll(), createGoldGobin(3)],
     isCleared: false,
     reward: { gold: 185, shardSkill: 1 },
     isOpen: false,
   },
   {
-    floor: 18,
+    floor: 19,
     enemies: [createGreenTroll(), createRedTroll(), createGrayTroll()],
     isCleared: false,
     reward: { gold: 190, shardArtifact: 1 },
+    isOpen: false,
+  },
+  {
+    floor: 20,
+    enemies: [createGreenTroll(), createGreenTroll(2), createPirpleGoblin(2)],
+    isCleared: false,
+    reward: { gold: 195, shardSkill: 1 },
     isOpen: false,
   },
 ];
