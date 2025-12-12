@@ -2,9 +2,8 @@ import { Box, Card, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IconArtifactShard, IconSkillShard } from "../ui/icons";
 
-const imgSkill =
-  "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddc3689c-92d0-4237-9beb-a628b8aacb3d/dfypsbe-d687327d-1704-411a-9d57-c5dc9ad48352.png/v1/fill/w_768,h_768,q_80,strp/1685569032_magic_crystal_cell__shaded_01_by_krogher22_dfypsbe-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzY4IiwicGF0aCI6IlwvZlwvZGRjMzY4OWMtOTJkMC00MjM3LTliZWItYTYyOGI4YWFjYjNkXC9kZnlwc2JlLWQ2ODczMjdkLTE3MDQtNDExYS05ZDU3LWM1ZGM5YWQ0ODM1Mi5wbmciLCJ3aWR0aCI6Ijw9NzY4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.fanp6KPzGHvgC-qbFIYCg-R1TXBhJMH0_T_rhfGAxlA";
-const imgArtifact = "https://masterpiecer-images.s3.yandex.net/600afa23b4c5330:upscaled";
+const imgSkill = "/img/skill_shard.png";
+const imgArtifact = "/img/artifact_shard.png";
 const ShardCard = ({ type }: { type: "shardSkill" | "shardArtifact" }) => {
   return (
     <Card.Root maxW="sm" h={"100%"} overflow="hidden" cursor={"pointer"}>

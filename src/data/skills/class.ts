@@ -5,7 +5,6 @@ import type {
   IDataAwakenings,
   IElement,
   IElementName,
-  ILevelSkill,
   ISkill,
   ISkillEngine,
   ISkillHero,
@@ -14,7 +13,8 @@ import type {
 } from "@/types/skill";
 import { useBuffs, useDebuffs } from "./helpers";
 import { useAmplifyDmg } from "../hero/utils";
-type SkillBaseArgs = Omit<ISkillEngine, "rarity" | "level" | "currentCooldown">;
+import { MAX_LEVEL_CARD } from "@/constant/hero";
+type SkillBaseArgs = Omit<ISkillEngine, "rarity" | "level" | "currentCooldown" | "maxLevel">;
 
 let id_skill_common = 0;
 let id_skill_rare = 100;
@@ -29,17 +29,12 @@ export class SkillEngine implements ISkillEngine {
   rarity: Rarity;
   id: number;
   tags?: Array<IEffect | IAction>;
-  level: ILevelSkill;
+  level: number;
+  maxLevel: number;
   // manaCost: number;
   awakenings?: React.ReactNode[];
   data: IDataAwakenings;
   currentCooldown: number;
-
-  // getCurrentAwakeningData(): unknown {
-  //   if (this.data && this.level) {
-  //     return [this.data];
-  //   }
-  // }
 
   setCooldown() {
     this.currentCooldown = this.data.cooldown[this.level];
@@ -53,6 +48,7 @@ export class SkillEngine implements ISkillEngine {
     }
   }
   upgradeSkill(this: ISkillHero) {
+    if (this.level >= this.maxLevel) return;
     if (this.copies >= 2) {
       this.copies--;
       this.level++;
@@ -114,6 +110,7 @@ export class SkillEngine implements ISkillEngine {
     this.tags = args.tags;
     this.id = SkillEngine.generateId(rarity);
     this.level = 0;
+    this.maxLevel = MAX_LEVEL_CARD;
     // this.manaCost = args.manaCost;
     this.awakenings = args.awakenings;
     this.data = args.data;
@@ -143,6 +140,7 @@ export class SkillEngine implements ISkillEngine {
       element: this.element,
       rarity: this.rarity,
       level: this.level,
+      maxLevel: this.maxLevel,
       // manaCost: this.manaCost,
       awakenings: this.awakenings,
       data: this.data,

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { IElement, Rarity } from "./skill";
 import type { IAmpifications, IHero } from "./hero";
 
-export type ILevelArtifact = 0 | 1 | 2 | 3;
+// export type ILevelArtifact = 0 | 1 | 2 | 3;
 
 export type IStatName = "attack";
 export interface IStat {
@@ -15,7 +15,8 @@ export interface IArtifactEngine {
   name: string;
   img: string;
   description: string;
-  level: ILevelArtifact;
+  level: number;
+  maxLevel: number;
   element: IElement[] | IStat[];
   awakenings?: React.ReactNode[];
   data: {

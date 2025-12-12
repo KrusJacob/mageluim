@@ -47,14 +47,14 @@ export const SKILLS_LEGENDARY = [
       element: [LIGHT],
       awakenings: [
         <>{useActionTo(BUFF_LIGHT_2, 3)}</>,
-        <>Урон увеличен на {useDmgToElement(300, LIGHT)}</>,
-        <>Урон увеличен на {useDmgToElement(350, LIGHT)}</>,
+        <>Урон увеличен на {useDmgToElement(400, LIGHT)}</>,
+        <>Урон увеличен на {useDmgToElement(400, LIGHT)}</>,
       ],
       data: {
         manaCost: [8, 8, 8, 8],
         cooldown: [5, 5, 5, 5],
         useDmgToTarget: {
-          light: [1200, 1200, 1500, 1850],
+          light: [1200, 1200, 1600, 2000],
         },
         useActionToSelf: [
           [],
@@ -71,29 +71,29 @@ export const SKILLS_LEGENDARY = [
       name: "Цунами",
       description: (
         <>
-          Наносит {useDmgToElement(250, WIND)} и {useDmgToElement(250, WATER)} урона всем и {useEffectTo(WET, 2)}
+          Наносит {useDmgToElement(200, WIND)} и {useDmgToElement(300, WATER)} урона всем и {useEffectTo(WET, 2)}
         </>
       ),
       img: "/img/skills/Цунами.png",
       element: [WIND, WATER],
       tags: [WET],
       awakenings: [
-        <>{useActionTo(DEBUFF_WATER_2, 2)}</>,
         <>{useActionTo(DEBUFF_ATTACK_2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(175, WATER)}</>,
+        <>Урон увеличен на {useDmgToElement(250, WATER)}</>,
+        <>Урон увеличен на {useDmgToElement(250, WATER)}</>,
       ],
       data: {
         manaCost: [6, 6, 6, 6],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          wind: [250, 250, 250, 250],
-          water: [250, 250, 250, 425],
+          wind: [200, 200, 200, 200],
+          water: [300, 300, 550, 700],
         },
         useActionToAOE: [
           [actionTarget(WET, 2)],
-          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2)],
-          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2), actionTarget(DEBUFF_ATTACK_2, 2)],
-          [actionTarget(WET, 2), actionTarget(DEBUFF_WATER_2, 2), actionTarget(DEBUFF_ATTACK_2, 2)],
+          [actionTarget(WET, 2)],
+          [actionTarget(WET, 2), actionTarget(DEBUFF_ATTACK_2, 2)],
+          [actionTarget(WET, 2), actionTarget(DEBUFF_ATTACK_2, 2)],
         ],
       },
     },
@@ -111,15 +111,15 @@ export const SKILLS_LEGENDARY = [
       element: [FIRE],
       tags: [BURN],
       awakenings: [
-        <>Урон увеличен на {useDmgToElement(200, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(225, FIRE)}</>,
         <>{useEffectTo(BURN, 2, 2)}</>,
-        <>Урон увеличен на {useDmgToElement(200, FIRE)}</>,
+        <>Урон увеличен на {useDmgToElement(225, FIRE)}</>,
       ],
       data: {
         manaCost: [9, 9, 9, 9],
         cooldown: [5, 5, 5, 5],
         useDmgToAOE: {
-          fire: [600, 800, 800, 1000],
+          fire: [600, 825, 825, 1050],
         },
         useActionToAOE: [
           [actionTarget(BURN, 2, 2)],

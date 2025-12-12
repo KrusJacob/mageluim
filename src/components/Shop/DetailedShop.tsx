@@ -1,4 +1,4 @@
-import { Box, Button, Stack } from "@chakra-ui/react";
+import { Box, Button, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import SkillCard from "../Skill/SkillCard";
 import ShardCard from "./ShardCard";
@@ -16,6 +16,7 @@ interface Props {
   item: IShopTypeItem;
 }
 const DetailedShop = ({ item }: Props) => {
+  const hero = useHeroSkillStore((state) => state.hero);
   const heroGold = useHeroSkillStore((state) => state.gold);
   const addNewSkill = useHeroSkillStore((state) => state.addNewSkill);
   const addNewArtifact = useHeroSkillStore((state) => state.addNewArtifact);
@@ -24,6 +25,13 @@ const DetailedShop = ({ item }: Props) => {
   const addShardArtifact = useHeroSkillStore((state) => state.addShardArtifact);
 
   const price = getPrice(item);
+
+  const getItemMaxLevel = () => {
+    if (isSkill(item)) return hero.skills.find((s) => s.id === item.id)?.level === item.maxLevel;
+    if (isArtifact(item)) return hero.artifacts.find((a) => a.id === item.id)?.level === item.maxLevel;
+  };
+
+  const isItemMaxLevel = getItemMaxLevel();
 
   const onBuy = () => {
     if (item === "shardSkill") {
@@ -65,9 +73,14 @@ const DetailedShop = ({ item }: Props) => {
         </Stack>
       )}
 
-      <Button mt={2} onClick={onBuy} disabled={heroGold < price} w={"100%"}>
+      <Button mt={2} onClick={onBuy} disabled={heroGold < price || isItemMaxLevel} w={"100%"}>
         {price} <IconGold /> {heroGold >= price ? `Купить` : "Недостаточно золота"}
       </Button>
+      {isItemMaxLevel && (
+        <Text textAlign={"center"} mt={2}>
+          Уже имеет максимальное уровень
+        </Text>
+      )}
     </Box>
   );
 };

@@ -7,6 +7,8 @@ import { HERO, createHero_1 } from "@/data/hero/hero";
 import { tickAllStatuses } from "@/data/hero/utils";
 import type { IArtifact, IArtifactHero } from "@/types/artifact";
 import { getPrice } from "@/utils/getPrice";
+import { isSkill } from "@/data/skills/class";
+import { isArtifact } from "@/data/artifacts/class";
 
 interface HeroSkillState {
   hero: IHero;
@@ -41,6 +43,7 @@ interface HeroSkillState {
   useSkill: (skill: ISkillHero, enemies: IEnemy[], index: number) => void;
   sellSkill: (skill: ISkillHero, gold: number) => void;
   sellArtifact: (artifact: IArtifactHero, gold: number) => void;
+  sellMaxLevelItem: (item: ISkill | IArtifact) => number;
 }
 
 export const useHeroSkillStore = create<HeroSkillState>((set, get) => ({
@@ -167,6 +170,23 @@ export const useHeroSkillStore = create<HeroSkillState>((set, get) => ({
       artifacts: [...hero.artifacts],
       gold: hero.gold,
     }));
+  },
+  sellMaxLevelItem: (item) => {
+    const hero = get().hero;
+    let isMaxLevel;
+    if (isSkill(item)) {
+      isMaxLevel = hero.skills.find((s) => s.id === item.id)?.level === item.maxLevel;
+    }
+    if (isArtifact(item)) {
+      isMaxLevel = hero.artifacts.find((a) => a.id === item.id)?.level === item.maxLevel;
+    }
+    if (isMaxLevel) {
+      const sellPrice = Math.floor(getPrice(item) / 2);
+      hero.addGold(sellPrice);
+      set((state) => ({ gold: hero.gold }));
+      return sellPrice;
+    }
+    return 0;
   },
   resetLevel: () => {
     const hero = get().hero;
