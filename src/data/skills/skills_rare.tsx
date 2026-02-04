@@ -25,7 +25,7 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Лютый_вихрь.png",
       element: [WIND],
-      tags: [BUFF_WIND_1],
+      tags: [BUFF_WIND_1, BUFF_WIND_2],
       awakenings: [
         <>{useActionTo(BUFF_WIND_2, 2)}</>,
         <>Расход маны уменьшен на 1</>,
@@ -57,7 +57,7 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Утренний_дождик.png",
       element: [WATER],
-      tags: [HEAL, WET],
+      tags: [HEAL, WET, INSPIRATION],
       awakenings: [
         <>{useEffectTo(HEAL, 3)}</>,
         <>{useEffectTo(INSPIRATION, 3)}</>,
@@ -121,7 +121,7 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Луч_света.png",
       element: [LIGHT],
-      tags: [BLIND, DEBUFF_LIGHT_2, INSPIRATION],
+      tags: [BLIND, DEBUFF_LIGHT_2],
       awakenings: [
         <>{useActionTo(DEBUFF_LIGHT_2, 2)}</>,
         <>Урон увеличен на {useDmgToElement(175, LIGHT)}</>,
@@ -186,7 +186,7 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Каменная_кожа.png",
       element: [PHYSICAL],
-      tags: [BUFF_PHYSICAL_1, BUFF_DEF_1],
+      tags: [BUFF_PHYSICAL_1, BUFF_DEF_1, BUFF_PHYSICAL_2, BUFF_DEF_2],
       awakenings: [
         <>{useActionTo(BUFF_DEF_2, 2)}</>,
         <>Исцеляет герою 15% здоровья</>,
@@ -248,6 +248,7 @@ export const SKILLS_RARE = [
       ),
       img: "/img/skills/Гнев_земли.png",
       element: [PHYSICAL, FOREST],
+      tags: [BUFF_ATTACK_2, DEBUFF_DEF_2],
       awakenings: [
         <>{useActionTo(BUFF_ATTACK_2, 2)}</>,
         <>{useActionTo(DEBUFF_DEF_2, 2)}</>,

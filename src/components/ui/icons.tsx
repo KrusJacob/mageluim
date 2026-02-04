@@ -7,7 +7,7 @@ export const IconGold = () => {
   return <BiCoinStack title="Золото" color="gold" size={24} />;
 };
 export const IconSkillShard = ({ size = 24 }: { size?: number }) => {
-  return <SiCrystal size={size} title="Кристалл призыва cпособностей" color="violet" />;
+  return <SiCrystal size={size} title="Кристалл призыва заклинаний" color="violet" />;
 };
 export const IconArtifactShard = ({ size = 24 }: { size?: number }) => {
   return <GiCrystalize size={size} title="Кристалл призыва артефактов" color="rosybrown" />;

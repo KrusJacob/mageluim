@@ -32,7 +32,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Огненные_угли.png",
       element: [FIRE],
-      tags: [BUFF_BURN_1],
+      tags: [BUFF_BURN_1, BUFF_BURN_2],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
@@ -65,7 +65,6 @@ export const SKILLS_COMMON = [
       img: "/img/skills/Водная_волна.png",
       element: [WATER],
       tags: [WET, DEBUFF_ATTACK_1],
-
       awakenings: [
         <>Урон увеличен на {useDmgToElement(75, WATER)}</>,
         <>{useActionTo(DEBUFF_ATTACK_1, 2)}</>,
@@ -97,7 +96,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Искры_молнии.png",
       element: [WIND],
-      tags: [DEBUFF_WIND_1],
+      tags: [DEBUFF_WIND_1, DEBUFF_WIND_2],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(100, WIND)}</>,
         <>Урон увеличен на {useDmgToElement(100, WIND)}</>,
@@ -129,7 +128,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Языки_пламени.png",
       element: [FIRE],
-      tags: [DEBUFF_BURN_1],
+      tags: [DEBUFF_BURN_1, DEBUFF_BURN_2],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(100, FIRE)}</>,
         <>{useActionTo(DEBUFF_BURN_2, 2)}</>,
@@ -232,7 +231,7 @@ export const SKILLS_COMMON = [
       ),
       img: "/img/skills/Удар_булыжником.png",
       element: [PHYSICAL],
-      tags: [DEBUFF_PHYSICAL_1],
+      tags: [DEBUFF_PHYSICAL_1, DEBUFF_PHYSICAL_2],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(150, PHYSICAL)}</>,
         <>{useActionTo(DEBUFF_PHYSICAL_2, 2)}</>,

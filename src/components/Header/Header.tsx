@@ -1,6 +1,7 @@
 import { Box, Container, HStack, Span, Stack, Text } from "@chakra-ui/react";
 import { ColorModeButton } from "../ui/color-mode";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
+import GuideInfo from "../Guide/GuideInfo";
 
 const Header = ({ back, title }: { back: () => void; title: string | null }) => {
   return (
@@ -12,6 +13,7 @@ const Header = ({ back, title }: { back: () => void; title: string | null }) => 
           <HStack m={"auto"} fontSize={30}>
             <Text>Mageluim</Text>
             <Text>{title && <span>| {title}</span>}</Text>
+            <GuideInfo />
           </HStack>
         </HStack>
       </Container>

@@ -39,7 +39,7 @@ export const SKILLS_EPIC = [
       ),
       img: "/img/skills/Сокрушительный_удар.png",
       element: [PHYSICAL],
-      tags: [BUFF_PHYSICAL_1],
+      tags: [BUFF_PHYSICAL_1, BUFF_PHYSICAL_2],
       awakenings: [
         <>{useActionTo(BUFF_PHYSICAL_2, 2)}</>,
         <>Урон увеличен на {useDmgToElement(225, PHYSICAL)}</>,
@@ -72,7 +72,7 @@ export const SKILLS_EPIC = [
       ),
       img: "/img/skills/Замораживающее_дыхание.png",
       element: [WATER, WIND],
-      tags: [FREEZE],
+      tags: [FREEZE, DEBUFF_WATER_2, DEBUFF_WIND_2],
       awakenings: [
         <>Расход маны уменьшен на 1</>,
         <>{useActionTo(DEBUFF_WATER_2, 2)}</>,
@@ -100,6 +100,7 @@ export const SKILLS_EPIC = [
       name: "Цветок жизни",
       description: <>Исцеляет герою 20% здоровья и {useActionTo(BUFF_FOREST_1, 2)}</>,
       img: "/img/skills/Цветок_жизни.png",
+      tags: [BUFF_FOREST_1, BUFF_FOREST_2, HEAL],
       element: [FOREST],
       awakenings: [
         <>Исцеляет герою 10% здоровья</>,
@@ -131,7 +132,7 @@ export const SKILLS_EPIC = [
       ),
       img: "/img/skills/Ядовитое_облако.png",
       element: [FOREST],
-      tags: [POISON, DEBUFF_FOREST_1],
+      tags: [POISON, DEBUFF_FOREST_1, DEBUFF_FOREST_2],
       awakenings: [
         <>{useActionTo(DEBUFF_FOREST_2, 2)}</>,
         <>{useEffectTo(POISON, 3, 1)}</>,
@@ -164,7 +165,7 @@ export const SKILLS_EPIC = [
       ),
       img: "/img/skills/Туман_ужаса.png",
       element: [WIND, DARK],
-      tags: [DEBUFF_DARK_2],
+      tags: [DEBUFF_DARK_2, DEBUFF_ATTACK_2, DEBUFF_DEF_2],
       awakenings: [
         <>{useActionTo(DEBUFF_DARK_2, 2)}</>,
         <>{useActionTo(DEBUFF_ATTACK_2, 2)}</>,
@@ -231,7 +232,7 @@ export const SKILLS_EPIC = [
       ),
       img: "/img/skills/Статический_разряд.png",
       element: [WIND],
-      tags: [BUFF_WIND_1, INSPIRATION],
+      tags: [BUFF_WIND_1, BUFF_WIND_2, INSPIRATION],
       awakenings: [
         <>{useActionTo(BUFF_WIND_2, 2)}</>,
         <>{useEffectTo(INSPIRATION, 2)}</>,

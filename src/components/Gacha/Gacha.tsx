@@ -13,7 +13,7 @@ const Gacha = () => {
         <Grid templateColumns="repeat(2, 1fr)" maxW={{ base: "6xl" }} w={"100%"} gap={8}>
           <For
             each={[
-              { label: "Способности", img: "/img/bg_gacha.png", name: "skill" },
+              { label: "Заклинания", img: "/img/bg_gacha.png", name: "skill" },
               { label: "Артефакты", img: "/img/bg_gacha_artifact.png", name: "artifact" },
             ]}
           >
