@@ -42,7 +42,7 @@ const Bag = () => {
           <Tabs.List>
             <Tabs.Trigger value="skills">
               <GiScrollUnfurled />
-              Способности
+              Заклинания
             </Tabs.Trigger>
             <Tabs.Trigger value="artifacts">
               <GiBurningEye />

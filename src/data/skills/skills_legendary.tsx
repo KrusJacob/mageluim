@@ -45,6 +45,7 @@ export const SKILLS_LEGENDARY = [
       description: <>Наносит {useDmgToElement(1200, LIGHT)} урона одному врагу</>,
       img: "/img/skills/Божественная_кара.png",
       element: [LIGHT],
+      tags: [BUFF_LIGHT_2],
       awakenings: [
         <>{useActionTo(BUFF_LIGHT_2, 3)}</>,
         <>Урон увеличен на {useDmgToElement(400, LIGHT)}</>,
@@ -76,7 +77,7 @@ export const SKILLS_LEGENDARY = [
       ),
       img: "/img/skills/Цунами.png",
       element: [WIND, WATER],
-      tags: [WET],
+      tags: [WET, DEBUFF_ATTACK_2],
       awakenings: [
         <>{useActionTo(DEBUFF_ATTACK_2, 2)}</>,
         <>Урон увеличен на {useDmgToElement(250, WATER)}</>,
@@ -141,7 +142,7 @@ export const SKILLS_LEGENDARY = [
       ),
       img: "/img/skills/Ледяной_панцирь.png",
       element: [WATER],
-      tags: [HEAL],
+      tags: [HEAL, INVULNERABILITY, INSPIRATION],
       awakenings: [
         <>{useEffectTo(HEAL, 2, 2)}</>,
         <>{useEffectTo(INSPIRATION, 3)}</>,
@@ -173,7 +174,7 @@ export const SKILLS_LEGENDARY = [
       ),
       img: "/img/skills/Гнев_природы.png",
       element: [FOREST],
-      tags: [STUN],
+      tags: [STUN, BUFF_FOREST_2],
       awakenings: [
         <>Урон увеличен на {useDmgToElement(200, FOREST)}</>,
         <>{useActionTo(BUFF_FOREST_2, 3)}</>,

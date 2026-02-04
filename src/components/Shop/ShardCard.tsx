@@ -26,7 +26,7 @@ const ShardCard = ({ type }: { type: "shardSkill" | "shardArtifact" }) => {
         <Card.Description color={"gray.400"}>
           {type === "shardArtifact" ? <IconArtifactShard size={20} /> : <IconSkillShard size={20} />}
           <Text as={"span"} mt={2} display={"block"}>
-            Исользуется для призыва {type === "shardSkill" ? "способности" : "артефакта"}
+            Исользуется для призыва {type === "shardSkill" ? "заклинания" : "артефакта"}
           </Text>
         </Card.Description>
       </Card.Body>

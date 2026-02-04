@@ -1,6 +1,7 @@
 import { Box, Center, Container, For, Grid, GridItem, Loader, Text } from "@chakra-ui/react";
 import React, { Suspense, lazy, useState } from "react";
 import Header from "../Header/Header";
+import Footer from "../ui/footer";
 
 const LazyGacha = lazy(() => import("../Gacha/Gacha"));
 const LazyBag = lazy(() => import("../Bag/Bag"));
@@ -12,7 +13,7 @@ const Menu = () => {
   return (
     <>
       <Header back={() => setSelectMode(null)} title={selectMode} />
-      <Container px={2} py={4} maxW={{ base: "8xl" }} justifyContent="center" position={"static"}>
+      <Container px={2} py={4} maxW={{ base: "8xl" }} justifyContent="center" position={"static"} h={"100%"}>
         <Center w={"100%"}>
           {!selectMode && (
             <Grid templateColumns="repeat(2, 1fr)" maxW={{ base: "6xl" }} w={"100%"} gap={8}>
@@ -54,6 +55,7 @@ const Menu = () => {
           </Suspense>
         </Center>
       </Container>
+      <Footer />
     </>
   );
 };
